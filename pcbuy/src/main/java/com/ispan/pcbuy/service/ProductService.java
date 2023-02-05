@@ -1,6 +1,6 @@
 package com.ispan.pcbuy.service;
 
-import com.ispan.pcbuy.constant.ProductCategory;
+import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
 import com.ispan.pcbuy.model.Product;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 

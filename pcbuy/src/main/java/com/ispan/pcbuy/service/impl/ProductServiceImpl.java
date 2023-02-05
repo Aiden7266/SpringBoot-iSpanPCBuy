@@ -2,6 +2,7 @@ package com.ispan.pcbuy.service.impl;
 
 import com.ispan.pcbuy.constant.ProductCategory;
 import com.ispan.pcbuy.dao.ProductDao;
+import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
 import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.service.ProductService;
@@ -17,8 +18,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

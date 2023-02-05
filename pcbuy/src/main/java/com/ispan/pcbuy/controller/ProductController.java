@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.controller;
 
 import com.ispan.pcbuy.constant.ProductCategory;
+import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
 import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
