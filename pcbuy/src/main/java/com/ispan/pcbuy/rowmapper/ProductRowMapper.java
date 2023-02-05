@@ -1,5 +1,6 @@
 package com.ispan.pcbuy.rowmapper;
 
+import com.ispan.pcbuy.constant.ProductCategory;
 import com.ispan.pcbuy.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -13,7 +14,13 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         product.setProductId(resultSet.getInt("product_id"));
         product.setProductName(resultSet.getString("product_name"));
-        product.setCategory(resultSet.getString("category"));
+
+        String categoryString = resultSet.getString("category");
+        ProductCategory productCategory = ProductCategory.valueOf(categoryString);
+        product.setCategory(productCategory);
+
+//        product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+
         product.setImageUrl(resultSet.getString("image_url"));
         product.setPrice(resultSet.getInt("price"));
         product.setStock(resultSet.getInt("stock"));
