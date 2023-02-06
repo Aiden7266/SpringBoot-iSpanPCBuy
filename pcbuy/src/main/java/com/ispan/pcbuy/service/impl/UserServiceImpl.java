@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.service.impl;
 
 import com.ispan.pcbuy.dao.UserDao;
+import com.ispan.pcbuy.dto.UserLoginRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserService;
@@ -36,5 +37,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+        if(user == null){
+            log.warn("該 email {} 尚未被註冊！", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        if(user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else {
+            log.warn("該 email {} 的密碼不正確！", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }

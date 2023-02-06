@@ -1,5 +1,6 @@
 package com.ispan.pcbuy.controller;
 
+import com.ispan.pcbuy.dto.UserLoginRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserService;
@@ -24,5 +25,12 @@ public class UserController {
         User user = userService.getUserById(userId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest){
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
