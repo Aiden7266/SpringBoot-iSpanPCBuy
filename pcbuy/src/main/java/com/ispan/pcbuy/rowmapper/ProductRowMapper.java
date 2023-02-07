@@ -21,6 +21,16 @@ public class ProductRowMapper implements RowMapper<Product> {
 
 //        product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
 
+        product.setBrand(resultSet.getString("brand"));
+        product.setSeries(resultSet.getString("series"));
+        product.setWatt(resultSet.getInt("watt"));
+        product.setSocket(resultSet.getString("socket"));
+        product.setScore(resultSet.getInt("score"));
+        product.setSize(resultSet.getInt("size"));
+        product.setLength(resultSet.getDouble("length"));
+        product.setHeight(resultSet.getDouble("height"));
+        product.setCapacity(resultSet.getInt("capacity"));
+        product.setState(resultSet.getBoolean("state"));
         product.setImageUrl(resultSet.getString("image_url"));
         product.setPrice(resultSet.getInt("price"));
         product.setStock(resultSet.getInt("stock"));

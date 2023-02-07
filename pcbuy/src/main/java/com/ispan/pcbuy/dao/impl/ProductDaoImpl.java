@@ -38,8 +38,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
-        String sql = "SELECT product_id, product_name, category, image_url, price, stock, description, created_date, last_modified_date " +
-                "FROM product WHERE 1=1";
+        String sql = "SELECT * FROM product WHERE 1=1 ";
 
         Map<String, Object> map = new HashMap<>();
 
@@ -60,8 +59,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProductById(Integer productId) {
-         String sql = "SELECT product_id, product_name, category, image_url, price, stock, description, created_date, last_modified_date " +
-                 "FROM product WHERE product_id = :productId";
+         String sql = "SELECT * FROM product WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productId", productId);
@@ -77,16 +75,26 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Integer createProduct(ProductRequest productRequest) {
-        String sql= "INSERT INTO product (product_name, category, image_url, price, stock, description, created_date, last_modified_date) " +
-            "VALUES (:productName, :category, :imageUrl, :price, :stock, :description, :createDate, :lastModifiedDate)";
+        String sql= "INSERT INTO product (product_name, category, brand, series, watt, socket, score, size, length, height, capacity, state, description, image_url, stock, price, created_date, last_modified_date) " +
+            "VALUES (:productName, :category, :brand, :series, :watt, :socket, :score, :size, :length, :height, :capacity, :state, :description, :imageUrl, :stock, :price, :createDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productName", productRequest.getProductName());
         map.put("category", productRequest.getCategory().toString());
-        map.put("imageUrl", productRequest.getImageUrl());
-        map.put("price", productRequest.getPrice());
-        map.put("stock", productRequest.getStock());
+        map.put("brand", productRequest.getBrand());
+        map.put("series", productRequest.getSeries());
+        map.put("watt", productRequest.getWatt());
+        map.put("socket", productRequest.getSocket());
+        map.put("score", productRequest.getScore());
+        map.put("size", productRequest.getSize());
+        map.put("length", productRequest.getLength());
+        map.put("height", productRequest.getHeight());
+        map.put("capacity", productRequest.getCapacity());
+        map.put("state", productRequest.getState());
         map.put("description", productRequest.getDescription());
+        map.put("imageUrl", productRequest.getImageUrl());
+        map.put("stock", productRequest.getStock());
+        map.put("price", productRequest.getPrice());
 
         Date now = new Date();
         map.put("createDate", now);

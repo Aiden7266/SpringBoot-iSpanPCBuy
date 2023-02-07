@@ -5,9 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class ProductRequest {
+public class PowerRequest {
 
-    /*
     @NotNull
     private String productName;
 
@@ -15,30 +14,29 @@ public class ProductRequest {
     private ProductCategory category;
 
     @NotNull
-    private String imageUrl;
-
-    @NotNull
-    private Integer price;
-
-    @NotNull
-    private Integer stock;
-
-    private String description;
-    */
-    private String productName;
-    private ProductCategory category;
     private String brand;
+
+    @NotNull
     private String series;
+
+    @NotNull
     private Integer watt;
-    private String  socket;
-    private Integer score;
+
+    @NotNull
     private Integer size;
-    private Integer length;
-    private Integer height;
-    private Integer capacity;
+
+    @NotNull
     private Boolean state;
+
     private String description;
+
+    @NotNull
     private String imageUrl;
+
+    @NotNull
     private Integer stock;
+
+    @NotNull
     private Integer price;
+
 }

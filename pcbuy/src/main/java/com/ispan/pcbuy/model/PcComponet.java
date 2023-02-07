@@ -1,30 +1,15 @@
-package com.ispan.pcbuy.dto;
+package com.ispan.pcbuy.model;
 
 import com.ispan.pcbuy.constant.ProductCategory;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
-public class ProductRequest {
+public class PcComponet {
 
-    /*
-    @NotNull
-    private String productName;
-
-    @NotNull
-    private ProductCategory category;
-
-    @NotNull
-    private String imageUrl;
-
-    @NotNull
-    private Integer price;
-
-    @NotNull
-    private Integer stock;
-
-    private String description;
-    */
+    private Integer productId;
     private String productName;
     private ProductCategory category;
     private String brand;
@@ -41,4 +26,7 @@ public class ProductRequest {
     private String imageUrl;
     private Integer stock;
     private Integer price;
+    private Date createdDate;
+    private Date lastModifiedDate;
+
 }

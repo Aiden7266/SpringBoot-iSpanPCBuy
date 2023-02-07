@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.controller;
 
 import com.ispan.pcbuy.constant.ProductCategory;
+import com.ispan.pcbuy.dto.CpuRequest;
 import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
 import com.ispan.pcbuy.model.Product;
@@ -34,7 +35,7 @@ public class ProductController {
             @RequestParam(defaultValue = "desc")         String sort,
 
             //分頁 (要加@Valid註解才能使用@Min@Max)
-            @RequestParam(defaultValue = "5") @Min(0) @Max(100) Integer limit,
+            @RequestParam(defaultValue = "100") @Min(0) @Max(100) Integer limit,
             @RequestParam(defaultValue = "0") @Min(0)           Integer offset
     ){
         ProductQueryParams productQueryParams = new ProductQueryParams();
@@ -70,6 +71,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+
     @PostMapping("/products")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
         Integer productId = productService.createProduct(productRequest);
@@ -79,13 +81,25 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
+
+    @PostMapping("/products/CPU")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid  CpuRequest cpuRequest){
+
+//        ProductRequest.cpuRequest cpuRequest = productRequest.new cpuRequest();
+        Integer productId = productService.createProduct(cpuRequest);
+
+        Product product = productService.getProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+
     @PutMapping("/products/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
-                                                 @RequestBody @Valid ProductRequest productRequest){
+                                                 @RequestBody @Valid CpuRequest cpuRequest){
         Product product = productService.getProductById(productId);
 
         if(product != null) {
-            productService.updateProduct(productId, productRequest);
+            productService.updateProduct(productId, cpuRequest);
             Product updatedProduct = productService.getProductById(productId);
             return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
         }else {
