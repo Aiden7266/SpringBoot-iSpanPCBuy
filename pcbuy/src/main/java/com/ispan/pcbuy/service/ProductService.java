@@ -1,5 +1,6 @@
 package com.ispan.pcbuy.service;
 
+import com.ispan.pcbuy.constant.ProductCategory;
 import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
 import com.ispan.pcbuy.model.Product;
@@ -11,6 +12,10 @@ public interface ProductService {
     Integer countProduct(ProductQueryParams productQueryParams);
 
     List<Product> getProducts(ProductQueryParams productQueryParams);
+
+    List<Product> getProductsFromCategory(String category);
+
+    List<Product> getMbBySocket(String socket);
 
     Product getProductById(Integer productId);
 

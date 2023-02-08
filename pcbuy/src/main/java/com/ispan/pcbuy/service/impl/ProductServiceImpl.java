@@ -28,6 +28,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductsFromCategory(String category) {
+        return productDao.getProductsFromCategory(category);
+    }
+
+    @Override
+    public List<Product> getMbBySocket(String socket) {
+        return productDao.getMbBySocket(socket);
+    }
+
+    @Override
     public Product getProductById(Integer productId) {
         return productDao.getProductById(productId);
     }

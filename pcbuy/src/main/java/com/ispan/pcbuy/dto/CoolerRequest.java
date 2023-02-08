@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class CoolerRequest {
+public class CoolerRequest extends ProductRequest{
 
     @NotNull
     private String productName;

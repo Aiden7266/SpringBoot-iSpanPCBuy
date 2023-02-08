@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  jQuery.support.cors = true;
+  $(document).ready(function() {
+
+    //第一層選單
+    $.ajax({
+      url: 'http://localhost:8080/products/category/CPU',
+      type: "get",
+      dataType: "json",
+      success: function (data) {
+        // console.log(data);
+        $.each(data, function (key, value) { // []->{}*?
+
+          // $('#cpuName').append('<option value="' + key + '">' + data[].productName + '</option>')
+          $('#CPU').append('<option value =" '+data[key].productId+' "socket = ' + data[key].socket + '>' + data[key].productName + '</option>')
+          console.log(data[key].productId + " " + data[key].productName + " " + data[key].socket)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    });
+  });
+
+  function onSelectCPU(){
+    var cpuId     = $('#CPU').find(':selected').val()
+    var cpuName   = $('#CPU').find(':selected').text()
+    var cpuSocket = $('#CPU').find(':selected').attr('socket')
+    console.log("cpuId=" + cpuId + ", cpuName=" + cpuName + ", cpuSocket=" + cpuSocket)
+
+    $('#MB').empty().append("<option value = '' socket = ''>請選擇一項主機板</option>")
+    $.ajax({
+      url: 'http://localhost:8080/products/MB',
+      type: "get",
+      data:{"socket":cpuSocket},
+      dataType: "json",
+      success: function (data) {
+        // console.log(data);
+        $.each(data, function (key, value) { // []->{}*?
+          $('#MB').append('<option value =" '+data[key].productId+' "socket = ' + data[key].socket + '>' + data[key].productName + '</option>')
+          console.log(data[key].productId + " " + data[key].productName + " " + data[key].socket)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    })
+
+
+  }
+
+
+</script>
+
+<body>
+  中央處理器
+  <select id = "CPU" onchange="onSelectCPU()">
+    <option value = '' socket = ''>請選擇一項CPU</option>
+  </select>
+  <br>
+  主機板
+  <select id = "MB" name="MB" >
+    <option value = "">請選擇一項主機板</option>
+  </select>
+</body>
+</html>

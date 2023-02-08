@@ -1,5 +1,6 @@
 package com.ispan.pcbuy.dao.impl;
 
+import com.ispan.pcbuy.constant.ProductCategory;
 import com.ispan.pcbuy.dao.ProductDao;
 import com.ispan.pcbuy.dto.ProductQueryParams;
 import com.ispan.pcbuy.dto.ProductRequest;
@@ -54,6 +55,24 @@ public class ProductDaoImpl implements ProductDao {
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
+        return productList;
+    }
+
+    @Override
+    public List<Product> getProductsFromCategory(String category) {
+        String sql = "SELECT * FROM product WHERE category = :category ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", category);
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+        return productList;
+    }
+
+    @Override
+    public List<Product> getMbBySocket(String socket) {
+        String sql = "SELECT * FROM product WHERE category = 'MB' AND socket = :socket ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("socket", socket);
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
         return productList;
     }
 

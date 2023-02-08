@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class DramRequest {
+public class DramRequest extends ProductRequest{
 
     @NotNull
     private String productName;

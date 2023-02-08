@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class PowerRequest {
+public class PowerRequest extends ProductRequest{
 
     @NotNull
     private String productName;

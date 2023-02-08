@@ -1,9 +1,7 @@
 package com.ispan.pcbuy.controller;
 
 import com.ispan.pcbuy.constant.ProductCategory;
-import com.ispan.pcbuy.dto.CpuRequest;
-import com.ispan.pcbuy.dto.ProductQueryParams;
-import com.ispan.pcbuy.dto.ProductRequest;
+import com.ispan.pcbuy.dto.*;
 import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.service.ProductService;
 import com.ispan.pcbuy.util.Page;
@@ -35,7 +33,7 @@ public class ProductController {
             @RequestParam(defaultValue = "desc")         String sort,
 
             //分頁 (要加@Valid註解才能使用@Min@Max)
-            @RequestParam(defaultValue = "100") @Min(0) @Max(100) Integer limit,
+            @RequestParam(defaultValue = "8") @Min(0) @Max(100) Integer limit,
             @RequestParam(defaultValue = "0") @Min(0)           Integer offset
     ){
         ProductQueryParams productQueryParams = new ProductQueryParams();
@@ -71,25 +69,75 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @GetMapping("/products/category/{category}")
+    public ResponseEntity<List<Product>> getProductsFromCategory(
+            @PathVariable(required = true) String category){
+        System.out.println("我是Category = " + category);
+        List<Product> productList = productService.getProductsFromCategory(category);
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
+
+    @GetMapping("/products/MB")
+    public ResponseEntity<List<Product>> getMbBySocket(
+            @RequestParam(required = true) String socket){
+        System.out.println("我是Socket = " + socket);
+        List<Product> productList = productService.getMbBySocket(socket);
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
 
     @PostMapping("/products")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
         Integer productId = productService.createProduct(productRequest);
-
         Product product = productService.getProductById(productId);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
-
     @PostMapping("/products/CPU")
-    public  ResponseEntity<Product> createProduct(@RequestBody @Valid  CpuRequest cpuRequest){
-
-//        ProductRequest.cpuRequest cpuRequest = productRequest.new cpuRequest();
-        Integer productId = productService.createProduct(cpuRequest);
-
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid CpuRequest cpuRequest){
+            Integer productId = productService.createProduct(cpuRequest);
+            Product product = productService.getProductById(productId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/DRAM")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid DramRequest dramRequest){
+        Integer productId = productService.createProduct(dramRequest);
         Product product = productService.getProductById(productId);
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/MB")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid MbRequest mbRequest){
+        Integer productId = productService.createProduct(mbRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/GPU")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid GpuRequest gpuRequest){
+        Integer productId = productService.createProduct(gpuRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/COOLER")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid CoolerRequest coolerRequest){
+        Integer productId = productService.createProduct(coolerRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/STORAGE")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid StorageRequest storageRequest){
+        Integer productId = productService.createProduct(storageRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/POWER")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid PowerRequest powerRequest){
+        Integer productId = productService.createProduct(powerRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    }
+    @PostMapping("/products/CASE")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid CaseRequest caseRequest){
+        Integer productId = productService.createProduct(caseRequest);
+        Product product = productService.getProductById(productId);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
