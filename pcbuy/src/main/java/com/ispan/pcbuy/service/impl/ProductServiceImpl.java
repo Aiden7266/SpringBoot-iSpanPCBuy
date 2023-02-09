@@ -43,6 +43,8 @@ public class ProductServiceImpl implements ProductService {
         if (category.name().equals("MB")) {
             if(filterI != null) {
                 return productDao.getMbByFilter(category, filterI);
+            }else if (filterI == null){
+                return productDao.getProductsFromCategory(category.name());
             }else {
                 return null;
             }
@@ -53,7 +55,10 @@ public class ProductServiceImpl implements ProductService {
                 return productDao.getDramByFilter(category, "DDR4");
             }else if (filterI.contains("DDR5")){
                 return productDao.getDramByFilter(category, "DDR5");
-            }else {
+            }else if (filterI == null) {
+                return productDao.getProductsFromCategory(category.name());
+            }
+            else {
                 return null;
             }
             /*
@@ -69,8 +74,26 @@ public class ProductServiceImpl implements ProductService {
             return null;
 
              */
-        } else {
-
+        }else if (category.name().equals("GPU")){
+            if(filterI == null) {
+                return productDao.getProductsFromCategory(category.name());
+            }else{
+                return null;
+            }
+        } else if (category.name().equals("STORAGE")){
+            if(filterI == null) {
+                return productDao.getProductsFromCategory(category.name());
+            }else{
+                return null;
+            }
+        } else if (category.name().equals("COOLER")){
+            if(filterI == null) {
+                return productDao.getProductsFromCategory(category.name());
+            }else{
+                return null;
+            }
+        }
+        else {
             return null;
         }
 

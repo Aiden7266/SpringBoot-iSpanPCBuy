@@ -89,7 +89,7 @@ public class ProductController {
     @GetMapping("/products/{category}/Filter")
     public ResponseEntity<List<Product>> getCategoryByFilter(
             @PathVariable(required = true) ProductCategory category,
-            @RequestParam(required = true)  String filterI,
+            @RequestParam(required = false)  String filterI,
             @RequestParam(required = false) String filterII,
             @RequestParam(required = false) String filterIII){
         System.out.println("我是Category  = " + category.name());

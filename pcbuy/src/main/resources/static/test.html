@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
   jQuery.support.cors = true;
@@ -81,6 +81,54 @@
     })
   }
 
+  $.ajax({
+    url: 'http://localhost:8080/products/GPU/Filter',
+    type: "get",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      $.each(data, function (key, value) { // []->{}*?
+        $('#GPU').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+        // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
+      })
+    },
+    error: function (data) {
+      alert("fail");
+    }
+  })
+
+  $.ajax({
+    url: 'http://localhost:8080/products/STORAGE/Filter',
+    type: "get",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      $.each(data, function (key, value) { // []->{}*?
+        $('#STORAGE').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+        // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
+      })
+    },
+    error: function (data) {
+      alert("fail");
+    }
+  })
+
+  $.ajax({
+    url: 'http://localhost:8080/products/COOLER/Filter',
+    type: "get",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      $.each(data, function (key, value) { // []->{}*?
+        $('#COOLER').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+        // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
+      })
+    },
+    error: function (data) {
+      alert("fail");
+    }
+  })
+
 
   function onSelectDRAM() {
     var dramId = $('#DRAM').find(':selected').val()
@@ -88,28 +136,19 @@
     var dramSeries = $('#DRAM').find(':selected').attr('series')
     console.log("dramId=" + dramId + ", dramName=" + dramName + ", dramSeries=" + dramSeries)
 
-    /*
-    $.ajax({
-      url: 'http://localhost:8080/products/DRAM/Filter',
-      type: "get",
-      data:{"filter":dramSeries},
-      dataType: "json",
-      success: function (data) {
-        console.log(data);
-        $.each(data, function (key, value) { // []->{}*?
-        //   $('#DRAM').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
-          // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
-        })
-      },
-      error: function (data) {
-        alert("fail");
-      }
-    })
-
-     */
+  }
+  function onSelectGPU(){
+    var gpuId = $('#GPU').find(':selected').val()
+    var gpuName = $('#GPU').find(':selected').text()
+    var gpuSeries = $('#GPU').find(':selected').attr('series')
+    console.log("gpuId=" + gpuId + ", gpuName=" + gpuName + ", gpuSeries=" + gpuSeries)
+  }
+  function onSelectSTORAGE(){
 
   }
+  function onSelectSTORAGE(){
 
+  }
 
 </script>
 
@@ -121,12 +160,44 @@
   <br>
   主機板
   <select id = "MB" onchange="onSelectMB()">
-    <option value = '' series = ''>請選擇一項主機板</option>
+    <option value = '' series = ''>請選擇一項處理器</option>
   </select>
   <br>
   記憶體
   <select id = "DRAM" onchange="onSelectDRAM()">
     <option value = "">請選擇一項記憶體</option>
   </select>
+  <br>
+  顯示卡
+  <select id = "GPU" onchange="onSelectGPU()">
+    <option value = "">請選擇一項顯示卡</option>
+  </select>
+  <br>
+  儲存諜
+  <select id = "STORAGE" onchange="onSelectSTORAGE()">
+    <option value = "">請選擇一項儲存諜</option>
+  </select>
+  <br>
+  散熱器
+  <select id = "COOLER" onchange="onSelectCOOLER()">
+    <option value = "">請選擇一項散熱器</option>
+  </select>
+  <br>
+  <input type="button" value="送出" id="btn">
+<script>
+
+  $('#btn').click(function (){
+    var x = true
+    $('select').each(function (){
+      if ($(this).val() == ""){
+        x = false
+      }
+    })
+    if (x == false){
+      alert("有東西還沒填")
+    }
+  })
+</script>
+
 </body>
 </html>
