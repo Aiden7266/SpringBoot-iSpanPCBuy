@@ -32,9 +32,48 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getProductsFromCategory(category);
     }
 
+//    @Override
+//    public List<Product> getMbBySocket(String socket) {
+//        return productDao.getMbBySocket(socket);
+//    }
+
     @Override
-    public List<Product> getMbBySocket(String socket) {
-        return productDao.getMbBySocket(socket);
+    public List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII) {
+
+        if (category.name().equals("MB")) {
+            if(filterI != null) {
+                return productDao.getMbByFilter(category, filterI);
+            }else {
+                return null;
+            }
+        }
+        else if (category.name().equals("DRAM")){
+            if (filterI.contains("DDR4")) {
+                System.out.println("equals=DDR4, filterI=" + filterI);
+                return productDao.getDramByFilter(category, "DDR4");
+            }else if (filterI.contains("DDR5")){
+                return productDao.getDramByFilter(category, "DDR5");
+            }else {
+                return null;
+            }
+            /*
+        }else if (category.name().equals("POWER")){
+            if(Integer.parseInt(filterI) > 0){
+                int watt = Integer.parseInt(filterI);
+                return productDao.getCategoryByCalculate(category, watt);
+            }else {
+                return null;
+            }
+        }else if (category.name().equals("CASE")){
+            //需要三個參數 1.顯卡長度 2.冷排長度 3.散熱器高度
+            return null;
+
+             */
+        } else {
+
+            return null;
+        }
+
     }
 
     @Override

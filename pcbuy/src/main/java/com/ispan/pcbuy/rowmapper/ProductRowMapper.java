@@ -27,8 +27,9 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setSocket(resultSet.getString("socket"));
         product.setScore(resultSet.getInt("score"));
         product.setSize(resultSet.getInt("size"));
-        product.setLength(resultSet.getDouble("length"));
-        product.setHeight(resultSet.getDouble("height"));
+        product.setCoolerLength(resultSet.getDouble("cooler_length"));
+        product.setCoolerHeight(resultSet.getDouble("cooler_height"));
+        product.setGpuLength(resultSet.getDouble("gpu_length"));
         product.setCapacity(resultSet.getInt("capacity"));
         product.setState(resultSet.getBoolean("state"));
         product.setImageUrl(resultSet.getString("image_url"));

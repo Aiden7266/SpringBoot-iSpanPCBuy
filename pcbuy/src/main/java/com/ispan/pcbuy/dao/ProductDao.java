@@ -15,7 +15,11 @@ public interface ProductDao {
 
     List<Product> getProductsFromCategory(String category);
 
-    List<Product> getMbBySocket(String socket);
+//    List<Product> getMbBySocket(String socket);
+
+    List<Product> getMbByFilter(ProductCategory category, String filterI);
+
+    List<Product> getDramByFilter(ProductCategory category, String filterI);
 
     Product getProductById(Integer productId);
 

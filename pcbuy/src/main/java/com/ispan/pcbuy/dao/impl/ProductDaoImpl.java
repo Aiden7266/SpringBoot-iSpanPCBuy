@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
-    @Override
+    @Override //抓出該Category所有的品項
     public List<Product> getProductsFromCategory(String category) {
         String sql = "SELECT * FROM product WHERE category = :category ";
         Map<String, Object> map = new HashMap<>();
@@ -67,11 +67,31 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
-    @Override
-    public List<Product> getMbBySocket(String socket) {
-        String sql = "SELECT * FROM product WHERE category = 'MB' AND socket = :socket ";
+//    @Override
+//    public List<Product> getMbBySocket(String socket) {
+//        String sql = "SELECT * FROM product WHERE category = 'MB' AND socket = :socket ";
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("socket", socket);
+//        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+//        return productList;
+//    }
+
+    @Override //藉由CPU腳位篩選並列出符合的主機板
+    public List<Product> getMbByFilter(ProductCategory category, String filterI) {
+        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ";
         Map<String, Object> map = new HashMap<>();
-        map.put("socket", socket);
+        map.put("category", category.name());
+        map.put("socket", filterI);
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+        return productList;
+    }
+
+    @Override //藉由主機板晶片組篩選並列出符合的記憶體
+    public List<Product> getDramByFilter(ProductCategory category, String filterI) {
+        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", category.name());
+        map.put("socket", filterI);
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
         return productList;
     }
@@ -94,8 +114,8 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Integer createProduct(ProductRequest productRequest) {
-        String sql= "INSERT INTO product (product_name, category, brand, series, watt, socket, score, size, length, height, capacity, state, description, image_url, stock, price, created_date, last_modified_date) " +
-            "VALUES (:productName, :category, :brand, :series, :watt, :socket, :score, :size, :length, :height, :capacity, :state, :description, :imageUrl, :stock, :price, :createDate, :lastModifiedDate)";
+        String sql= "INSERT INTO product (product_name, category, brand, series, watt, socket, score, size, cooler_length, cooler_height, gpu_length, capacity, state, description, image_url, stock, price, created_date, last_modified_date) " +
+            "VALUES (:productName, :category, :brand, :series, :watt, :socket, :score, :size, :coolerLength, :coolerHeight, :gpuLength, :capacity, :state, :description, :imageUrl, :stock, :price, :createDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productName", productRequest.getProductName());
@@ -106,8 +126,9 @@ public class ProductDaoImpl implements ProductDao {
         map.put("socket", productRequest.getSocket());
         map.put("score", productRequest.getScore());
         map.put("size", productRequest.getSize());
-        map.put("length", productRequest.getLength());
-        map.put("height", productRequest.getHeight());
+        map.put("coolerLength", productRequest.getCoolerLength());
+        map.put("coolerHeight", productRequest.getCoolerHeight());
+        map.put("gpuHeight", productRequest.getGpuLength());
         map.put("capacity", productRequest.getCapacity());
         map.put("state", productRequest.getState());
         map.put("description", productRequest.getDescription());

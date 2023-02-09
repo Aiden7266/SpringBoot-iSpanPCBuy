@@ -26,10 +26,13 @@ public class CoolerRequest extends ProductRequest{
     private Integer size;
 
     @NotNull
-    private Integer length;
+    private Double coolerLength;
 
     @NotNull
-    private Integer height;
+    private Double coolerHeight;
+
+    @NotNull
+    private Double gpuLength;
 
     @NotNull
     private Boolean state;

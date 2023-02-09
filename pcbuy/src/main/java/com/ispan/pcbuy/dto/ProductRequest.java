@@ -33,8 +33,9 @@ public class ProductRequest {
     private String  socket;
     private Integer score;
     private Integer size;
-    private Integer length;
-    private Integer height;
+    private Double coolerLength;
+    private Double coolerHeight;
+    private Double gpuLength;
     private Integer capacity;
     private Boolean state;
     private String description;

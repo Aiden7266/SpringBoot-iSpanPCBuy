@@ -28,8 +28,9 @@ public class Product {
    private String  socket;
    private Integer score;
    private Integer size;
-   private Double length;
-   private Double height;
+   private Double coolerLength;
+   private Double coolerHeight;
+   private Double gpuLength;
    private Integer capacity;
    private Boolean state;
    private String description;

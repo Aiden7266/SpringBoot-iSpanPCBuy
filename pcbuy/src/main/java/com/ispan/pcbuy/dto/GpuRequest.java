@@ -29,7 +29,7 @@ public class GpuRequest extends ProductRequest{
     private Integer score;
 
     @NotNull
-    private Integer length;
+    private Double gpulength;
 
     @NotNull
     private Integer capacity;

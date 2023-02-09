@@ -69,7 +69,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/products/category/{category}")
+    @GetMapping("/products/{category}/List")
     public ResponseEntity<List<Product>> getProductsFromCategory(
             @PathVariable(required = true) String category){
         System.out.println("我是Category = " + category);
@@ -77,13 +77,29 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 
-    @GetMapping("/products/MB")
-    public ResponseEntity<List<Product>> getMbBySocket(
-            @RequestParam(required = true) String socket){
-        System.out.println("我是Socket = " + socket);
-        List<Product> productList = productService.getMbBySocket(socket);
+//    @GetMapping("/products/MB")
+//    public ResponseEntity<List<Product>> getMbBySocket(
+//            @RequestParam(required = true) String socket){
+//        System.out.println("我是Socket = " + socket);
+//        List<Product> productList = productService.getMbBySocket(socket);
+//        return ResponseEntity.status(HttpStatus.OK).body(productList);
+//    }
+
+
+    @GetMapping("/products/{category}/Filter")
+    public ResponseEntity<List<Product>> getCategoryByFilter(
+            @PathVariable(required = true) ProductCategory category,
+            @RequestParam(required = true)  String filterI,
+            @RequestParam(required = false) String filterII,
+            @RequestParam(required = false) String filterIII){
+        System.out.println("我是Category  = " + category.name());
+        System.out.println("我是FilterI   = " + filterI);
+        System.out.println("我是FilterII  = " + filterII);
+        System.out.println("我是FilterIII = " + filterIII);
+        List<Product> productList = productService.getCategoryByFilter(category, filterI, filterII, filterIII);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
+
 
     @PostMapping("/products")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){

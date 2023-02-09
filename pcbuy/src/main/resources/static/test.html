@@ -12,7 +12,7 @@
 
     //第一層選單
     $.ajax({
-      url: 'http://localhost:8080/products/category/CPU',
+      url: 'http://localhost:8080/products/CPU/List',
       type: "get",
       dataType: "json",
       success: function (data) {
@@ -21,7 +21,7 @@
 
           // $('#cpuName').append('<option value="' + key + '">' + data[].productName + '</option>')
           $('#CPU').append('<option value =" '+data[key].productId+' "socket = ' + data[key].socket + '>' + data[key].productName + '</option>')
-          console.log(data[key].productId + " " + data[key].productName + " " + data[key].socket)
+          // console.log(data[key].productId + " " + data[key].productName + " " + data[key].socket)
         })
       },
       error: function (data) {
@@ -36,17 +36,69 @@
     var cpuSocket = $('#CPU').find(':selected').attr('socket')
     console.log("cpuId=" + cpuId + ", cpuName=" + cpuName + ", cpuSocket=" + cpuSocket)
 
-    $('#MB').empty().append("<option value = '' socket = ''>請選擇一項主機板</option>")
+    $('#MB').empty().append("<option value = '' series = ''>請選擇一項主機板</option>")
+    $('#DRAM').empty().append("<option value = '' series = ''>請選擇一項記憶體</option>")
     $.ajax({
-      url: 'http://localhost:8080/products/MB',
+      url: 'http://localhost:8080/products/MB/Filter',
       type: "get",
-      data:{"socket":cpuSocket},
+      data:{"filterI":cpuSocket},
       dataType: "json",
       success: function (data) {
         // console.log(data);
         $.each(data, function (key, value) { // []->{}*?
-          $('#MB').append('<option value =" '+data[key].productId+' "socket = ' + data[key].socket + '>' + data[key].productName + '</option>')
-          console.log(data[key].productId + " " + data[key].productName + " " + data[key].socket)
+          $('#MB').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+          // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    })
+  }
+
+  function onSelectMB(){
+    var mbId     = $('#MB').find(':selected').val()
+    var mbName   = $('#MB').find(':selected').text()
+    var mbSeries = $('#MB').find(':selected').attr('series')
+    console.log("mbId=" + mbId + ", mbName=" + mbName + ", mbSeries=" + mbSeries)
+
+    $('#DRAM').empty().append("<option value = '' series = ''>請選擇一項記憶體</option>")
+    $.ajax({
+      url: 'http://localhost:8080/products/DRAM/Filter',
+      type: "get",
+      data:{"filterI":mbSeries},
+      dataType: "json",
+      success: function (data) {
+        // console.log(data);
+        $.each(data, function (key, value) { // []->{}*?
+          $('#DRAM').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+          // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    })
+  }
+
+
+  function onSelectDRAM() {
+    var dramId = $('#DRAM').find(':selected').val()
+    var dramName = $('#DRAM').find(':selected').text()
+    var dramSeries = $('#DRAM').find(':selected').attr('series')
+    console.log("dramId=" + dramId + ", dramName=" + dramName + ", dramSeries=" + dramSeries)
+
+    /*
+    $.ajax({
+      url: 'http://localhost:8080/products/DRAM/Filter',
+      type: "get",
+      data:{"filter":dramSeries},
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        $.each(data, function (key, value) { // []->{}*?
+        //   $('#DRAM').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+          // console.log(data[key].productId + " " + data[key].productName + " " + data[key].series)
         })
       },
       error: function (data) {
@@ -54,6 +106,7 @@
       }
     })
 
+     */
 
   }
 
@@ -61,14 +114,19 @@
 </script>
 
 <body>
-  中央處理器
+  處理器
   <select id = "CPU" onchange="onSelectCPU()">
     <option value = '' socket = ''>請選擇一項CPU</option>
   </select>
   <br>
   主機板
-  <select id = "MB" name="MB" >
-    <option value = "">請選擇一項主機板</option>
+  <select id = "MB" onchange="onSelectMB()">
+    <option value = '' series = ''>請選擇一項主機板</option>
+  </select>
+  <br>
+  記憶體
+  <select id = "DRAM" onchange="onSelectDRAM()">
+    <option value = "">請選擇一項記憶體</option>
   </select>
 </body>
 </html>

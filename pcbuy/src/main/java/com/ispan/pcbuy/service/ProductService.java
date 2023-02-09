@@ -15,7 +15,9 @@ public interface ProductService {
 
     List<Product> getProductsFromCategory(String category);
 
-    List<Product> getMbBySocket(String socket);
+//    List<Product> getMbBySocket(String socket);
+
+    List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII);
 
     Product getProductById(Integer productId);
 
