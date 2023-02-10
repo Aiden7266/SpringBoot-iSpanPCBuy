@@ -16,12 +16,21 @@
   <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 </head>
 <style>
-  table,tr,td{
-    border: 2px solid;
+  table,tr,td,th{
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    border: 1px solid;
   }
   td{
     text-align: center;
+    background-color: #faf2cc;
   }
+  th{
+    background-color: #5bc0de;
+  }
+
+
 </style>
 
 <body>
@@ -46,7 +55,7 @@
       <ul class="nav navbar-nav side-nav">
         <li class="active"><a href="../index.html"><i class="fa fa-dashboard"></i> 首頁</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> 商品管理 <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> 商品管理 <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="../product/CPU.html">處理器</a></li>
             <li><a href="../product/MB.html">主機板</a></li>
@@ -106,7 +115,7 @@
         <input type="button" value="刪除資料" id="btn-delete">
         <input type="button" value="修改資料" id="btn-update">
         <br><br><br>
-        <table id="CPU" style="width: 90%">
+        <table id="CPU" style="width: 100%">
           <tr>
             <th style="text-align: center">選取</th>
             <th style="text-align: center">編號</th>

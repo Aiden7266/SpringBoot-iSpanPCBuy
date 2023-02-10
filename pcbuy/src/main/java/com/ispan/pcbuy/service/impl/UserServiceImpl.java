@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         //使用 MD5 生成密碼的雜湊值
-        String hashedPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
-        userRegisterRequest.setPassword(hashedPassword);
+        String BCryptPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
 
         //創建帳號
         return userDao.createUser(userRegisterRequest);
