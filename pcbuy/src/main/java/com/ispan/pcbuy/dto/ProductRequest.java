@@ -1,7 +1,6 @@
 package com.ispan.pcbuy.dto;
 
 import com.ispan.pcbuy.constant.ProductCategory;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

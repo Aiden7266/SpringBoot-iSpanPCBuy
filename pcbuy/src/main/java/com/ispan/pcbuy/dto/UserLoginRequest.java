@@ -1,7 +1,6 @@
 package com.ispan.pcbuy.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import lombok.Data;
 
 @Data

@@ -1,7 +1,6 @@
 package com.ispan.pcbuy.model;
 
 import com.ispan.pcbuy.constant.ProductCategory;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;

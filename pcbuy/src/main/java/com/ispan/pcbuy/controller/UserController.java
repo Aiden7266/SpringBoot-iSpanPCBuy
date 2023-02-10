@@ -4,7 +4,7 @@ import com.ispan.pcbuy.dto.UserLoginRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
