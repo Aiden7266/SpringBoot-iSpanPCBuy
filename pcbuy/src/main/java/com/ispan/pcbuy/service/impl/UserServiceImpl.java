@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public Integer register(UserRegisterRequest userRegisterRequest) {
         //檢查註冊的email
@@ -29,9 +32,9 @@ public class UserServiceImpl implements UserService {
             log.warn("該 email {} 已經被註冊！", userRegisterRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        //使用 MD5 生成密碼的雜湊值
-        String BCryptPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
-
+        //使用 BCP 生成密碼的雜湊值
+        String BCryptPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
+        userRegisterRequest.setPassword(BCryptPassword);
         //創建帳號
         return userDao.createUser(userRegisterRequest);
     }
