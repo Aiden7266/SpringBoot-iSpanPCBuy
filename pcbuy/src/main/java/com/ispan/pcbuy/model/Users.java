@@ -3,10 +3,11 @@ package com.ispan.pcbuy.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+
 import java.util.Date;
 
 @Data
-public class User {
+public class Users {
 
     private Integer userId;
     private String username;
@@ -25,12 +26,9 @@ public class User {
     private Date createdDate;
     private Date lastModifiedDate;
 
-    public User(String username, String password, String auth) {
+    public Users(String username, String password, String auth) {
         this.username = username;
         this.password = password;
         this.auth = auth;
-    }
-
-    public User() {
     }
 }

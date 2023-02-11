@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer register(UserRegisterRequest userRegisterRequest) {
-        //檢查註冊的email
-        User user = userDao.getUserByEmail(userRegisterRequest.getEmail());
+        //檢查註冊的username
+        User user = userDao.getUserByUsername(userRegisterRequest.getUsername());
         if(user != null) {
-            log.warn("該 email {} 已經被註冊！", userRegisterRequest.getEmail());
+            log.warn("該帳號：{}，已經被註冊！", userRegisterRequest.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         //使用 BCP 生成密碼的雜湊值
@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(userId);
     }
 
-    @Override
+    @Override //暫時棄用
     public User login(UserLoginRequest userLoginRequest) {
-        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+        User user = userDao.getUserByEmail(userLoginRequest.getUsername());
 
         //檢查 user 是否存在
         if(user == null){
-            log.warn("該 email {} 尚未被註冊！", userLoginRequest.getEmail());
+            log.warn("該 email {} 尚未被註冊！", userLoginRequest.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
         if(user.getPassword().equals(hashedPassword)){
             return user;
         }else {
-            log.warn("該 email {} 的密碼不正確！", userLoginRequest.getEmail());
+            log.warn("該 email {} 的密碼不正確！", userLoginRequest.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }

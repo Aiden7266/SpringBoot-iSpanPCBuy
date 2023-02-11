@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+        <form method="post" action="/users/test" id="registerForm">
+            <label for="username">帳號：</label><input type="text" name="username" id="username">
+            <br>
+            <label for="password">密碼：</label><input type="password" name="password" id="password">
+            <br>
+            <label for="name">姓名：</label><input type="text" name="name" id="name">
+            <br>
+            <label for="tel">電話：</label><input type="text" name="tel" id="tel">
+            <br>
+            <label for="addr">地址：</label><input type="text" name="addr" id="addr">
+            <br>
+            <label for="email">信箱：</label><input type="text" name="email" id="email">
+            <br>
+            <input type="button" value="提交" onclick="register()">
+        </form>
+</body>
+<script>
+    function register() {
+
+        $.ajax({
+            type: 'post',
+            url: '/users/register',
+            data: JSON.stringify({
+                username:$('#username').val(),
+                password:$('#password').val(),
+                name:$('#name').val(),
+                tel:$('#tel').val(),
+                addr:$('#addr').val(),
+                email:$('#email').val()
+            }),
+            contentType : 'application/json',
+            success: function(data) {
+                console.log(data)
+            }
+        });
+    }
+</script>
+</html>
+
+
