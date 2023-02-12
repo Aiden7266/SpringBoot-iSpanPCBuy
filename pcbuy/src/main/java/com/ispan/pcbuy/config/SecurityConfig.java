@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         //退出
-        http.logout().logoutUrl("/logout").logoutSuccessUrl("/successLogout.html").permitAll();
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").permitAll();
 
         //自定義403沒有權限訪問頁面
         http.exceptionHandling().accessDeniedPage("/unauth.html");
@@ -48,12 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin() //自定義自己編寫的登入頁面
                 .loginPage("/login_register.html") //登入頁面設置
 //                .loginProcessingUrl("/users/login") //登入時訪問的URL
-                .successForwardUrl("/loginSuccessI")
-                .defaultSuccessUrl("/success.html") //登入後跳轉路徑
+//                .successForwardUrl("/loginSuccessI")
+                .defaultSuccessUrl("/index.html") //登入後跳轉路徑
                 .failureForwardUrl("/loginFail").permitAll()
 
                 .and().authorizeRequests()
-                    .antMatchers("/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
+                    .antMatchers("/**","/assets/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
 //                    1.antMatchers("/loginSuccess").hasAuthority("role") //只賦予單個權限可以訪問
 //                    2.antMatchers("/loginSuccess").hasAnyAuthority("role","manger") //賦予多個權限可以訪問
 //                    3.antMatchers("/loginSuccess").hasRole("sale")

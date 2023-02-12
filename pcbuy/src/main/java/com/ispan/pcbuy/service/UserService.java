@@ -10,5 +10,7 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
+    User getUserByUsername(String username);
+
     User login(UserLoginRequest UserLoginRequest);
 }
