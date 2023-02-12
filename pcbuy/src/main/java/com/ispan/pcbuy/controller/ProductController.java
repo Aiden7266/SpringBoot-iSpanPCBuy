@@ -5,6 +5,8 @@ import com.ispan.pcbuy.dto.*;
 import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.service.ProductService;
 import com.ispan.pcbuy.util.Page;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +90,7 @@ public class ProductController {
     @GetMapping("/products/{category}/Filter")
     public ResponseEntity<List<Product>> getCategoryByFilter(
             @PathVariable(required = true) ProductCategory category,
-            @RequestParam(required = false)  String filterI,
+            @RequestParam(required = false) String filterI,
             @RequestParam(required = false) String filterII,
             @RequestParam(required = false) String filterIII){
         System.out.println("我是Category  = " + category.name());
@@ -97,6 +99,54 @@ public class ProductController {
         System.out.println("我是FilterIII = " + filterIII);
         List<Product> productList = productService.getCategoryByFilter(category, filterI, filterII, filterIII);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
+
+    @PostMapping("/productsTest")
+    public  ResponseEntity<Product> createProductTest(HttpServletRequest httpServletRequest){
+        ProductRequest productRequest = new ProductRequest();
+        productRequest.setProductName(httpServletRequest.getParameter("productName"));
+        productRequest.setCategory((ProductCategory.valueOf(httpServletRequest.getParameter("category"))));
+        productRequest.setBrand(httpServletRequest.getParameter("brand"));
+        productRequest.setSeries(httpServletRequest.getParameter("series"));
+
+        if (httpServletRequest.getParameter("watt")!=null)
+        {productRequest.setWatt(Integer.parseInt(httpServletRequest.getParameter("watt")));}
+
+        productRequest.setSocket(httpServletRequest.getParameter("socket"));
+
+        if (httpServletRequest.getParameter("score")!=null)
+        {productRequest.setScore(Integer.parseInt(httpServletRequest.getParameter("score")));}
+
+        productRequest.setSize(httpServletRequest.getParameter("size"));
+
+        if(httpServletRequest.getParameter("coolerLength")!=null)
+        {productRequest.setCoolerLength(Double.parseDouble(httpServletRequest.getParameter("coolerLength")));}
+
+        if (httpServletRequest.getParameter("coolerHeight")!=null)
+        {productRequest.setCoolerHeight(Double.parseDouble(httpServletRequest.getParameter("coolerHeight")));}
+
+        if (httpServletRequest.getParameter("gpuLength")!=null)
+        {productRequest.setGpuLength(Double.parseDouble(httpServletRequest.getParameter("gpuLength")));}
+
+        if (httpServletRequest.getParameter("capacity")!=null)
+        {productRequest.setCapacity(Integer.parseInt(httpServletRequest.getParameter("capacity")));}
+
+        if (httpServletRequest.getParameter("state")!=null)
+        {productRequest.setState(Boolean.parseBoolean(httpServletRequest.getParameter("state")));}
+
+        productRequest.setDescription(httpServletRequest.getParameter("description"));
+        productRequest.setImageUrl(httpServletRequest.getParameter("imageUrl"));
+
+        if(httpServletRequest.getParameter("stock")!=null)
+        {productRequest.setStock(Integer.parseInt(httpServletRequest.getParameter("stock")));}
+
+        if (httpServletRequest.getParameter("price")!=null)
+        {productRequest.setPrice(Integer.parseInt(httpServletRequest.getParameter("price")));}
+
+        Integer productId = productService.createProduct(productRequest);
+        Product product = productService.getProductById(productId);
+        System.out.println(productRequest.toString());
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
 
@@ -170,8 +220,8 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/products/{productId}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
+    @DeleteMapping("/products/delete")
+    public ResponseEntity<?> deleteProduct(@RequestParam Integer productId){
 
         productService.deleteProductById(productId);
 

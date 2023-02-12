@@ -26,7 +26,7 @@ public class MbRequest extends ProductRequest{
     private String  socket;
 
     @NotNull
-    private Integer size;
+    private String size;
 
     @NotNull
     private Boolean state;

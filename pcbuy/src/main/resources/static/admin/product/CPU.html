@@ -135,21 +135,22 @@
     <!-- JavaScript -->
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 
 <dialog id="infoModal">
   <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
   <hr>
-  <form action="" method="post">
+  <form action="/productsTest" method="post" id="create-CPU-form" onsubmit="return formSubmit()">
 
     <div>
       <label for="productName">名稱：</label>
       <input type="text" id="productName" name="productName" placeholder="輸入商品名稱" required="required" maxlength="50"
              oninvalid="setCustomValidity('請輸入商品名稱，確定字數在50字以內');" onchange="setCustomValidity('');">
 
-
       <label for="category">類別：</label>
-      <input type="text" id="category" name="category" placeholder="輸入商品類別" required="required" maxlength="50"
-             oninvalid="setCustomValidity('請輸入商品類別，確定字數在50字以內');" onchange="setCustomValidity('');">
+      <select id="category" name="category"  required="required">
+        <option value="CPU">CPU</option>
+      </select>
 
       <label for="brand">品牌：</label>
       <input type="text" id="brand" name="brand" placeholder="輸入商品品牌" required="required" maxlength="50"
@@ -173,8 +174,8 @@
       <label for="state">上架狀態：</label>
       <!--輸入商品上架狀態-->
       <select id="state" name="state"  required="required">
-        <option value="value1">true</option>
-        <option value="value2">false</option>
+        <option value="true">true</option>
+        <option value="false">false</option>
       </select>
 
       <label for="description">描述：</label>
@@ -196,9 +197,21 @@
 
       <div style="text-align:center;">
         <input type="button" id="create-close" value="關閉">
+        <input type="submit" id="create-submit" value="送出" hidden="hidden">
         <input type="submit" id="create-send" value="送出">
       </div>
     </div>
+  </form>
+</dialog>
+
+<dialog id="DoubleCheck" style="height: 100px">
+  <p>真的要刪除嗎？</p>
+  <hr>
+  <form action="" method="post" id="double-check-form">
+      <div style="text-align:center;">
+        <input type="button" id="no-send" value="取消">
+        <input type="button" id="ok-send" value="確定">
+      </div>
   </form>
 </dialog>
 
@@ -213,7 +226,7 @@
       success: function (data) {
         $.each(data, function (key, value) {
           // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
-          $('#CPU').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productName + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
+          $('#CPU').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
           console.log(data[key].productId)
         })
       },
@@ -222,36 +235,6 @@
       }
     });
   })
-
-  /*
-  var opt = {
-    title:"CPU",
-    width: 500,
-    height: 500,
-    resizable: false,
-    draggable: false,
-
-    autoOpen: false,
-    show: {
-      effect: "blind",
-      duration: 1000
-    },
-    hide: {
-      effect: "explode",
-      duration: 1000
-    }
-  };
-
-  $('#btn-create').click(function (){
-    console.log("123")
-    $('#infoModal').dialog().dialog("open")
-  })
-  $('#create-close').click(function () {
-    $('#infoModal').dialog().dialog("close")
-    console.log("我是關閉")
-  })
-  */
-
   let btn = document.querySelector("#btn-create")
   let infoModal = document.querySelector("#infoModal")
   let close = document.querySelector("#create-close")
@@ -261,6 +244,50 @@
   close.addEventListener("click", function () {
     infoModal.close()
   })
+
+  let checkModel = document.querySelector("#DoubleCheck")
+
+  function formSubmit(){
+    $('#create-CPU-form').ajaxSubmit(function () {
+      console.log("已送出")
+      infoModal.close()
+      // alert("已送出")
+      location.reload()
+    })
+    return false
+  }
+
+  $('#btn-delete').click(function (){
+
+    var selectedId = $("input[name='categoryRadio']:checked").val()
+
+
+    if (selectedId != undefined){
+
+      checkModel.showModal()
+
+      $('#ok-send').click(function () {
+        $.ajax({
+          url: '/products/delete',
+          type: "delete",
+          dataType: "json",
+          data:{
+            productId : selectedId
+          },
+          success: function (data){
+            checkModel.close()
+            location.reload()
+          }
+        })
+      })
+    }else {
+      alert("請選取一筆資料")
+    }
+    $('#no-send').click(function () {
+      checkModel.close()
+    })
+  })
+
 
 </script>
 

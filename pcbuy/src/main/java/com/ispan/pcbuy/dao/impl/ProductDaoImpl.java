@@ -128,7 +128,7 @@ public class ProductDaoImpl implements ProductDao {
         map.put("size", productRequest.getSize());
         map.put("coolerLength", productRequest.getCoolerLength());
         map.put("coolerHeight", productRequest.getCoolerHeight());
-        map.put("gpuHeight", productRequest.getGpuLength());
+        map.put("gpuLength", productRequest.getGpuLength());
         map.put("capacity", productRequest.getCapacity());
         map.put("state", productRequest.getState());
         map.put("description", productRequest.getDescription());

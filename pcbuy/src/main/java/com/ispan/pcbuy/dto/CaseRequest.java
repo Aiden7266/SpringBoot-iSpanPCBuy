@@ -17,7 +17,7 @@ public class CaseRequest extends ProductRequest{
     private String brand;
 
     @NotNull
-    private Integer size;
+    private String size;
 
     @NotNull
     private Double coolerLength;

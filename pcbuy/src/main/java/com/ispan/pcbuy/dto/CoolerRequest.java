@@ -23,9 +23,6 @@ public class CoolerRequest extends ProductRequest{
     private Integer watt;
 
     @NotNull
-    private Integer size;
-
-    @NotNull
     private Double coolerLength;
 
     @NotNull

@@ -31,7 +31,7 @@ public class ProductRequest {
     private Integer watt;
     private String  socket;
     private Integer score;
-    private Integer size;
+    private String size;
     private Double coolerLength;
     private Double coolerHeight;
     private Double gpuLength;

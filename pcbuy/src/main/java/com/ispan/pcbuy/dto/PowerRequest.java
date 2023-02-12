@@ -23,7 +23,7 @@ public class PowerRequest extends ProductRequest{
     private Integer watt;
 
     @NotNull
-    private Integer size;
+    private String size;
 
     @NotNull
     private Boolean state;
