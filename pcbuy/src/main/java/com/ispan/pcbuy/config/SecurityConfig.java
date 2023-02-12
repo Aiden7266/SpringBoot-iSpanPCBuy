@@ -47,19 +47,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin() //自定義自己編寫的登入頁面
                 .loginPage("/login_register.html") //登入頁面設置
-                .loginProcessingUrl("/user/login") //登入時訪問的URL
-                .defaultSuccessUrl("/success.html",true)
-                .failureForwardUrl("/loginFail").permitAll() //登入後跳轉路徑
+//                .loginProcessingUrl("/users/login") //登入時訪問的URL
+                .successForwardUrl("/loginSuccessI")
+                .defaultSuccessUrl("/success.html") //登入後跳轉路徑
+                .failureForwardUrl("/loginFail").permitAll()
 
                 .and().authorizeRequests()
-                    .antMatchers("/").permitAll() //設置哪些路徑可以直接訪問，不需要認證
+                    .antMatchers("/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
 //                    1.antMatchers("/loginSuccess").hasAuthority("role") //只賦予單個權限可以訪問
 //                    2.antMatchers("/loginSuccess").hasAnyAuthority("role","manger") //賦予多個權限可以訪問
 //                    3.antMatchers("/loginSuccess").hasRole("sale")
-                    .antMatchers("/admin/**").hasAnyRole("sale","manager")
+                    .antMatchers("/admin/**").hasAnyRole("admin")
+                    .antMatchers("/member/**").hasAnyRole("member","admin")
                     .anyRequest().authenticated()
                     .and().rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
-                .tokenValiditySeconds(60) //設置記住我的有效時長(秒)
+                .tokenValiditySeconds(600) //設置記住我的有效時長(秒)
                 .userDetailsService(userDetailsService)
                 .and().csrf().disable(); //關閉csrf防護
     }

@@ -1,30 +1,29 @@
 package com.ispan.pcbuy.service;
 
 import com.ispan.pcbuy.dao.UserDao;
-import com.ispan.pcbuy.rowmapper.UsersMapper;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 
 @Component("userDetailsService")
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
-
-    @Autowired
-    private UsersMapper usersMapper;
-
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService, UserDetails
+{
     @Autowired
     private UserDao userDao;
 
+    @Setter
+    private String username;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 
 //        QueryWrapper<Users_old> wrapper = new QueryWrapper<>(); //硅谷老師教法
 //        wrapper.eq("username", username);
@@ -34,10 +33,47 @@ public class UserDetailsService implements org.springframework.security.core.use
         String queryAuthority = userDao.getUserByUsername(username).getAuth();
         if(queryUsername == null){ //資料庫沒有這個使用者，認證失敗
             throw new UsernameNotFoundException("此帳號不存在");
+        }else {
+            setUsername(queryUsername);
         }
 
         //從資料庫查詢的users物件，獲取帳號密碼，再回傳
         List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(queryAuthority);
         return new User(queryUsername, queryPassword, auths);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

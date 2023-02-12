@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @PostMapping("/user/login")
+    @GetMapping("/loginSuccessI")
     public String login(){
         return "Hello 這裡是登入跳轉頁面";
     }
 
-    @GetMapping("/loginSuccess")
+    @GetMapping("/loginSuccessII")
     public String hello(){
         return "登入成功";
     }

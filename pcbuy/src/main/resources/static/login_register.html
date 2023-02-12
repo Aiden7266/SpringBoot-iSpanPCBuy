@@ -289,6 +289,22 @@
 
 <body>
 <div class="shell">
+
+    <!--登入-->
+    <div class="container b-container" id="b-container">
+        <form class="form" id="b-form" action="" method="post" >
+            <h2 class="form_title title">登入會員</h2>
+            <div class="form_icons"></div>
+            <input type="text" class="form_input" placeholder="帳號" name="username" required>
+            <input type="password" class="form_input" placeholder="密碼" name="password" required>
+            <a class="form_link"></a>
+            <input type="checkbox" name="remember-me">保持登入
+            <input type="submit" class="form_button button" id="loginrule" value="SIGN IN">
+            <br><br>
+            <!--             <a href="forgot-password.html" class="text-right pull-right">忘記密碼?</a>-->
+        </form>
+    </div>
+
     <!--註冊-->
     <div class="container a-container" id="a-container">
         <form class="form" id="a-form" action="" method="POST" >
@@ -328,21 +344,6 @@
         </form>
     </div>
 
-    <!--登入-->
-    <div class="container b-container" id="b-container">
-        <form class="form" id="b-form" action="/user/login" method="post" >
-            <h2 class="form_title title">登入會員</h2>
-            <div class="form_icons"></div>
-                <input type="text" class="form_input" placeholder="帳號" name="username" required>
-                <input type="password" class="form_input" placeholder="密碼" name="password" required>
-            <a class="form_link"></a>
-            <input type="checkbox" name="remember-me">保持登入
-            <input type="submit" class="form_button button" id="loginrule" value="SIGN IN">
-            <br><br>
-<!--             <a href="forgot-password.html" class="text-right pull-right">忘記密碼?</a>-->
-        </form>
-    </div>
-
     <div class="switch" id="switch-cnt">
         <div class="switch_circle"></div>
         <div class="switch_circle switch_circle-t"></div>
@@ -375,8 +376,8 @@
             switchCtn.classList.remove("is-gx");
         }, 1500)
         switchCtn.classList.toggle("is-txr");
-        switchCircle[0].classList.toggle("is-txr");
         switchCircle[1].classList.toggle("is-txr");
+        switchCircle[0].classList.toggle("is-txr");
 
         switchC1.classList.toggle("is-hidden");
         switchC2.classList.toggle("is-hidden");

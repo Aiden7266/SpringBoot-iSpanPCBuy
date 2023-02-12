@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
-@MapperScan("com.ispan.pcbuy.rowmapper")
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class PcbuyApplication {
 
