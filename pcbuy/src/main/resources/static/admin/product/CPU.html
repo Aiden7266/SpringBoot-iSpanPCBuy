@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible">
   <meta name="author" content="">
 
   <title>Forms - 後台管理</title>
@@ -12,8 +13,9 @@
   <link href="../css/bootstrap.css" rel="stylesheet">
 
   <!-- Add custom CSS here -->
-  <link href="../css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/sb-admin.css" >
   <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <style>
   table,tr,td,th{
@@ -34,7 +36,9 @@
 </style>
 
 <body>
-
+<link rel="stylesheet" href="../css/product_style.css">
+<!--<link rel="stylesheet" href="../css/jquery-ui.structure.css">-->
+<!--<link rel="stylesheet" href="../css/..">-->
 <div id="wrapper">
 
   <!-- Sidebar -->
@@ -55,7 +59,7 @@
       <ul class="nav navbar-nav side-nav">
         <li class="active"><a href="../index.html"><i class="fa fa-dashboard"></i> 首頁</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown-toggle"><i class="fa fa-caret-square-o-down"></i> 商品管理 <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> 商品管理 <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="../product/CPU.html">處理器</a></li>
             <li><a href="../product/MB.html">主機板</a></li>
@@ -78,11 +82,7 @@
 
       <ul class="nav navbar-nav navbar-right navbar-user">
 
-        <ul class="dropdown-menu">
 
-
-        </ul>
-        </li>
         <li class="dropdown alerts-dropdown">
 
           <ul class="dropdown-menu">
@@ -136,7 +136,73 @@
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/bootstrap.js"></script>
 
-<script>
+<dialog id="infoModal">
+  <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
+  <hr>
+  <form action="" method="post">
+
+    <div>
+      <label for="productName">名稱：</label>
+      <input type="text" id="productName" name="productName" placeholder="輸入商品名稱" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入商品名稱，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+
+      <label for="category">類別：</label>
+      <input type="text" id="category" name="category" placeholder="輸入商品類別" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入商品類別，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+      <label for="brand">品牌：</label>
+      <input type="text" id="brand" name="brand" placeholder="輸入商品品牌" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入品牌，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+
+      <label for="watt">功耗：</label>
+      <input type="number" id="watt" name="watt" placeholder="輸入商品功耗" required="required" min="1" max="2000"
+             oninvalid="setCustomValidity('功耗值必須大於0，小於等於2000');" onchange="setCustomValidity('');">
+
+
+      <label for="socket">腳位：</label>
+      <input type="text" id="socket" name="socket" placeholder="輸入商品腳位" required="required" maxlength="10"
+             oninvalid="setCustomValidity('請輸入商品腳位，確定字數為10字以內');" onchange="setCustomValidity('');">
+
+
+      <label for="score">分數：</label>
+      <input type="number" id="score" name="score" placeholder="輸入商品分數" required="required" min="1" max="100000"
+             oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
+
+      <label for="state">上架狀態：</label>
+      <!--輸入商品上架狀態-->
+      <select id="state" name="state"  required="required">
+        <option value="value1">true</option>
+        <option value="value2">false</option>
+      </select>
+
+      <label for="description">描述：</label>
+      <input type="text" id="description" name="description" placeholder="輸入商品描述" maxlength="1000"
+             oninvalid="setCustomValidity('描述最大字數為1000');" onchange="setCustomValidity('');">
+
+      <label for="imageUrl">照片連結：</label>
+      <input type="URL" id="imageUrl" name="imageUrl" placeholder="輸入商品照片連結" required="required"
+             oninvalid="setCustomValidity('請確定商品連結正確');" onchange="setCustomValidity('');">
+
+      <label for="stock">庫存：</label>
+      <input type="number" id="stock" name="stock" placeholder="輸入商品庫存" required="required" min="0" max="100"
+             oninvalid="setCustomValidity('庫存限制<=100');" onchange="setCustomValidity('');">
+
+      <label for="price">價格：</label>
+      <input type="number" id="price" name="price" placeholder="輸入商品價格" required="required" min="1" max="100000"
+             oninvalid="setCustomValidity('價格必須>0');" onchange="setCustomValidity('');">
+
+
+      <div style="text-align:center;">
+        <input type="button" id="create-close" value="關閉">
+        <input type="submit" id="create-send" value="送出">
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script type="text/javascript">
   jQuery.support.cors = true;
   $(document).ready(function() {
     var i=1
@@ -147,7 +213,7 @@
       success: function (data) {
         $.each(data, function (key, value) {
           // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
-          $('#CPU').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productName + '"></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
+          $('#CPU').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productName + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
           console.log(data[key].productId)
         })
       },
@@ -156,10 +222,46 @@
       }
     });
   })
+
+  /*
+  var opt = {
+    title:"CPU",
+    width: 500,
+    height: 500,
+    resizable: false,
+    draggable: false,
+
+    autoOpen: false,
+    show: {
+      effect: "blind",
+      duration: 1000
+    },
+    hide: {
+      effect: "explode",
+      duration: 1000
+    }
+  };
+
   $('#btn-create').click(function (){
-    // console.log("選中的productId = " + $('input[type=radio][name="categoryRadio"]').val());
-    console.log($('input:radio[name="categoryRadio"]:checked').val())
+    console.log("123")
+    $('#infoModal').dialog().dialog("open")
   })
+  $('#create-close').click(function () {
+    $('#infoModal').dialog().dialog("close")
+    console.log("我是關閉")
+  })
+  */
+
+  let btn = document.querySelector("#btn-create")
+  let infoModal = document.querySelector("#infoModal")
+  let close = document.querySelector("#create-close")
+  btn.addEventListener("click", function () {
+    infoModal.showModal()
+  })
+  close.addEventListener("click", function () {
+    infoModal.close()
+  })
+
 </script>
 
 </body>

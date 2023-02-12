@@ -36,7 +36,11 @@
               dataType: "json",
               success:function (data){
                   if (data.username !== undefined){
-                      $('#memberDiv').text('會員中心').attr('href','/member/index.html')
+                      if((data.auth).includes("admin")){
+                          $('#memberDiv').text('會員中心').attr('href','/admin/index.html')
+                      }else {
+                          $('#memberDiv').text('會員中心').attr('href','/member/index.html')
+                      }
                       $('#logInOutDiv').text('登出').attr('href','/logout')
                   }else if (data.username == undefined){
                       $('#memberDiv').text('會員中心').attr('href','/login_register.html')
