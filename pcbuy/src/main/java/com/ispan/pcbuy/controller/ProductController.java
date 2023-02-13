@@ -74,6 +74,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductsFromCategory(
             @PathVariable(required = true) String category){
         System.out.println("我是Category = " + category);
+        productService.getProductsFromCategory(category);
         List<Product> productList = productService.getProductsFromCategory(category);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
@@ -149,12 +150,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
-
-
     @PostMapping("/productUpdate")
     public ResponseEntity<Product> updateProduct(HttpServletRequest httpServletRequest){
         Integer productId = Integer.parseInt(httpServletRequest.getParameter("productId"));
         Product product = productService.getProductById(productId);
+
         ProductRequest productRequest = new ProductRequest();
         productRequest.setProductName(httpServletRequest.getParameter("productName"));
         productRequest.setCategory((ProductCategory.valueOf(httpServletRequest.getParameter("category"))));
@@ -190,6 +190,7 @@ public class ProductController {
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
     }
 
     @DeleteMapping("/products/delete")

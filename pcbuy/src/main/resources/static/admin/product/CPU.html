@@ -139,13 +139,13 @@
       </div>
     </div><!-- /.row -->
   </div>
-  </div>
+</div>
 
 
-    <!-- JavaScript -->
-    <script src="../js/jquery-1.10.2.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+<!-- JavaScript -->
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 
 <dialog id="infoModal">
   <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
@@ -225,12 +225,28 @@
 
       <label for="category-update">類別：</label>
       <select id="category-update" name="category"  required="required">
-        <option value="CPU">CPU</option>
+        <option value="" id="category-update-value"></option>-->
+<!--                <option value="CPU">CPU</option>-->
+        <!--        <option value="MB">MB</option>-->
+        <!--        <option value="DRAM">DRAM</option>-->
+        <!--        <option value="GPU">GPU</option>-->
+        <!--        <option value="STORAGE">STORAGE</option>-->
+        <!--        <option value="POWER">POWER</option>-->
+        <!--        <option value="COOLER">COOLER</option>-->
+        <!--        <option value="CASE">CASE</option>-->
       </select>
 
       <label for="brand-update">品牌：</label>
       <input type="text" id="brand-update" name="brand" placeholder="輸入商品品牌" required="required" maxlength="50"
              oninvalid="setCustomValidity('請輸入品牌，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+      <label for="series-update">系列：</label>
+      <input type="text" id="series-update" name="series" placeholder="輸入商品系列" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入商品系列，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+      <label for="gpuLength-update">顯示卡長度：</label>
+      <input type=number step=0.01 id="gpuLength-update" name="gpuLength" placeholder="輸入顯示卡長度" required="required" min="0.0"
+             oninvalid="setCustomValidity('顯示卡長度值需大於等於');" onchange="setCustomValidity('');">
 
 
       <label for="watt-update">功耗：</label>
@@ -246,6 +262,28 @@
       <label for="score-update">分數：</label>
       <input type="number" id="score-update" name="score" placeholder="輸入商品分數" required="required" min="1" max="100000"
              oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
+
+      <label for="size-update">主機板尺寸：</label>
+      <!--輸入商品主機板尺寸-->
+      <select id="size-update" name="size" required="required">
+        <option value="value1">E-ATX(特大)</option>
+        <option value="value2">ATX(大機殼)</option>
+        <option value="value3">mATX(小機殼)</option>
+        <option value="value4">ITX(特小)</option>
+      </select>
+
+      <label for="coolerLength-update">散熱器長度：</label>
+      <input type=number step=0.01 id="coolerLength-update" name="coolerLength" placeholder="輸入散熱器長度" required="required" min="0.0"
+             oninvalid="setCustomValidity('散熱器長度值需大於等於0');" onchange="setCustomValidity('');">
+
+
+      <label for="coolerHeight-update">散熱器高度：</label>
+      <input type=number step=0.01 id="coolerHeight-update" name="coolerHeight" placeholder="輸入散熱器高度" required="required" min="0.0"
+             oninvalid="setCustomValidity('散熱器高度值需大於等於0');" onchange="setCustomValidity('');">
+
+      <label for="capacity-update">容量：</label>
+      <input type="number" id="capacity-update" name="capacity" placeholder="輸入商品容量" required="required" min="1"
+             oninvalid="setCustomValidity('容量值必須大於0，且為整數');" onchange="setCustomValidity('');">
 
       <label for="state-update">上架狀態：</label>
       <!--輸入商品上架狀態-->
@@ -285,16 +323,15 @@
   <p>真的要刪除嗎？</p>
   <hr>
   <form action="" method="post" id="double-check-form">
-      <div style="text-align:center;">
-        <input type="button" id="no-send" value="取消">
-        <input type="button" id="ok-send" value="確定">
-      </div>
+    <div style="text-align:center;">
+      <input type="button" id="no-send" value="取消">
+      <input type="button" id="ok-send" value="確定">
+    </div>
   </form>
 </dialog>
 
 <script type="text/javascript">
   jQuery.support.cors = true;
-
   var categoryName = "CPU"
 
   function onCategorySelect() {
@@ -320,18 +357,24 @@
     });
   }
 
-  $(document).ready(function() {
-
+  $(document).ready(function() { //頁面載入時預設顯示CPU列表
     $.ajax({
       url: 'http://localhost:8080/products/' + categoryName +'/List',
       type: "get",
       dataType: "json",
       success: function (data) {
+        if(categoryName == "CPU") {
+          disabledCPU()
+          console.log("已執行CPU欄位disabled")
+        }else {
+          console.log("我現在是"+categoryName)
+        }
         var i=1
         $.each(data, function (key, value) {
           // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
           $('#categoryTable').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
           console.log(data[key].productId)
+
         })
       },
       error: function (data) {
@@ -369,15 +412,10 @@
     return false
   }
 
-  $('#btn-delete').click(function (){
-
+  $('#btn-delete').click(function (){ //刪除資料
     var selectedId = $("input[name='categoryRadio']:checked").val()
-
-
     if (selectedId != undefined){
-
       checkModal.showModal()
-
       $('#ok-send').click(function () {
         $.ajax({
           url: '/products/delete',
@@ -402,10 +440,8 @@
 
   let infoModalUpdate = document.querySelector("#infoModal-update")
 
-  $('#btn-update').click(function () {
-
+  $('#btn-update').click(function () { //更新資料
     var selectedId = $("input[name='categoryRadio']:checked").val()
-
     if (selectedId != undefined){
       $.ajax({
         url: '/products/'+selectedId,
@@ -414,11 +450,18 @@
         success:function (data) {
           $('#productId-update').attr('value',data.productId)
           $('#productName-update').attr('value',data.productName)
-          $('#category-update').attr('value',data.category)
+          $('#category-update-value').attr('value',data.category).text(data.category)
+          // $('#capacity-update').attr('value',data.category)
+          // console.log("我是類別"+ $('#category-update-value').val())
           $('#brand-update').attr('value',data.brand)
           $('#watt-update').attr('value',data.watt)
           $('#socket-update').attr('value',data.socket)
           $('#score-update').attr('value',data.score)
+          $('#size-update').attr('value',data.size)
+          $('#coolerLength-update').attr('value',data.coolerLength)
+          $('#coolerHeight-update').attr('value',data.coolerHeight)
+          $('#gpuLength-update').attr('value',data.gpuLength)
+          $('#capacity-update').attr('value',data.capacity)
           $('#state-update').attr('value',data.state)
           $('#description-update').attr('value',data.description)
           $('#imageUrl-update').attr('value',data.imageUrl)
@@ -438,6 +481,22 @@
       infoModalUpdate.close()
     })
   })
+
+  function disabledCPU(){
+    $('input').attr('disabled', false)
+    $('#capacity-update').attr('disabled', true)
+    $('#capacity').attr('disabled', true)
+    $('#series-update').attr('disabled', true)
+    $('#series').attr('disabled', true)
+    $('#gpuLength-update').attr('disabled', true)
+    $('#gpuLength').attr('disabled', true)
+    $('#coolerHeight-update').attr('disabled', true)
+    $('#coolerHeight').attr('disabled', true)
+    $('#coolerLength-update').attr('disabled', true)
+    $('#coolerLength').attr('disabled', true)
+    $('#size-update').attr('disabled', true)
+    $('#size').attr('disabled', true)
+  }
 
 
 </script>
