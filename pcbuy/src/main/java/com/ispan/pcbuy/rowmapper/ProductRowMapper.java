@@ -26,7 +26,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setWatt(resultSet.getInt("watt"));
         product.setSocket(resultSet.getString("socket"));
         product.setScore(resultSet.getInt("score"));
-        product.setSize(resultSet.getInt("size"));
+        product.setSize(resultSet.getString("size"));
         product.setCoolerLength(resultSet.getDouble("cooler_length"));
         product.setCoolerHeight(resultSet.getDouble("cooler_height"));
         product.setGpuLength(resultSet.getDouble("gpu_length"));

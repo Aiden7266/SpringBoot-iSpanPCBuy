@@ -463,6 +463,7 @@
   let close = document.querySelector("#create-close")
   btn.addEventListener("click", function () {
     CreateCategoryName = "CPU"
+    loadForm(CreateCategoryName)
     console.log("我想新增" + CreateCategoryName)
     $('#create-CATEGORY-form').find("input[type=text], textarea").val("")
     $('#create-CATEGORY-form').find("input[type=number], textarea").val("")
@@ -538,6 +539,7 @@
           $('#productName-update').attr('value',data.productName)
           $('#category-update-value').attr('value',data.category).text(data.category)
           UpdateCategoryName = data.category //將查詢到的Category存起來，送出Sumbit後直接秀出該類別資料表
+          loadForm(data.category)
           // $('#capacity-update').attr('value',data.category)
           // console.log("我是類別"+ $('#category-update-value').val())
           $('#brand-update').attr('value',data.brand)
@@ -570,21 +572,27 @@
   function onCreateSelect(){
     CreateCategoryName = $('#category-create').find(':selected').val()
     console.log("我想新增" + CreateCategoryName)
-    if(CreateCategoryName === "CPU"){
+    loadForm(CreateCategoryName)
+  }
+
+  //藉由代入的category呈現不同對應的Form
+  function loadForm(category){
+    console.log("調用loadForm()方法 " + category)
+    if(category === "CPU"){
       formForCPU()
-    }else if (CreateCategoryName === "MB"){
+    }else if (category === "MB"){
       formForMB()
-    }else if (CreateCategoryName === "GPU"){
+    }else if (category === "GPU"){
       formForGPU()
-    }else if (CreateCategoryName === "DRAM"){
+    }else if (category === "DRAM"){
       formForDRAM()
-    }else if (CreateCategoryName === "COOLER"){
+    }else if (category === "COOLER"){
       formForCOOLER()
-    }else if (CreateCategoryName === "CASE"){
+    }else if (category === "CASE"){
       formForCASE()
-    }else if (CreateCategoryName === "POWER"){
+    }else if (category === "POWER"){
       formForPOWER()
-    }else if (CreateCategoryName === "STORAGE"){
+    }else if (category === "STORAGE"){
       formForSTORAGE()
     }
   }
@@ -1032,6 +1040,8 @@
   function CRUDreload(category) {
     $('td').remove().load()
     $('#categorySelect').val(category)
+    $('h1').text($('#categorySelect').find(':selected').text())
+    $('#showproductname').text("商品管理 / " + $('#categorySelect').find(':selected').val())
     $.ajax({
       url: 'http://localhost:8080/products/' + category +'/List',
       type: "get",
