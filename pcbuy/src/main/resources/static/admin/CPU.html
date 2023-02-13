@@ -122,7 +122,7 @@
 <dialog id="infoModal">
   <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
   <hr>
-  <form action="/productCreate" method="post" id="create-CPU-form" onsubmit="return formCreateSubmit()">
+  <form action="/productCreate" method="post" id="create-CATEGORY-form" onsubmit="return formCreateSubmit()">
 
     <div>
       <label for="productName">名稱：</label>
@@ -186,9 +186,9 @@
 -->
 
 <dialog id="infoModal">
-  <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
+  <p id="createFormTitle"> 新增資料 </p>
   <hr>
-  <form action="/productCreate" method="post" id="create-CPU-form" onsubmit="return formCreateSubmit()">
+  <form action="/productCreate" method="post" id="create-CATEGORY-form" onsubmit="return formCreateSubmit()">
 
     <div>
       <label for="productName-create" class="create-form" id="productName-create-label">名稱：</label>
@@ -246,7 +246,7 @@
 
       <label for="coolerHeight-create" class="create-form" id="coolerHeight-create-label">散熱器高度：</label>
       <input type=number step=0.01 id="coolerHeight-create" name="coolerHeight" placeholder="輸入散熱器高度" required="required" min="0.0"
-             oninvalid="setCustomValidity('散熱器高度值需大於等於0');" onchange="setCustocreatemValidity('');">
+             oninvalid="setCustomValidity('散熱器高度值需大於等於0');" onchange="setCustomValidity('');">
 
       <label for="capacity-create" id="capacity-create-label" class="create-form">容量：</label>
       <input type="number" id="capacity-create" name="capacity" placeholder="輸入商品容量" required="required" min="1"
@@ -283,9 +283,9 @@
 </dialog>
 
 <dialog id="infoModal-update">
-  <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;修改資料 </p>
+  <p id="updateFormTitle"> 修改資料 </p>
   <hr>
-  <form action="/productUpdate" method="post" id="update-CPU-form"  onsubmit="return formUpdateSubmit()">
+  <form action="/productUpdate" method="post" id="update-CATEGORY-form"  onsubmit="return formUpdateSubmit()">
 
     <div>
       <label for="productName-update" class="update-form" id="productName-update-label">名稱：</label>
@@ -403,9 +403,11 @@
   jQuery.support.cors = true;
   var categoryName = "CPU" //(第一次進入預設選取CPU)
   var CreateCategoryName = "CPU" //(第一次進入預設選取CPU)
+  var UpdateCategoryName
 
   //根據商品管理頁面下拉式列表的零組件->列出相對應的資料
   function onCategorySelect() {
+    console.log("調用onCategorySelect()")
     $('h1').text($('#categorySelect').find(':selected').text())
     $('#showproductname').text("商品管理 / " + $('#categorySelect').find(':selected').val())
     categoryName = $('#categorySelect').find(':selected').val()
@@ -435,7 +437,7 @@
       type: "get",
       dataType: "json",
       success: function (data) {
-        if(categoryName == "CPU") {
+        if(categoryName === "CPU") {
           formForCPU()
           console.log("頁面載入時已將表單形式設定為CPU")
         }else {
@@ -462,6 +464,9 @@
   btn.addEventListener("click", function () {
     CreateCategoryName = "CPU"
     console.log("我想新增" + CreateCategoryName)
+    $('#create-CATEGORY-form').find("input[type=text], textarea").val("")
+    $('#create-CATEGORY-form').find("input[type=number], textarea").val("")
+    $('#create-CATEGORY-form').find("input[type=URL], textarea").val("")
     infoModal.showModal()
   })
   close.addEventListener("click", function () {
@@ -473,20 +478,20 @@
 
   //改寫新增資料時按下submit方法，使之不會跳轉頁面，並且刷新Table
   function formCreateSubmit(){
-    $('#create-CPU-form').ajaxSubmit(function () {
+    $('#create-CATEGORY-form').ajaxSubmit(function () {
       console.log("已新增")
       infoModal.close()
-      location.reload()
+      CRUDreload(CreateCategoryName)
     })
     return false
   }
 
   //改寫修改資料時按下submit方法，使之不會跳轉頁面，並且刷新Table
   function formUpdateSubmit() {
-    $('#update-CPU-form').ajaxSubmit(function () {
+    $('#update-CATEGORY-form').ajaxSubmit(function () {
       console.log("已更新")
       infoModalUpdate.close()
-      location.reload()
+      CRUDreload(UpdateCategoryName)
     })
     return false
   }
@@ -532,6 +537,7 @@
           $('#productId-update').attr('value',data.productId)
           $('#productName-update').attr('value',data.productName)
           $('#category-update-value').attr('value',data.category).text(data.category)
+          UpdateCategoryName = data.category //將查詢到的Category存起來，送出Sumbit後直接秀出該類別資料表
           // $('#capacity-update').attr('value',data.category)
           // console.log("我是類別"+ $('#category-update-value').val())
           $('#brand-update').attr('value',data.brand)
@@ -555,9 +561,7 @@
     }else {
       alert("請選取一筆資料")
     }
-    $('#update-send').click(function (){
-      // alert("已更新資料")
-    })
+    //關閉修改資料的Form表單
     $('#update-close').click(function (){
       infoModalUpdate.close()
     })
@@ -1025,7 +1029,26 @@
     $('#size-update').hide()
     $('#size-update').attr('disabled', true)
   }
-
+  function CRUDreload(category) {
+    $('td').remove().load()
+    $('#categorySelect').val(category)
+    $.ajax({
+      url: 'http://localhost:8080/products/' + category +'/List',
+      type: "get",
+      dataType: "json",
+      success: function (data) {
+        var i=1
+        $.each(data, function (key, value) {
+          // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
+          $('#categoryTable').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
+          console.log(data[key].productId)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    });
+  }
 
 </script>
 
