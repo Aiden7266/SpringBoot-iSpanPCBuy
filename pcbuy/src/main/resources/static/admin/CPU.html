@@ -402,6 +402,7 @@
 <script type="text/javascript">
   jQuery.support.cors = true;
   var categoryName = "CPU" //(第一次進入預設選取CPU)
+  var CreateCategoryName = "CPU" //(第一次進入預設選取CPU)
 
   //根據商品管理頁面下拉式列表的零組件->列出相對應的資料
   function onCategorySelect() {
@@ -435,8 +436,8 @@
       dataType: "json",
       success: function (data) {
         if(categoryName == "CPU") {
-          disabledCPU()
-          console.log("已執行CPU欄位disabled")
+          formForCPU()
+          console.log("頁面載入時已將表單形式設定為CPU")
         }else {
           console.log("我現在是"+categoryName)
         }
@@ -459,6 +460,8 @@
   let infoModal = document.querySelector("#infoModal")
   let close = document.querySelector("#create-close")
   btn.addEventListener("click", function () {
+    CreateCategoryName = "CPU"
+    console.log("我想新增" + CreateCategoryName)
     infoModal.showModal()
   })
   close.addEventListener("click", function () {
@@ -488,7 +491,8 @@
     return false
   }
 
-  $('#btn-delete').click(function (){ //刪除資料
+  //刪除資料
+  $('#btn-delete').click(function (){
     var selectedId = $("input[name='categoryRadio']:checked").val()
     if (selectedId != undefined){
       checkModal.showModal()
@@ -559,36 +563,181 @@
     })
   })
 
-  function disabledCPU(){
-    $('input').attr('disabled', false) //呼叫時解除所有禁用的input
-    $('input').attr('disabled', false) //呼叫時解除所有禁用的input
-    $('.update-form').show() //呼叫時讓所有label顯示
-
-    $('#capacity-update-label').hide()
-    $('#capacity-update').attr('type', 'hidden') //讓此input隱藏
-    $('#capacity-update').attr('disabled', true) //讓此input禁用
-
-    $('#series-update-label').hide()
-    $('#series-update').attr('type', 'hidden')
-    $('#series-update').attr('disabled', true)
-
-    $('#gpuLength-update-label').hide()
-    $('#gpuLength-update').attr('type', 'hidden')
-    $('#gpuLength-update').attr('disabled', true)
-
-    $('#coolerHeight-update-label').hide()
-    $('#coolerHeight-update').attr('type', 'hidden')
-    $('#coolerHeight-update').attr('disabled', true)
-
-    $('#coolerLength-update-label').hide()
-    $('#coolerLength-update').attr('type', 'hidden')
-    $('#coolerLength-update').attr('disabled', true)
-
-    $('#size-update-label').hide()
-    $('#size-update').hide() //select的隱藏不能用attr('type', 'hidden')
-    $('#size-update').attr('disabled', true)
+  function onCreateSelect(){
+    CreateCategoryName = $('#category-create').find(':selected').val()
+    console.log("我想新增" + CreateCategoryName)
+    if(CreateCategoryName === "CPU"){
+      formForCPU()
+    }else if (CreateCategoryName === "MB"){
+      formForMB()
+    }
   }
 
+  function formForCPU(){
+    $('input').show() //呼叫時讓所有隱藏的input顯示
+    $('input').attr('disabled', false) //呼叫時解除所有禁用的input
+    $('.create-form').show() //呼叫時讓所有隱藏的label顯示
+    $('.update-form').show() //呼叫時讓所有隱藏的label顯示
+
+    $('#capacity-create-label').hide()
+    // $('#capacity-update').attr('type', 'hidden') //隱藏input方法1
+    $('#capacity-create').hide() //隱藏input方法2
+    $('#capacity-create').attr('disabled', true) //讓此input禁用
+    $('#capacity-update-label').hide()
+    $('#capacity-update').hide()
+    $('#capacity-update').attr('disabled', true)
+
+    $('#series-create-label').hide()
+    $('#series-create').hide()
+    $('#series-create').attr('disabled', true)
+    $('#series-update-label').hide()
+    $('#series-update').hide()
+    $('#series-update').attr('disabled', true)
+
+    $('#gpuLength-create-label').hide()
+    $('#gpuLength-create').hide()
+    $('#gpuLength-create').attr('disabled', true)
+    $('#gpuLength-update-label').hide()
+    $('#gpuLength-update').hide()
+    $('#gpuLength-update').attr('disabled', true)
+
+    $('#coolerHeight-create-label').hide()
+    $('#coolerHeight-create').hide()
+    $('#coolerHeight-create').attr('disabled', true)
+    $('#coolerHeight-update-label').hide()
+    $('#coolerHeight-update').hide()
+    $('#coolerHeight-update').attr('disabled', true)
+
+    $('#coolerLength-create-label').hide()
+    $('#coolerLength-create').hide()
+    $('#coolerLength-create').attr('disabled', true)
+    $('#coolerLength-update-label').hide()
+    $('#coolerLength-update').hide()
+    $('#coolerLength-update').attr('disabled', true)
+
+    $('#size-create-label').hide()
+    $('#size-create').hide() //select的隱藏不能用attr('type', 'hidden')
+    $('#size-create').attr('disabled', true)
+    $('#size-update-label').hide()
+    $('#size-update').hide()
+    $('#size-update').attr('disabled', true)
+
+  }
+
+  function formForMB(){
+    $('input').show() //呼叫時讓所有隱藏的input顯示
+    $('input').attr('disabled', false) //呼叫時解除所有禁用的input
+    $('.create-form').show() //呼叫時讓所有隱藏的label顯示
+    $('.update-form').show() //呼叫時讓所有隱藏的label顯示
+
+    $('#capacity-create-label').hide()
+    $('#capacity-create').hide()
+    $('#capacity-create').attr('disabled', true)
+    $('#capacity-update-label').hide()
+    $('#capacity-update').hide()
+    $('#capacity-update').attr('disabled', true)
+
+    $('#gpuLength-create-label').hide()
+    $('#gpuLength-create').hide()
+    $('#gpuLength-create').attr('disabled', true)
+    $('#gpuLength-update-label').hide()
+    $('#gpuLength-update').hide()
+    $('#gpuLength-update').attr('disabled', true)
+
+    $('#coolerHeight-create-label').hide()
+    $('#coolerHeight-create').hide()
+    $('#coolerHeight-create').attr('disabled', true)
+    $('#coolerHeight-update-label').hide()
+    $('#coolerHeight-update').hide()
+    $('#coolerHeight-update').attr('disabled', true)
+
+    $('#coolerLength-create-label').hide()
+    $('#coolerLength-create').hide()
+    $('#coolerLength-create').attr('disabled', true)
+    $('#coolerLength-update-label').hide()
+    $('#coolerLength-update').hide()
+    $('#coolerLength-update').attr('disabled', true)
+
+    $('#score-create-label').hide()
+    $('#score-create').hide()
+    $('#score-create').attr('disabled', true)
+    $('#score-update-label').hide()
+    $('#score-update').hide()
+    $('#score-update').attr('disabled', true)
+
+  }
+
+  function disabledAll(){
+    $('input').show() //呼叫時讓所有隱藏的input顯示
+    $('input').attr('disabled', false) //呼叫時解除所有禁用的input
+    $('.create-form').show() //呼叫時讓所有隱藏的label顯示
+    $('.update-form').show() //呼叫時讓所有隱藏的label顯示
+
+    $('#capacity-create-label').hide()
+    $('#capacity-create').hide()
+    $('#capacity-create').attr('disabled', true)
+    $('#capacity-update-label').hide()
+    $('#capacity-update').hide()
+    $('#capacity-update').attr('disabled', true)
+
+    $('#series-create-label').hide()
+    $('#series-create').hide()
+    $('#series-create').attr('disabled', true)
+    $('#series-update-label').hide()
+    $('#series-update').hide()
+    $('#series-update').attr('disabled', true)
+
+    $('#gpuLength-create-label').hide()
+    $('#gpuLength-create').hide()
+    $('#gpuLength-create').attr('disabled', true)
+    $('#gpuLength-update-label').hide()
+    $('#gpuLength-update').hide()
+    $('#gpuLength-update').attr('disabled', true)
+
+    $('#coolerHeight-create-label').hide()
+    $('#coolerHeight-create').hide()
+    $('#coolerHeight-create').attr('disabled', true)
+    $('#coolerHeight-update-label').hide()
+    $('#coolerHeight-update').hide()
+    $('#coolerHeight-update').attr('disabled', true)
+
+    $('#coolerLength-create-label').hide()
+    $('#coolerLength-create').hide()
+    $('#coolerLength-create').attr('disabled', true)
+    $('#coolerLength-update-label').hide()
+    $('#coolerLength-update').hide()
+    $('#coolerLength-update').attr('disabled', true)
+
+    $('#watt-create-label').hide()
+    $('#watt-create').hide()
+    $('#watt-create').attr('disabled', true)
+    $('#watt-update-label').hide()
+    $('#watt-update').hide()
+    $('#watt-update').attr('disabled', true)
+
+    $('#socket-create-label').hide()
+    $('#socket-create').hide()
+    $('#socket-create').attr('disabled', true)
+    $('#socket-update-label').hide()
+    $('#socket-update').hide()
+    $('#socket-update').attr('disabled', true)
+
+    $('#score-create-label').hide()
+    $('#score-create').hide()
+    $('#score-create').attr('disabled', true)
+    $('#score-update-label').hide()
+    $('#score-update').hide()
+    $('#score-update').attr('disabled', true)
+
+    $('#size-create-label').hide()
+    $('#size-create').hide()
+    $('#size-create').attr('disabled', true)
+    $('#size-update-label').hide()
+    $('#size-update').hide()
+    $('#size-update').attr('disabled', true)
+
+    location.reload()
+  }
 
 </script>
 
