@@ -114,9 +114,19 @@
         <input type="button" value="新增資料" id="btn-create">
         <input type="button" value="刪除資料" id="btn-delete">
         <input type="button" value="修改資料" id="btn-update">
+        <select id = "categorySelect" onchange="onCategorySelect()">
+          <option value = 'CPU'>處理器</option>
+          <option value = 'MB'>主機板</option>
+          <option value = 'DRAM'>記憶體</option>
+          <option value = 'GPU'>顯示卡</option>
+          <option value = 'COOLER'>散熱器</option>
+          <option value = 'STORAGE'>硬碟</option>
+          <option value = 'CASE'>機殼</option>
+          <option value = 'POWER'>電源供應器</option>
+        </select>
         <br><br><br>
-        <table id="CPU" style="width: 100%">
-          <tr>
+        <table id="categoryTable" style="width: 100%">
+          <tr id="MyTh">
             <th style="text-align: center">選取</th>
             <th style="text-align: center">編號</th>
             <th style="text-align: center">名稱</th>
@@ -284,16 +294,41 @@
 
 <script type="text/javascript">
   jQuery.support.cors = true;
-  $(document).ready(function() {
-    var i=1
+
+  var categoryName = "CPU"
+
+  function onCategorySelect() {
+    categoryName = $('#categorySelect').find(':selected').val()
+    $('td').remove().load()
     $.ajax({
-      url: 'http://localhost:8080/products/CPU/List',
+      url: 'http://localhost:8080/products/' + categoryName +'/List',
       type: "get",
       dataType: "json",
       success: function (data) {
+        var i=1
         $.each(data, function (key, value) {
           // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
-          $('#CPU').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
+          $('#categoryTable').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
+          console.log(data[key].productId)
+        })
+      },
+      error: function (data) {
+        alert("fail");
+      }
+    });
+  }
+
+  $(document).ready(function() {
+
+    $.ajax({
+      url: 'http://localhost:8080/products/' + categoryName +'/List',
+      type: "get",
+      dataType: "json",
+      success: function (data) {
+        var i=1
+        $.each(data, function (key, value) {
+          // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
+          $('#categoryTable').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
           console.log(data[key].productId)
         })
       },
