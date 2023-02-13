@@ -29,9 +29,6 @@ public class CoolerRequest extends ProductRequest{
     private Double coolerHeight;
 
     @NotNull
-    private Double gpuLength;
-
-    @NotNull
     private Boolean state;
 
     private String description;
