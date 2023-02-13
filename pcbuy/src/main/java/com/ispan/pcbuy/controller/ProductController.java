@@ -101,7 +101,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 
-    @PostMapping("/productsTest")
+    @PostMapping("/productCreate")
     public  ResponseEntity<Product> createProductTest(HttpServletRequest httpServletRequest){
         ProductRequest productRequest = new ProductRequest();
         productRequest.setProductName(httpServletRequest.getParameter("productName"));
@@ -150,18 +150,63 @@ public class ProductController {
     }
 
 
-    @PostMapping("/products")
-    public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
-        Integer productId = productService.createProduct(productRequest);
+
+    @PostMapping("/productUpdate")
+    public ResponseEntity<Product> updateProduct(HttpServletRequest httpServletRequest){
+        Integer productId = Integer.parseInt(httpServletRequest.getParameter("productId"));
         Product product = productService.getProductById(productId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+        ProductRequest productRequest = new ProductRequest();
+        productRequest.setProductName(httpServletRequest.getParameter("productName"));
+        productRequest.setCategory((ProductCategory.valueOf(httpServletRequest.getParameter("category"))));
+        productRequest.setBrand(httpServletRequest.getParameter("brand"));
+        productRequest.setSeries(httpServletRequest.getParameter("series"));
+        if (httpServletRequest.getParameter("watt")!=null)
+        {productRequest.setWatt(Integer.parseInt(httpServletRequest.getParameter("watt")));}
+        productRequest.setSocket(httpServletRequest.getParameter("socket"));
+        if (httpServletRequest.getParameter("score")!=null)
+        {productRequest.setScore(Integer.parseInt(httpServletRequest.getParameter("score")));}
+        productRequest.setSize(httpServletRequest.getParameter("size"));
+        if(httpServletRequest.getParameter("coolerLength")!=null)
+        {productRequest.setCoolerLength(Double.parseDouble(httpServletRequest.getParameter("coolerLength")));}
+        if (httpServletRequest.getParameter("coolerHeight")!=null)
+        {productRequest.setCoolerHeight(Double.parseDouble(httpServletRequest.getParameter("coolerHeight")));}
+        if (httpServletRequest.getParameter("gpuLength")!=null)
+        {productRequest.setGpuLength(Double.parseDouble(httpServletRequest.getParameter("gpuLength")));}
+        if (httpServletRequest.getParameter("capacity")!=null)
+        {productRequest.setCapacity(Integer.parseInt(httpServletRequest.getParameter("capacity")));}
+        if (httpServletRequest.getParameter("state")!=null)
+        {productRequest.setState(Boolean.parseBoolean(httpServletRequest.getParameter("state")));}
+        productRequest.setDescription(httpServletRequest.getParameter("description"));
+        productRequest.setImageUrl(httpServletRequest.getParameter("imageUrl"));
+        if(httpServletRequest.getParameter("stock")!=null)
+        {productRequest.setStock(Integer.parseInt(httpServletRequest.getParameter("stock")));}
+        if (httpServletRequest.getParameter("price")!=null)
+        {productRequest.setPrice(Integer.parseInt(httpServletRequest.getParameter("price")));}
+
+        if(product != null) {
+            productService.updateProduct(productId, productRequest);
+            Product updatedProduct = productService.getProductById(productId);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+    @DeleteMapping("/products/delete")
+    public ResponseEntity<?> deleteProduct(@RequestParam Integer productId){
+
+        productService.deleteProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+//    -------------------------------------------------------------------------
 
     @PostMapping("/products/CPU")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid CpuRequest cpuRequest){
-            Integer productId = productService.createProduct(cpuRequest);
-            Product product = productService.getProductById(productId);
-            return ResponseEntity.status(HttpStatus.CREATED).body(product);
+        Integer productId = productService.createProduct(cpuRequest);
+        Product product = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
     @PostMapping("/products/DRAM")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid DramRequest dramRequest){
@@ -206,25 +251,10 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
-    @PutMapping("/products/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
-                                                 @RequestBody @Valid CpuRequest cpuRequest){
+    @PostMapping("/products")
+    public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
+        Integer productId = productService.createProduct(productRequest);
         Product product = productService.getProductById(productId);
-
-        if(product != null) {
-            productService.updateProduct(productId, cpuRequest);
-            Product updatedProduct = productService.getProductById(productId);
-            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
-
-    @DeleteMapping("/products/delete")
-    public ResponseEntity<?> deleteProduct(@RequestParam Integer productId){
-
-        productService.deleteProductById(productId);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 }

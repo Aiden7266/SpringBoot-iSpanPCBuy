@@ -153,10 +153,21 @@ public class ProductDaoImpl implements ProductDao {
     public void updateProduct(Integer productId, ProductRequest productRequest) {
         String sql= "UPDATE product SET product_name = :productName, "            +
                                        "category = :category, "                   +
-                                       "image_url = :imageUrl, "                  +
-                                       "price = :price, "                         +
-                                       "stock = :stock, "                         +
+                                       "brand = :brand, "                         +
+                                       "series = :series, "                       +
+                                       "watt = :watt, "                           +
+                                       "socket = :socket, "                       +
+                                       "score = :score, "                         +
+                                       "`size`= :size, "                          +
+                                       "cooler_length = :coolerLength, "          +
+                                       "cooler_height = :coolerHeight, "          +
+                                       "gpu_length = :gpuLength, "                +
+                                       "capacity = :capacity, "                   +
+                                       "`state` = :state, "                       +
                                        "description = :description, "             +
+                                       "image_url = :imageUrl, "                  +
+                                       "stock = :stock, "                         +
+                                       "price = :price, "                         +
                                        "last_modified_date = :lastModifiedDate "  +
                     "WHERE product_id = :productId";
 
@@ -164,15 +175,23 @@ public class ProductDaoImpl implements ProductDao {
         map.put("productId", productId);
         map.put("productName", productRequest.getProductName());
         map.put("category", productRequest.getCategory().toString());
-        map.put("imageUrl", productRequest.getImageUrl());
-        map.put("price", productRequest.getPrice());
-        map.put("stock", productRequest.getStock());
+        map.put("brand", productRequest.getBrand());
+        map.put("series", productRequest.getSeries());
+        map.put("watt", productRequest.getWatt());
+        map.put("socket", productRequest.getSocket());
+        map.put("score", productRequest.getScore());
+        map.put("size", productRequest.getSize());
+        map.put("coolerLength", productRequest.getCoolerLength());
+        map.put("coolerHeight", productRequest.getCoolerHeight());
+        map.put("gpuLength", productRequest.getGpuLength());
+        map.put("capacity", productRequest.getCapacity());
+        map.put("state", productRequest.getState());
         map.put("description", productRequest.getDescription());
-
+        map.put("imageUrl", productRequest.getImageUrl());
+        map.put("stock", productRequest.getStock());
+        map.put("price", productRequest.getPrice());
         map.put("lastModifiedDate", new Date());
-
         namedParameterJdbcTemplate.update(sql, map);
-
     }
 
     @Override

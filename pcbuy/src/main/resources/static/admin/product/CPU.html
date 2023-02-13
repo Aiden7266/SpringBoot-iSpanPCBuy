@@ -140,7 +140,7 @@
 <dialog id="infoModal">
   <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
   <hr>
-  <form action="/productsTest" method="post" id="create-CPU-form" onsubmit="return formSubmit()">
+  <form action="/productCreate" method="post" id="create-CPU-form" onsubmit="return formCreateSubmit()">
 
     <div>
       <label for="productName">名稱：</label>
@@ -197,8 +197,75 @@
 
       <div style="text-align:center;">
         <input type="button" id="create-close" value="關閉">
-        <input type="submit" id="create-submit" value="送出" hidden="hidden">
         <input type="submit" id="create-send" value="送出">
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="infoModal-update">
+  <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;修改資料 </p>
+  <hr>
+  <form action="/productUpdate" method="post" id="update-CPU-form"  onsubmit="return formUpdateSubmit()">
+
+    <div>
+      <label for="productName-update">名稱：</label>
+      <input type="text" id="productName-update" name="productName" placeholder="輸入商品名稱" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入商品名稱，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+      <label for="category-update">類別：</label>
+      <select id="category-update" name="category"  required="required">
+        <option value="CPU">CPU</option>
+      </select>
+
+      <label for="brand-update">品牌：</label>
+      <input type="text" id="brand-update" name="brand" placeholder="輸入商品品牌" required="required" maxlength="50"
+             oninvalid="setCustomValidity('請輸入品牌，確定字數在50字以內');" onchange="setCustomValidity('');">
+
+
+      <label for="watt-update">功耗：</label>
+      <input type="number" id="watt-update" name="watt" placeholder="輸入商品功耗" required="required" min="1" max="2000"
+             oninvalid="setCustomValidity('功耗值必須大於0，小於等於2000');" onchange="setCustomValidity('');">
+
+
+      <label for="socket-update">腳位：</label>
+      <input type="text" id="socket-update" name="socket" placeholder="輸入商品腳位" required="required" maxlength="10"
+             oninvalid="setCustomValidity('請輸入商品腳位，確定字數為10字以內');" onchange="setCustomValidity('');">
+
+
+      <label for="score-update">分數：</label>
+      <input type="number" id="score-update" name="score" placeholder="輸入商品分數" required="required" min="1" max="100000"
+             oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
+
+      <label for="state-update">上架狀態：</label>
+      <!--輸入商品上架狀態-->
+      <select id="state-update" name="state"  required="required">
+        <option value="true">true</option>
+        <option value="false">false</option>
+      </select>
+
+      <label for="description-update">描述：</label>
+      <input type="text" id="description-update" name="description" placeholder="輸入商品描述" maxlength="1000"
+             oninvalid="setCustomValidity('描述最大字數為1000');" onchange="setCustomValidity('');">
+
+      <label for="imageUrl-update">照片連結：</label>
+      <input type="URL" id="imageUrl-update" name="imageUrl" placeholder="輸入商品照片連結" required="required"
+             oninvalid="setCustomValidity('請確定商品連結正確');" onchange="setCustomValidity('');">
+
+      <label for="stock-update">庫存：</label>
+      <input type="number" id="stock-update" name="stock" placeholder="輸入商品庫存" required="required" min="0" max="100"
+             oninvalid="setCustomValidity('庫存限制<=100');" onchange="setCustomValidity('');">
+
+      <label for="price-update">價格：</label>
+      <input type="number" id="price-update" name="price" placeholder="輸入商品價格" required="required" min="1" max="100000"
+             oninvalid="setCustomValidity('價格必須>0');" onchange="setCustomValidity('');">
+
+      <label for="productId-update"></label>
+      <input type="hidden" id="productId-update" name="productId" >
+
+      <div style="text-align:center;">
+        <input type="button" id="update-close" value="關閉">
+        <input type="submit" id="update-send" value="送出">
       </div>
     </div>
   </form>
@@ -245,13 +312,21 @@
     infoModal.close()
   })
 
-  let checkModel = document.querySelector("#DoubleCheck")
+  let checkModal = document.querySelector("#DoubleCheck")
 
-  function formSubmit(){
+  function formCreateSubmit(){
     $('#create-CPU-form').ajaxSubmit(function () {
-      console.log("已送出")
+      console.log("已新增")
       infoModal.close()
-      // alert("已送出")
+      location.reload()
+    })
+    return false
+  }
+
+  function formUpdateSubmit() {
+    $('#update-CPU-form').ajaxSubmit(function () {
+      console.log("已更新")
+      infoModalUpdate.close()
       location.reload()
     })
     return false
@@ -264,7 +339,7 @@
 
     if (selectedId != undefined){
 
-      checkModel.showModal()
+      checkModal.showModal()
 
       $('#ok-send').click(function () {
         $.ajax({
@@ -275,7 +350,7 @@
             productId : selectedId
           },
           success: function (data){
-            checkModel.close()
+            checkModal.close()
             location.reload()
           }
         })
@@ -284,7 +359,46 @@
       alert("請選取一筆資料")
     }
     $('#no-send').click(function () {
-      checkModel.close()
+      checkModal.close()
+    })
+  })
+
+  let infoModalUpdate = document.querySelector("#infoModal-update")
+
+  $('#btn-update').click(function () {
+
+    var selectedId = $("input[name='categoryRadio']:checked").val()
+
+    if (selectedId != undefined){
+      $.ajax({
+        url: '/products/'+selectedId,
+        type: "get",
+        dataType: "json",
+        success:function (data) {
+          $('#productId-update').attr('value',data.productId)
+          $('#productName-update').attr('value',data.productName)
+          $('#category-update').attr('value',data.category)
+          $('#brand-update').attr('value',data.brand)
+          $('#watt-update').attr('value',data.watt)
+          $('#socket-update').attr('value',data.socket)
+          $('#score-update').attr('value',data.score)
+          $('#state-update').attr('value',data.state)
+          $('#description-update').attr('value',data.description)
+          $('#imageUrl-update').attr('value',data.imageUrl)
+          $('#stock-update').attr('value',data.stock)
+          $('#price-update').attr('value',data.price)
+          console.log(data)
+        }
+      })
+      infoModalUpdate.showModal()
+    }else {
+      alert("請選取一筆資料")
+    }
+    $('#update-send').click(function (){
+      // alert("已更新資料")
+    })
+    $('#update-close').click(function (){
+      infoModalUpdate.close()
     })
   })
 

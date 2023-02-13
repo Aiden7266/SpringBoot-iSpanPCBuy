@@ -32,11 +32,6 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getProductsFromCategory(category);
     }
 
-//    @Override
-//    public List<Product> getMbBySocket(String socket) {
-//        return productDao.getMbBySocket(socket);
-//    }
-
     @Override
     public List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII) {
 
