@@ -113,77 +113,10 @@
   </div>
 </div>
 
-
 <!-- JavaScript -->
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
-<!--
-<dialog id="infoModal">
-  <p> 處理器&nbsp;&nbsp;/&nbsp;&nbsp;新增資料 </p>
-  <hr>
-  <form action="/productCreate" method="post" id="create-CATEGORY-form" onsubmit="return formCreateSubmit()">
-
-    <div>
-      <label for="productName">名稱：</label>
-      <input type="text" id="productName" name="productName" placeholder="輸入商品名稱" required="required" maxlength="50"
-             oninvalid="setCustomValidity('請輸入商品名稱，確定字數在50字以內');" onchange="setCustomValidity('');">
-
-      <label for="category">類別：</label>
-      <select id="category" name="category"  required="required">
-        <option value="CPU">CPU</option>
-      </select>
-
-      <label for="brand">品牌：</label>
-      <input type="text" id="brand" name="brand" placeholder="輸入商品品牌" required="required" maxlength="50"
-             oninvalid="setCustomValidity('請輸入品牌，確定字數在50字以內');" onchange="setCustomValidity('');">
-
-
-      <label for="watt">功耗：</label>
-      <input type="number" id="watt" name="watt" placeholder="輸入商品功耗" required="required" min="1" max="2000"
-             oninvalid="setCustomValidity('功耗值必須大於0，小於等於2000');" onchange="setCustomValidity('');">
-
-
-      <label for="socket">腳位：</label>
-      <input type="text" id="socket" name="socket" placeholder="輸入商品腳位" required="required" maxlength="10"
-             oninvalid="setCustomValidity('請輸入商品腳位，確定字數為10字以內');" onchange="setCustomValidity('');">
-
-
-      <label for="score">分數：</label>
-      <input type="number" id="score" name="score" placeholder="輸入商品分數" required="required" min="1" max="100000"
-             oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
-
-      <label for="state">上架狀態：</label>
-      <select id="state" name="state"  required="required">
-        <option value="true">true</option>
-        <option value="false">false</option>
-      </select>
-
-      <label for="description">描述：</label>
-      <input type="text" id="description" name="description" placeholder="輸入商品描述" maxlength="1000"
-             oninvalid="setCustomValidity('描述最大字數為1000');" onchange="setCustomValidity('');">
-
-      <label for="imageUrl">照片連結：</label>
-      <input type="URL" id="imageUrl" name="imageUrl" placeholder="輸入商品照片連結" required="required"
-             oninvalid="setCustomValidity('請確定商品連結正確');" onchange="setCustomValidity('');">
-
-      <label for="stock">庫存：</label>
-      <input type="number" id="stock" name="stock" placeholder="輸入商品庫存" required="required" min="0" max="100"
-             oninvalid="setCustomValidity('庫存限制<=100');" onchange="setCustomValidity('');">
-
-      <label for="price">價格：</label>
-      <input type="number" id="price" name="price" placeholder="輸入商品價格" required="required" min="1" max="100000"
-             oninvalid="setCustomValidity('價格必須>0');" onchange="setCustomValidity('');">
-
-
-      <div style="text-align:center;">
-        <input type="button" id="create-close" value="關閉">
-        <input type="submit" id="create-send" value="送出">
-      </div>
-    </div>
-  </form>
-</dialog>
--->
 
 <dialog id="infoModal">
   <p id="createFormTitle"> 新增資料 </p>
@@ -232,7 +165,6 @@
              oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
 
       <label for="size-create" class="create-form" id="size-create-label">主機板尺寸：</label>
-      <!--輸入商品主機板尺寸-->
       <select id="size-create" name="size" required="required">
         <option value="E-ATX">E-ATX</option>
         <option value="ATX">ATX</option>
@@ -295,14 +227,6 @@
       <label for="category-update" class="update-form" id="category-update-label">類別：</label>
       <select id="category-update" name="category"  required="required">
         <option value="" id="category-update-value"></option>-->
-<!--                <option value="CPU">CPU</option>-->
-        <!--        <option value="MB">MB</option>-->
-        <!--        <option value="DRAM">DRAM</option>-->
-        <!--        <option value="GPU">GPU</option>-->
-        <!--        <option value="STORAGE">STORAGE</option>-->
-        <!--        <option value="POWER">POWER</option>-->
-        <!--        <option value="COOLER">COOLER</option>-->
-        <!--        <option value="CASE">CASE</option>-->
       </select>
 
       <label for="brand-update" class="update-form" id="brand-update-label">品牌：</label>
@@ -333,7 +257,6 @@
              oninvalid="setCustomValidity('分數值必須大於0，小於100000');" onchange="setCustomValidity('');">
 
       <label for="size-update" class="update-form" id="size-update-label">主機板尺寸：</label>
-      <!--輸入商品主機板尺寸-->
       <select id="size-update" name="size" required="required">
         <option value="E-ATX">E-ATX</option>
         <option value="ATX">ATX</option>
@@ -355,7 +278,6 @@
              oninvalid="setCustomValidity('容量值必須大於0，且為整數');" onchange="setCustomValidity('');">
 
       <label for="state-update" class="update-form" id="state-update-label">上架狀態：</label>
-      <!--輸入商品上架狀態-->
       <select id="state-update" name="state"  required="required">
         <option value="true">true</option>
         <option value="false">false</option>
@@ -402,8 +324,6 @@
 <script type="text/javascript">
   jQuery.support.cors = true;
   var categoryName = "CPU" //(第一次進入預設選取CPU)
-  var CreateCategoryName = "CPU" //(第一次進入預設選取CPU)
-  var UpdateCategoryName
 
   //根據商品管理頁面下拉式列表的零組件->列出相對應的資料
   function onCategorySelect() {
@@ -433,22 +353,15 @@
   //頁面載入時預設選取CPU，因此列出CPU資料
   $(document).ready(function() {
     $.ajax({
-      url: 'http://localhost:8080/products/' + categoryName +'/List',
+      url: 'http://localhost:8080/products/' + $('#categorySelect').find(':selected').val() +'/List',
       type: "get",
       dataType: "json",
       success: function (data) {
-        if(categoryName === "CPU") {
-          formForCPU()
-          console.log("頁面載入時已將表單形式設定為CPU")
-        }else {
-          console.log("我現在是"+categoryName)
-        }
+        loadForm($('#categorySelect').find(':selected').val())
         var i=1
         $.each(data, function (key, value) {
-          // $('#CPU').append(`'<tr><td style="text-align: center"><input type="radio" value="` + data[key].productId + ' " + ></td></tr>"')
           $('#categoryTable').append('<tr><td style="text-align: center"><input type="radio" name="categoryRadio" value="' + data[key].productId + '""></td><td>' + i++ + '</td><td>' + data[key].productName + '</td><td>' + data[key].price + '</td><td>' + data[key].stock + '</td><td>' + data[key].state + '</td></tr>')
           console.log(data[key].productId)
-
         })
       },
       error: function (data) {
@@ -462,13 +375,14 @@
   let infoModal = document.querySelector("#infoModal")
   let close = document.querySelector("#create-close")
   btn.addEventListener("click", function () {
-    CreateCategoryName = "CPU"
-    loadForm(CreateCategoryName)
-    console.log("我想新增" + CreateCategoryName)
+    loadForm($('#categorySelect').find(':selected').val())
+    console.log("我想新增" + $('#categorySelect').find(':selected').val())
     $('#create-CATEGORY-form').find("input[type=text], textarea").val("")
     $('#create-CATEGORY-form').find("input[type=number], textarea").val("")
     $('#create-CATEGORY-form').find("input[type=URL], textarea").val("")
     infoModal.showModal()
+    //打開新增資料後，將下拉式選單的category值 set 到 form裡面的 category
+    $('#category-create').val($('#categorySelect').find(':selected').val())
   })
   close.addEventListener("click", function () {
     infoModal.close()
@@ -482,7 +396,7 @@
     $('#create-CATEGORY-form').ajaxSubmit(function () {
       console.log("已新增")
       infoModal.close()
-      CRUDreload(CreateCategoryName)
+      CRUDreload($('#categorySelect').find(':selected').val())
     })
     return false
   }
@@ -492,7 +406,7 @@
     $('#update-CATEGORY-form').ajaxSubmit(function () {
       console.log("已更新")
       infoModalUpdate.close()
-      CRUDreload(UpdateCategoryName)
+      CRUDreload($('#categorySelect').find(':selected').val())
     })
     return false
   }
@@ -512,7 +426,7 @@
           },
           success: function (data){
             checkModal.close()
-            location.reload()
+            CRUDreload($('#categorySelect').find(':selected').val())
           }
         })
       })
@@ -538,10 +452,6 @@
           $('#productId-update').attr('value',data.productId)
           $('#productName-update').attr('value',data.productName)
           $('#category-update-value').attr('value',data.category).text(data.category)
-          UpdateCategoryName = data.category //將查詢到的Category存起來，送出Sumbit後直接秀出該類別資料表
-          loadForm(data.category)
-          // $('#capacity-update').attr('value',data.category)
-          // console.log("我是類別"+ $('#category-update-value').val())
           $('#brand-update').attr('value',data.brand)
           $('#watt-update').attr('value',data.watt)
           $('#socket-update').attr('value',data.socket)
@@ -557,6 +467,9 @@
           $('#stock-update').attr('value',data.stock)
           $('#price-update').attr('value',data.price)
           console.log(data)
+
+          //用抓取回來的category去請求待會要呈現的Form該對應哪個category
+          loadForm(data.category)
         }
       })
       infoModalUpdate.showModal()
@@ -569,10 +482,11 @@
     })
   })
 
+  //這個是指Form表單裡面的category發生改變
+  // 這筆看起來很亂的$('#...')是該Form的category
   function onCreateSelect(){
-    CreateCategoryName = $('#category-create').find(':selected').val()
-    console.log("我想新增" + CreateCategoryName)
-    loadForm(CreateCategoryName)
+    console.log("我想新增" + $('#category-create').find(':selected').val())
+    loadForm($('#category-create').find(':selected').val())
   }
 
   //藉由代入的category呈現不同對應的Form
@@ -1037,6 +951,8 @@
     $('#size-update').hide()
     $('#size-update').attr('disabled', true)
   }
+
+  //增刪修結束後停留在當前頁面並且刷新
   function CRUDreload(category) {
     $('td').remove().load()
     $('#categorySelect').val(category)
