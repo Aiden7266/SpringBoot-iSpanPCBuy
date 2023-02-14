@@ -1,9 +1,6 @@
 /*
-
 Softy Pinko
-
 https://templatemo.com/tm-535-softy-pinko
-
 */
 /* ---------------------------------------------
 Table of contents
@@ -20,18 +17,16 @@ Table of contents
 10. contact
 11. footer
 12. preloader
-
 --------------------------------------------- */
-/* 
+/*
 ---------------------------------------------
-font & reset css
---------------------------------------------- 
 */
+
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
-/* 
+/*
 ---------------------------------------------
 reset
---------------------------------------------- 
+---------------------------------------------
 */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
@@ -88,6 +83,32 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*更改*/
+select {
+  color: #333;
+  background-color: #f9f9f9;
+  width: 300px;
+  margin-top: -25px;
+  height: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
+
+
+
+
 a {
   text-decoration: none !important;
 }
@@ -101,10 +122,10 @@ ul {
   margin-bottom: 0px;
 }
 
-/* 
+/*
 ---------------------------------------------
 global styles
---------------------------------------------- 
+---------------------------------------------
 */
 html,
 body {
@@ -368,10 +389,10 @@ button.main-button:hover {
 }
 
 
-/* 
+/*
 ---------------------------------------------
 header
---------------------------------------------- 
+---------------------------------------------
 */
 .header-area {
   position: fixed;
@@ -633,10 +654,10 @@ header
   }
 }
 
-/* 
+/*
 ---------------------------------------------
 welcome
---------------------------------------------- 
+---------------------------------------------
 */
 .welcome-area {
   overflow: hidden;
@@ -650,7 +671,7 @@ welcome
   height: 1350px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; 
+  background-size: cover;
   height: 100vh;
 }
 

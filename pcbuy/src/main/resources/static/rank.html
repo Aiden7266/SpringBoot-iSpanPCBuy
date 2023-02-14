@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description">
+    <meta name="author">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <title>hardware 天梯效能排行</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+
+</head>
+<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/users/userinfo',
+            type: "get",
+            dataType: "json",
+            success:function (data){
+                if (data.username !== undefined){
+                    if((data.auth).includes("admin")){
+                        $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
+                    }else {
+                        $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
+                    }
+                    $('#logInOutDiv').text('登出').attr('href','/logout')
+                }else if (data.username == undefined){
+                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            },
+            error:function (){
+                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+            }
+        })
+
+        $('#logInOutDiv').click(function (){
+            $.ajax({
+                url: 'http://localhost:8080/users/userinfo',
+                type: "get",
+                dataType: "json",
+                success:function (data){
+                    if (data.username !== undefined){
+                        $.ajax({
+                            url: 'http://localhost:8080/users/logoutUser',
+                            type: "get",
+                            // dataType: "json",
+                            success:function (){
+                                // alert("已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            },
+                            error:function (){
+                                // alert("出錯！已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            }
+                        })
+                    }else if (data.username == undefined){
+                        $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                        $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                    }
+                },
+                error:function (){
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            })
+        })
+    })
+</script>
+
+<body>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/login_register.html." alt="Softy Pinko" />
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html"> 產品購買 </a></li>
+                        <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                        <li><a href="rank.html"  style="color: #ff589e" > 天梯效能排行 </a></li>
+                        <li><a href="contact_us.html"> 聯絡我們 </a></li>
+                        <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()"> 會員中心 </a></li>
+                        <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>菜單欄</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+        <!-- ***** Footer Start ***** -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="social">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="copyright">Copyright &copy;2023 PCBuy company</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <!-- jQuery -->
+        <script src="../index_assets/js/jquery-2.1.0.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../index_assets/js/popper.js"></script>
+        <script src="../index_assets/js/bootstrap.min.js"></script>
+        <!-- Plugins -->
+        <script src="../index_assets/js/scrollreveal.min.js"></script>
+        <script src="../index_assets/js/waypoints.min.js"></script>
+        <script src="../index_assets/js/jquery.counterup.min.js"></script>
+        <script src="../index_assets/js/imgfix.min.js"></script>
+        <!-- Global Init -->
+        <script src="../index_assets/js/custom.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    </body>
+</html>

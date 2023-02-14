@@ -2,30 +2,19 @@
 <html lang="en">
 
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description">
     <meta name="author">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-
-    <title>hardware</title>
+    <title>hardware 首頁</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
-
     <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
-
-    <!-- 我添加的 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!--  -->
-
-
-    </head>
+  </head>
+    <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
@@ -37,9 +26,9 @@
               success:function (data){
                   if (data.username !== undefined){
                       if((data.auth).includes("admin")){
-                          $('#memberDiv').text('會員中心').attr('href','/admin/index.html')
+                          $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
                       }else {
-                          $('#memberDiv').text('會員中心').attr('href','/member/index.html')
+                          $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
                       }
                       $('#logInOutDiv').text('登出').attr('href','/logout')
                   }else if (data.username == undefined){
@@ -85,22 +74,9 @@
                 })
             })
         })
-
-
     </script>
+
     <body>
-    
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-    
-    
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -113,25 +89,17 @@
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
-                        
+
                         <ul class="nav">
-                            <li><a href="#welcome" class="active">首頁</a></li>
-                            <li><a href="#intro">產品介紹</a></li>
-                            <li><a href="#features">產品購買</a></li>
-                            <li><a href="#work-process">處理器天梯效能排行</a>
-                                <!-- <ul>
-                                    <li><a href="#">AMD</a></li>
-                                    <li><a href="#">Intel</a></li>
-                                </ul> -->
-                            </li>
-                            <li><a href="#testimonials">顯示卡天梯效能排行</a></li>
-                            <li><a href="#contact-us">聯絡我們</a></li>
-                            <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()">會員中心</a></li>
+                            <li><a href="#purchase"> 產品購買 </a></li>
+                            <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                            <li><a href="rank.html"> 天梯效能排行 </a></li>
+                            <li><a href="contact_us.html"> 聯絡我們 </a></li>
+                            <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()"> 會員中心 </a></li>
                             <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>
-                            
                         </ul>
                         <a class='menu-trigger'>
-                            <span>Menu</span>
+                            <span>菜單欄</span>
                         </a>
                         <!-- ***** Menu End ***** -->
                     </nav>
@@ -143,7 +111,6 @@
 
     <!-- ***** Welcome Area Start ***** -->
     <div class="welcome-area" id="welcome">
-
         <!-- ***** Header Text Start ***** -->
         <div class="header-text">
             <div class="container">
@@ -151,23 +118,10 @@
                     <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
                         <br><br><br>
                         <h1> 歡迎光臨
-                            <!-- <strong>xxx</strong><br>xxxx<strong>xxx</strong> -->
-                            <strong>PCBUY</strong><br>
-                            </h1> 
+                            <strong>PCBUY</strong> <br>
+                        </h1>
                         <p>宗旨：服務至上</p>
-                        <a href="#features" class="main-button-slider">開始選購</a>
-                        
-                        <!-- <a href="#pricing-plans" class="main-button-slider">read more</a> -->
-
-                        <!-- <a href="#blog"class="main-button-slider">read</a> -->
-                            
-                        <!--  -->
-                            
-                                   
-                        
-
-
-                            <!--  -->
+                        <a href="#purchase" class="main-button-slider">開始選購</a>
                     </div>
                 </div>
             </div>
@@ -178,598 +132,265 @@
 
     <br><br><br><br><br><br><br><br><br>
     <!-- ***** Features Small Start ***** -->
-    <section class="section home-feature" id="intro">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">中央處理器</h5>
-                                <p>解釋電腦指令以及處理電腦軟體中的資料。</p>
-                                <br>
-                                <p>1970年代前，中央處理器由多個獨立單元構成，後來發展出由積體電路製造的中央處理器，
-                                    這些高度收縮的元件就是所謂的微處理器。其中分出的中央處理器最為複雜的電路可以做成單一微小功能強大的單元，
-                                    也就是所謂的核心。中央處理器廣義上指一系列可以執行複雜的電腦程式的邏輯機器。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">CPU散熱器</h5>
-                                <p>CPU 產生大量的熱量，高溫可能導致系統關機以保護重要元件，甚至可能導致永久性損壞。因此，為了保持 CPU 在低溫下運轉，風扇和散熱鰭片是必要配備。除了部分高階 CPU 外，大多數盒裝 CPU 都與對應的 CPU 散熱器一起搭售，可滿足散熱的基本需求。為了更好的系統效能，建議購買更好的 CPU 散熱器。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">主機板</h5>
-                                <p>主要功能是提供一系列接合點，形成一個能整合處理器、記憶體、儲存裝置、顯示卡、音效卡、網卡和各種外部裝置的連接平台。主機板通常直接固定在機箱內壁，表面設計有可以直接插入擴充卡的插槽或可以連接其它內建裝置的線路連接。主機板上最重要的構成元件是晶片組。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-                         
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">記憶體</h5>
-                                <p>一種儲存資料的電子裝置。電腦記憶體可分為記憶體和外部記憶體，我們平常使用的程式，如Windows作業系統、打字軟體、遊戲軟體等，一般都是安裝在硬碟等外部記憶體上的，但必須把它們調入記憶體中執行，才能真正使用其功能，我們平時輸入一段文字，或玩一個遊戲，其實都是在記憶體中進行的，資料產生後不斷地由記憶體向外部記憶體進行讀寫。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">顯示卡</h5>
-                                <p>簡稱顯卡，是個人電腦上以圖形處理器（GPU）為核心的擴充卡，用途是提供中央處理器以外的微處理器幫助計算圖像資訊，並將電腦系統所需要的顯示資訊進行轉換並提供逐行或隔行掃描訊號給顯示裝置，是連接顯示器和個人電腦主機板的重要元件，是「人機對話」的重要裝置之一。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">硬碟</h5>
-                                <p>有時為了與後來出現的固態驅動器相區分而也稱「機械硬碟」或「傳統硬碟」，是電腦上使用堅硬的旋轉磁性碟片為基礎的非依電性記憶體，它在平整的磁性表面儲存和檢索數字資料，資料通過離磁性表面很近的磁頭由電磁流來改變極性的方式被寫入到磁碟上，資料可以通過碟片被讀取，原理是磁頭經過碟片的上方時碟片本身的磁場導致讀取線圈中電氣訊號改變。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">電源供應器</h5>
-                                <p>電能轉換類的電源，主要功能為將標準交流電轉成低壓穩定的直流電，或直接將直流電轉成低壓穩定的直流電給某些特殊的器材使用。香港又稱火牛，是電牛的意思，意指電力供應者，源於早期變壓器造型似牛；用於電腦者，又俗稱電腦電源。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">機殼</h5>
-                                <p>大部分可根據個人品味選擇，但有幾個需要牢記的因素。首先，機殼需要保持良好的風流，因此應該有許多風扇安裝點。同時要尋找前方可讓空氣進入的大開口，並加以過濾避免灰塵進入機殼。 其次，檢查您的機殼能夠容納的主機板大小，大多數主機板都是 ATX 大小，不適合較小的機殼。</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
-                        <!-- ***** Features Small Item Start ***** -->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-09.svg" alt="" width="70px"></i>
-                                </div>
-                                <h5 class="features-title">週邊多媒體設備</h5>
-                                <p>週邊設備泛指主機以外的相關硬體設備，這些設備依其用途，可區分為輔助儲存設備（輔助記憶體）、輸入設備、及輸出設備等3大類</p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
-
+    <div class="container shop" id="purchase">
+        <div class="card shadow-sm text-center p-2 ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" src="../index_assets/images/product_picture/cputest.jpg" width="130" height="130">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">處理器</span>
                     </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" src="###" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" src="../index_assets/product_picture/images/gputest.png" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card shadow-sm text-center p-2">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img class="imgbig" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black"></span>
+                    </div>
+                    <br>
+                    <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="itemcount">
+            <div class="inner">
+                <div class="d-flex">
+                    <div class="bordtest " style="display: flex;">
+                        <div class="anyitem " style="font-size: 20px;">耗電量</div>
+                        <a class="font-weight-bold text-warning text-decoration-none "
+                           style="font-size: 25px;margin-left:30px ">1000w</a>
+                    </div>
+                    <div class="bordtest " style="display: flex;">
+
+                        <div class="anyitem" style="font-size: 20px;">總價錢</div>
+                        <a class="font-weight-bold text-danger text-decoration-none "
+                           style="font-size: 25px;margin-left:30px;">1000w</a>
+                    </div>
+                    <div class="bordtest">
+                        <button type="submit" id="clear" class="main-button ">清空重選</button>
+                    </div>
+                    <div class="bordtest" style="margin-left: auto;">
+
+                        <button type="submit" id="form-submit" class="shopbtn">下單</button>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ***** Features Small End ***** -->
-
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section padding-top-70 padding-bottom-0" id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12 align-self-center" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                    <img src="/assets/images/left-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
-                </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-6 col-md-12 col-sm-12 align-self-center mobile-top-fix">
-                    <div class="left-heading">
-                        <h2 class="section-title">Let’s discuss about you project</h2>
-                    </div>
-                    <div class="left-text">
-                        <p>Nullam sit amet purus libero. Etiam ullamcorper nisl ut augue blandit, at finibus leo efficitur. Nam gravida purus non sapien auctor, ut aliquam magna ullamcorper.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hr"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
-
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section padding-bottom-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 align-self-center mobile-bottom-fix">
-                    <div class="left-heading">
-                        <h2 class="section-title">We can help you to grow your business</h2>
-                    </div>
-                    <div class="left-text">
-                        <p>Aenean pretium, ipsum et porttitor auctor, metus ipsum iaculis nisi, a bibendum lectus libero vitae urna. Sed id leo eu dolor luctus congue sed eget ipsum. Nunc nec luctus libero. Etiam quis dolor elit.</p>
-                    </div>
-                </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-5 col-md-12 col-sm-12 align-self-center mobile-bottom-fix-big" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                    <img src="/assets/images/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
-
-    <!-- ***** Home Parallax Start ***** -->
-    <section class="mini" id="work-process">
-        <div class="mini-content">
-            <div class="container">
-                <div class="row">
-                    <div class="offset-lg-3 col-lg-6">
-                        <div class="info">
-                            <h1>Work Process</h1>
-                            <p>Aenean nec tempor metus. Maecenas ligula dolor, commodo in imperdiet interdum, vehicula ut ex. Donec ante diam.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ***** Mini Box Start ***** -->
-                <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Get Ideas</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Sketch Up</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Discuss</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Revise</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Approve</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" class="mini-box">
-                            <i><img src="/assets/images/work-process-item-01.png" alt=""></i>
-                            <strong>Launch</strong>
-                            <span>Godard pabst prism fam cliche.</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- ***** Mini Box End ***** -->
-            </div>
-        </div>
-    </section>
-    <!-- ***** Home Parallax End ***** -->
-
-    <!-- ***** Testimonials Start ***** -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <!-- ***** Section Title Start ***** -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="center-heading">
-                        <h2 class="section-title">What do they say?</h2>
-                    </div>
-                </div>
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="center-text">
-                        <p>Donec tempus, sem non rutrum imperdiet, lectus orci fringilla nulla, at accumsan elit eros a turpis. Ut sagittis lectus libero.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Section Title End ***** -->
-
-            <div class="row">
-                <!-- ***** Testimonials Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="team-item">
-                        <div class="team-content">
-                            <i><img src="/assets/images/testimonial-icon.png" alt=""></i>
-                            <p>Proin a neque nisi. Nam ipsum nisi, venenatis ut nulla quis, egestas scelerisque orci. Maecenas a finibus odio.</p>
-                            <div class="user-image">
-                                <img src="http://placehold.it/60x60" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="user-name">Catherine Soft</h3>
-                                <span>Managing Director</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Testimonials Item End ***** -->
-                
-                <!-- ***** Testimonials Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="team-item">
-                        <div class="team-content">
-                            <i><img src="/assets/images/testimonial-icon.png" alt=""></i>
-                            <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat nibh. Cras maximus venenatis molestie.</p>
-                            <div class="user-image">
-                                <img src="http://placehold.it/60x60" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="user-name">Kelvin Wood</h3>
-                                <span>Digital Marketer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Testimonials Item End ***** -->
-                
-                <!-- ***** Testimonials Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="team-item">
-                        <div class="team-content">
-                            <i><img src="/assets/images/testimonial-icon.png" alt=""></i>
-                            <p>Quisque diam odio, maximus ac consectetur eu, auctor non lorem. Cras quis est non ante ultrices molestie. Ut vehicula et diam at aliquam.</p>
-                            <div class="user-image">
-                                <img src="http://placehold.it/60x60" alt="">
-                            </div>
-                            <div class="team-info">
-                                <h3 class="user-name">David Martin</h3>
-                                <span>Website Manager</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Testimonials Item End ***** -->
-            </div>
-        </div>
-    </section>
-    <!-- ***** Testimonials End ***** -->
-
-    <!-- ***** Pricing Plans Start ***** -->
-    <section class="section colored" id="pricing-plans">
-        <div class="container">
-            <!-- ***** Section Title Start ***** -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="center-heading">
-                        <h2 class="section-title">Pricing Plans</h2>
-                    </div>
-                </div>
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="center-text">
-                        <p>Donec vulputate urna sed rutrum venenatis. Cras consequat magna quis arcu elementum, quis congue risus volutpat.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Section Title End ***** -->
-
-            <div class="row">
-                <!-- ***** Pricing Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
-                    <div class="pricing-item">
-                        <div class="pricing-header">
-                            <h3 class="pricing-title">Starter</h3>
-                        </div>
-                        <div class="pricing-body">
-                            <div class="price-wrapper">
-                                <span class="currency">$</span>
-                                <span class="price">14.50</span>
-                                <span class="period">monthly</span>
-                            </div>
-                            <ul class="list">
-                                <li class="active">60 GB space</li>
-                                <li class="active">600 GB transfer</li>
-                                <li class="active">Pro Design Panel</li>
-                                <li>15-minute support</li>
-                                <li>Unlimited Emails</li>
-                                <li>24/7 Security</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-footer">
-                            <a href="#" class="main-button">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Pricing Item End ***** -->
-
-                <!-- ***** Pricing Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
-                    <div class="pricing-item active">
-                        <div class="pricing-header">
-                            <h3 class="pricing-title">Premium</h3>
-                        </div>
-                        <div class="pricing-body">
-                            <div class="price-wrapper">
-                                <span class="currency">$</span>
-                                <span class="price">21.50</span>
-                                <span class="period">monthly</span>
-                            </div>
-                            <ul class="list">
-                                <li class="active">120 GB space</li>
-                                <li class="active">1200 GB transfer</li>
-                                <li class="active">Pro Design Panel</li>
-                                <li class="active">15-minute support</li>
-                                <li>Unlimited Emails</li>
-                                <li>24/7 Security</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-footer">
-                            <a href="#" class="main-button">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Pricing Item End ***** -->
-
-                <!-- ***** Pricing Item Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                    <div class="pricing-item">
-                        <div class="pricing-header">
-                            <h3 class="pricing-title">Advanced</h3>
-                        </div>
-                        <div class="pricing-body">
-                            <div class="price-wrapper">
-                                <span class="currency">$</span>
-                                <span class="price">42.00</span>
-                                <span class="period">monthly</span>
-                            </div>
-                            <ul class="list">
-                                <li class="active">250 GB space</li>
-                                <li class="active">5000 GB transfer</li>
-                                <li class="active">Pro Design Panel</li>
-                                <li class="active">15-minute support</li>
-                                <li class="active">Unlimited Emails</li>
-                                <li class="active">24/7 Security</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-footer">
-                            <a href="#" class="main-button">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Pricing Item End ***** -->
-            </div>
-        </div>
-    </section>
-    <!-- ***** Pricing Plans End ***** -->
-
-    <!-- ***** Counter Parallax Start ***** -->
-    <section class="counter">
-        <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="count-item decoration-bottom">
-                            <strong>126</strong>
-                            <span>Projects</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="count-item decoration-top">
-                            <strong>63</strong>
-                            <span>Happy Clients</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="count-item decoration-bottom">
-                            <strong>18</strong>
-                            <span>Awards Wins</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="count-item">
-                            <strong>27</strong>
-                            <span>Countries</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Counter Parallax End ***** -->   
-
-    <!-- ***** Blog Start ***** -->
-    <section class="section" id="blog">
-        <div class="container">
-            <!-- ***** Section Title Start ***** -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="center-heading">
-                        <h2 class="section-title">Blog Entries</h2>
-                    </div>
-                </div>
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="center-text">
-                        <p>Integer molestie aliquam gravida. Nullam nec arcu finibus, imperdiet nulla vitae, placerat nibh. Cras maximus venenatis molestie.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Section Title End ***** -->
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-thumb">
-                        <div class="img">
-                            <img src="/assets/images/blog-item-01.png" alt="">
-                        </div>
-                        <div class="blog-content">
-                            <h3>
-                                <a href="#">Vivamus ac vehicula dui</a>
-                            </h3>
-                            <div class="text">
-                               Cras aliquet ligula dui, vitae fermentum velit tincidunt id. Praesent eu finibus nunc. Nulla in sagittis eros. Aliquam egestas augue.
-                            </div>
-                            <a href="#" class="main-button">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-thumb">
-                        <div class="img">
-                            <img src="/assets/images/blog-item-02.png" alt="">
-                        </div>
-                        <div class="blog-content">
-                            <h3>
-                                <a href="#">Phasellus convallis augue</a>
-                            </h3>
-                            <div class="text">
-                                Aliquam commodo ornare nisl, et scelerisque nisl dignissim ac. Vestibulum finibus urna ut velit venenatis, vel ultrices sapien mattis.
-                            </div>
-                            <a href="#" class="main-button">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-post-thumb">
-                        <div class="img">
-                            <img src="/assets/images/blog-item-03.png" alt="">
-                        </div>
-                        <div class="blog-content">
-                            <h3>
-                                <a href="#">Nam gravida purus non</a>
-                            </h3>
-                            <div class="text">
-                                Maecenas eu erat vitae dui convallis consequat vel gravida nulla. Vestibulum finibus euismod odio, ut tempus enim varius eu.
-                            </div>
-                            <a href="#" class="main-button">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Blog End ***** -->
-
-    <!-- ***** Contact Us Start ***** -->
-    <section class="section colored" id="contact-us">
-        <div class="container">
-            <!-- ***** Section Title Start ***** -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="center-heading">
-                        <h2 class="section-title">聯絡我們</h2>
-                    </div>
-                </div>
-                <div class="offset-lg-3 col-lg-6">
-                    <div class="center-text">
-                        <p>請填寫正確資料，以便我們聯絡您，謝謝!</p>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Section Title End ***** -->
-
-            <div class="row">
-                <!-- ***** Contact Text Start ***** -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <!-- <h5 class="margin-bottom-30">Keep in touch</h5> -->
-                    <div class="contact-text">
-                        <h4>門市位置</h4>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58249.67090556209!2d120.59557811637737!3d24.150526199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9650422ae1%3A0x334dfd5796c49ff6!2z6LOH5bGV5ZyL6ZqbLeWOnyDos4fnrZbmnIMt5pW45L2N5pWZ6IKy56CU56m25omALeS4reWNgA!5e0!3m2!1szh-TW!2stw!4v1673577114346!5m2!1szh-TW!2stw" 
-                        width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        <!-- <p>You are NOT allowed to re-distribute Softy Pinko template on any template collection websites. Thank you.</p> -->
-                    </div>
-                </div>
-                <!-- ***** Contact Text End ***** -->
-
-                <!-- ***** Contact Form Start ***** -->
-                <div class="col-lg-8 col-md-6 col-sm-12">
-                    <div class="contact-form">
-                        <form id="contact" action="" method="get">
-                          <div class="row">
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                              <fieldset>
-                                <input name="name" type="text" class="form-control" id="name" placeholder="完整姓名" required="">
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                              <fieldset>
-                                <input name="email" type="email" class="form-control" id="email" placeholder="E-Mail 地址" required="">
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <textarea name="message" rows="6" class="form-control" id="message" placeholder="您的留言" required=""></textarea>
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <button type="submit" id="form-submit" class="main-button">發送訊息</button>
-                              </fieldset>
-                            </div>
-                          </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- ***** Contact Form End ***** -->
-            </div>
-        </div>
-    </section>
-    <!-- ***** Contact Us End ***** -->
-    
+    </div>
+  </div>
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
@@ -791,7 +412,7 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- jQuery -->
     <script src="/assets/js/jquery-2.1.0.min.js"></script>
 
@@ -804,7 +425,7 @@
     <script src="/assets/js/waypoints.min.js"></script>
     <script src="/assets/js/jquery.counterup.min.js"></script>
     <script src="/assets/js/imgfix.min.js"></script>
-    
+
     <!-- Global Init -->
     <script src="/assets/js/custom.js"></script>
 

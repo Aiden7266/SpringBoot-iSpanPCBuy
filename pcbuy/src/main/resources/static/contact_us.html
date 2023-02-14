@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description">
+    <meta name="author">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <title> hardware 聯絡我們</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+
+</head>
+<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/users/userinfo',
+            type: "get",
+            dataType: "json",
+            success:function (data){
+                if (data.username !== undefined){
+                    if((data.auth).includes("admin")){
+                        $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
+                    }else {
+                        $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
+                    }
+                    $('#logInOutDiv').text('登出').attr('href','/logout')
+                }else if (data.username == undefined){
+                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            },
+            error:function (){
+                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+            }
+        })
+
+        $('#logInOutDiv').click(function (){
+            $.ajax({
+                url: 'http://localhost:8080/users/userinfo',
+                type: "get",
+                dataType: "json",
+                success:function (data){
+                    if (data.username !== undefined){
+                        $.ajax({
+                            url: 'http://localhost:8080/users/logoutUser',
+                            type: "get",
+                            // dataType: "json",
+                            success:function (){
+                                // alert("已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            },
+                            error:function (){
+                                // alert("出錯！已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            }
+                        })
+                    }else if (data.username == undefined){
+                        $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                        $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                    }
+                },
+                error:function (){
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            })
+        })
+    })
+</script>
+
+    <body>
+
+ <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="index.html" class="logo">
+                                <img src="../index_assets/images/logo.png" alt="Softy Pinko" />
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li><a href="index.html"> 產品購買 </a></li>
+                                <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                                <li><a href="rank.html"> 天梯效能排行 </a></li>
+                                <li><a href="contact_us.html" style="color: #ff589e"> 聯絡我們 </a></li>
+                                <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()"> 會員中心 </a></li>
+                                <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>菜單欄</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+
+        <!-- ***** Contact Us Start ***** -->
+        <section class="section colored" id="contact-us">
+            <div class="container">
+                <!-- ***** Section Title Start ***** -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="center-heading">
+                            <h2 class="section-title"> 聯絡我們 </h2>
+                        </div>
+                    </div>
+                    <div class="offset-lg-3 col-lg-6">
+                        <div class="center-text">
+                            <p> 請填寫正確資料，以便我們聯絡您，謝謝! </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Section Title End ***** -->
+
+                <div class="row">
+                    <!-- ***** Contact Text Start ***** -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="contact-text">
+                            <h4>門市位置</h4>
+                            <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58249.67090556209!2d120.59557811637737!3d24.150526199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9650422ae1%3A0x334dfd5796c49ff6!2z6LOH5bGV5ZyL6ZqbLeWOnyDos4fnrZbmnIMt5pW45L2N5pWZ6IKy56CU56m25omALeS4reWNgA!5e0!3m2!1szh-TW!2stw!4v1673577114346!5m2!1szh-TW!2stw"
+                                    width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                    <!-- ***** Contact Text End ***** -->
+
+                    <!-- ***** Contact Form Start ***** -->
+                    <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="contact-form">
+                            <form id="contact" action="" method="get">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <fieldset>
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="完整姓名"
+                                                   required="">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <fieldset>
+                                            <input name="email" type="email" class="form-control" id="email"
+                                                   placeholder="E-Mail 地址" required="">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <fieldset>
+                                                <textarea name="message" rows="6" class="form-control" id="message"
+                                                          placeholder="您的留言" required=""></textarea>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="main-button">發送訊息</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ***** Contact Form End ***** -->
+                </div>
+            </div>
+        </section>
+        <!-- ***** Contact Us End ***** -->
+
+        <!-- ***** Footer Start ***** -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <ul class="social">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="copyright">Copyright &copy;2023 PCBuy company</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <!-- jQuery -->
+        <script src="../index_assets/js/jquery-2.1.0.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../index_assets/js/popper.js"></script>
+        <script src="../index_assets/js/bootstrap.min.js"></script>
+        <!-- Plugins -->
+        <script src="../index_assets/js/scrollreveal.min.js"></script>
+        <script src="../index_assets/js/waypoints.min.js"></script>
+        <script src="../index_assets/js/jquery.counterup.min.js"></script>
+        <script src="../index_assets/js/imgfix.min.js"></script>
+        <!-- Global Init -->
+        <script src="../index_assets/js/custom.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    </body>
+</html>
