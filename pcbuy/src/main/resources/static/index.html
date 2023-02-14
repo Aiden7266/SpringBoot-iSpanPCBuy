@@ -47,18 +47,18 @@
                     type: "get",
                     dataType: "json",
                     success:function (data){
+                        alert("已登出")
                         if (data.username !== undefined){
                             $.ajax({
                                 url: 'http://localhost:8080/users/logoutUser',
                                 type: "get",
                                 // dataType: "json",
                                 success:function (){
-                                    // alert("已清除使用者資訊")
+                                    // location.reload()
                                     $('#memberDiv').text('會員中心').attr('href','/login_register.html')
                                     $('#logInOutDiv').text('登入').attr('href','/login_register.html')
                                 },
                                 error:function (){
-                                    // alert("出錯！已清除使用者資訊")
                                     $('#memberDiv').text('會員中心').attr('href','/login_register.html')
                                     $('#logInOutDiv').text('登入').attr('href','/login_register.html')
                                 }
@@ -136,7 +136,7 @@
         <div class="card shadow-sm text-center p-2 ">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img class="imgbig" src="../index_assets/images/product_picture/cputest.jpg" width="130" height="130">
+                    <img class="imgbig" src="assets/images/indexImg.jpg" width="100%" height="100%" alt="">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">

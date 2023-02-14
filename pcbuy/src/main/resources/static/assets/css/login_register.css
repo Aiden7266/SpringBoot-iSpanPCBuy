@@ -181,12 +181,12 @@ input:required {
     outline: none;
 }
 
-.a-container {
+.login_Msg {
     z-index: 100;
     left: calc(100% - 600px);
 }
 
-.b-container {
+.register_Msg {
     left: calc(100% - 600px);
     z-index: 0;
 }

@@ -38,22 +38,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        //自定義自己編寫的登入頁面
+        http.formLogin()
+                .loginPage("/login_register.html") //登入頁面設置
+                .loginProcessingUrl("/login") //登入時訪問的URL
+                .defaultSuccessUrl("/index.html",true) //登入後跳轉路徑
+                .failureUrl("/login-error").permitAll();
         //退出
-        http.logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").permitAll();
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/index.html")
+                .permitAll();
 
         //自定義403沒有權限訪問頁面
         http.exceptionHandling().accessDeniedPage("/unauth.html");
 
-        http.formLogin() //自定義自己編寫的登入頁面
-                .loginPage("/login_register.html") //登入頁面設置
-//                .loginProcessingUrl("/users/login") //登入時訪問的URL
-//                .successForwardUrl("/loginSuccessI")
-                .defaultSuccessUrl("/index.html") //登入後跳轉路徑
-                .failureForwardUrl("/loginFail").permitAll()
-
-                .and().authorizeRequests()
-                    .antMatchers("/**","/assets/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
+        //設定訪問權限
+        http.authorizeRequests()
+                    .antMatchers("/assets/**","index_assets/**","/index.html","contact_us.html","intro.html","login_register.html","rank.html","unauth.html","/").permitAll() //設置哪些路徑可以直接訪問，不需要認證
 //                    1.antMatchers("/loginSuccess").hasAuthority("role") //只賦予單個權限可以訪問
 //                    2.antMatchers("/loginSuccess").hasAnyAuthority("role","manger") //賦予多個權限可以訪問
 //                    3.antMatchers("/loginSuccess").hasRole("sale")

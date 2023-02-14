@@ -665,8 +665,8 @@ welcome
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-image: url(../images/hardware.jpg); */
-  background-color: #777;
+   background-image: url(../images/indexImg.jpg);
+  /*background-color: #777;*/
   width: 1350px;
   height: 1350px;
   background-repeat: no-repeat;

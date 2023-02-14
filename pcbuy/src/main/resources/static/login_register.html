@@ -16,8 +16,8 @@
 <div class="shell">
     <link rel="stylesheet" href="../assets/css/login_register.css">
     <!--登入-->
-    <div class="container a-container" id="a-container">
-        <form class="form" id="a-form" action="" method="post" >
+    <div class="container login_Msg" id="login_Msg">
+        <form class="form" id="a-form" action="/login" method="post" >
             <h2 class="form_title title">登入會員</h2>
             <div class="form_icons"></div>
             <input type="text" class="form_input" placeholder="帳號" name="username" required>
@@ -29,7 +29,7 @@
     </div>
 
     <!--註冊-->
-    <div class="container b-container" id="b-container">
+    <div class="container register_Msg" id="register_Msg">
         <form class="form" id="b-form" action="" method="POST" >
             <h2 class="form_title title">註冊帳號</h2>
             <div class="form_icons">
@@ -101,8 +101,8 @@
     let switchC2 = document.querySelector("#switch-c2");
     let switchCircle = document.querySelectorAll(".switch_circle");
     let switchBtn = document.querySelectorAll(".switch-btn");
-    let aContainer = document.querySelector("#a-container");
-    let bContainer = document.querySelector("#b-container");
+    let aContainer = document.querySelector("#login_Msg");
+    let bContainer = document.querySelector("#register_Msg");
     let allButtons = document.querySelectorAll(".submit");
 
     let getButtons = (e) => e.preventDefault()
