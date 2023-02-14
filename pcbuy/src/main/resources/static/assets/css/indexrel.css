@@ -1,10 +1,12 @@
 select {
     color: #333;
     background-color: #f9f9f9;
-    width: 300px;
+    width: 500px;
     margin-top: -25px;
     height: 35px;
     border-radius: 30px;
+    text-align:-webkit-center;
+
 }
 
 option {
@@ -18,20 +20,19 @@ option {
 }
 
 .itemcount {
-    box-shadow: 0px 0px 15px rgb(0 0 0 / 10%);
-    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
     min-height: 80px;
     background: linear-gradient(90deg, #BA81FF 0%, #FF6A95 99%);
-    border: 10px;
-    height: 40px;
+    border: 20px;
+    height: 60px;
     padding-bottom: 90px;
     position: fixed;
     bottom: 10px;
     right: 0;
     left: 0;
-    z-index: 998;
+    z-index: 500;
     display: none;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 .inner {
     padding: 10px;
@@ -52,17 +53,17 @@ option {
     padding-left: 60px;
 }
 
-
 .shopbtn {
     height: 2.8em;
-    width: 9em;
+    width: 8em;
     background: transparent;
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
     border: 2px solid #8261EE;
     outline: none;
     color: #8261EE;
-    font-size: 17px;
+    font-size: 15px;
+    border-radius: 20px;
 }
 
 .shopbtn:hover {

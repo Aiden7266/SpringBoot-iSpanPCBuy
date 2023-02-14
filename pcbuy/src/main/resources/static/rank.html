@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
-
 </head>
 <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -85,7 +84,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="/login_register.html." alt="Softy Pinko" />
+                        <img src="./assets/images/logo.png" alt="Softy Pinko" />
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -107,7 +106,37 @@
     </div>
 </header>
 <!-- ***** Header Area End ***** -->
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
+
+
+<div class="tab_css">
+    <!-- TAB1 打包區塊 start -->
+    <input id="tab1" type="radio" name="tab" checked="checked"/>
+    <label for="tab1">處理器天梯效能排行</label>
+    <div class="tab_content">
+        <!-- ***** Home Parallax Start ***** -->
+        <section class="mini" id="cpurank">
+            <div class="mini-content">
+                <div class="container">
+                    <!-- ***** Mini Box Start ***** -->
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+                            <a href="#" class="mini-box">
+
+                            </a>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+                            <a href="#" class="mini-box">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- ***** Mini Box End ***** -->
+                </div>
+            </div>
+        </section>
+        <!-- ***** Home Parallax End ***** -->
+    </div>
+    <!-- TAB1 打包區塊 end -->
 
 
 
@@ -116,7 +145,27 @@
 
 
 
+    <!-- TAB2 打包區塊 start -->
+    <input id="tab2" type="radio" name="tab"/>
+    <label for="tab2">顯示卡天梯效能排行</label>
+    <div class="tab_content">
+        第 2 個頁籤內容區塊<br/>
+        WFU BLOG | Blogger 調校資料庫<br/>
+        第 2 個頁籤內容區塊<br/>
+        WFU BLOG | Blogger 調校資料庫<br/>
+    </div>
+    <!-- TAB2 打包區塊 end -->
 
+</div>
+
+<style>
+    .tab_css{display:flex;flex-wrap:wrap;justify-content:center;}
+    .tab_css input{display:none}
+    .tab_css label{margin: 0 5px 5px 0; padding: 10px 16px; cursor: pointer; border-radius: 5px; background: #999; color: #fff; opacity: 0.5;}
+    .tab_content{order:1;display: none; width:100%; border-bottom: 3px solid #ddd; line-height: 1.6; font-size: .9em; padding: 15px; border: 1px solid #ddd; border-radius: 5px;}
+    .tab_css input:checked + label, .tab_css label:hover{opacity: 1; font-weight:bold;}
+    .tab_css input:checked + label + .tab_content{display: initial;}
+</style>
         <!-- ***** Footer Start ***** -->
         <footer>
             <div class="container">

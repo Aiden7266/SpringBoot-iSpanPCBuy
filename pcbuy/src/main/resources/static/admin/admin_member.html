@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description">
@@ -14,28 +14,75 @@
     <!-- Add custom CSS here -->
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-  </head>
+    <style>
+        #background-pop {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #div-pop {
+            background: #ffffff;
+            margin-top: 200px;
+            margin-left: 250px;
+            width: 70%;
 
-  <body>
-    <div id="wrapper">
+            overflow: auto;
+        }
+        .div-top {
+            width: 100%;
+            height: auto;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .div-top div {
+            padding: 3px 5px 5px 8px;
+        }
+        span {
+            color: white;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+            float: right;
+        }
+        .div-content {
+            width: auto;
+            height: 200px;
+            overflow: auto;
+        }
+        .div-footer {
+            text-align: center;
+            background-color: darkgray;
+        }
+        th{
+            background-color: #5c6264;
+        }
+    </style>
+</head>
 
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<body>
+<div id="wrapper">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="admin_index.html">後台管理</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="admin_index.html">後台管理</a>
         </div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                  <li class="active"><a href="admin_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-                  <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i>  商品管理 </a></li>
-                  <li><a href="admin_member.html"><i class="fa fa-user-md"></i>  會員管理 </a></li>
-                  <li><a href="admin_order.html"><i class="fa fa-file-text"></i>  訂單管理 </a></li>
+                <li class="active"><a href="admin_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
+                <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i>  商品管理 </a></li>
+                <li><a href="admin_member.html"><i class="fa fa-user-md"></i>  會員管理 </a></li>
+                <li><a href="admin_order.html"><i class="fa fa-file-text"></i>  訂單管理 </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
@@ -44,24 +91,215 @@
                 <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
             </ul>
         </div>
-      </nav>
+    </nav>
 
-      <div id="page-wrapper">
-          <div class="row">
-              <div class="col-lg-12">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
                 <h1>會員管理</h1>
-                    <ol class="breadcrumb">
-                      <li><a href="admin_index.html"><i class="fa fa-home"></i> 首頁</a></li>
-                      <li class="active">會員管理</li>
-                    </ol>
-              </div>
-          </div>
-      </div>
+                <ol class="breadcrumb">
+                    <li><a href="admin_index.html"><i class="fa fa-home"></i> 首頁</a></li>
+                    <li class="active">會員管理</li>
+                </ol>
+                <div class="col-lg-12">
+
+                    <label for="searchTerm">搜索：</label> <input id="searchTerm" placeholder="輸入帳號" type="text">
+                    <button onclick="search()">查詢</button>
+                    <div id="dateresult"></div>
+                    <div id="background-pop">
+                        <div id="div-pop">
+                            <div class="div-top">
+                                <span id="close-button">x</span>
+                                <div>
+                                    會員資料修改
+                                </div>
+                            </div>
+                            <div class="div-content">
+                                <table>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>電話</th>
+                                        <th>地址</th>
+                                        <th>電子郵件</th>
+                                        <th>帳號</th>
+                                        <th>密碼</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="name"></td>
+                                        <td><input id="tel"></td>
+                                        <td><input id="addr"></td>
+                                        <td><input id="email"></td>
+                                        <td><input id="username"></td>
+                                        <td><input id="password"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="div-footer">
+                                <button id="confirm-button">確定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+</div>
+<script>
+    //僅測試
+    let testdata = [
+        {
+            name: "王小明",
+            tel: "0910123456q",
+            addr: "台中市公益路",
+            email: "test12346@gmail.com",
+            username: "test111",
+            password: "ttest123",
+        },
+        {
+            name: "王小明",
+            tel: "0910123456w",
+            addr: "台中市公益路",
+            email: "test12346@gmail.com",
+            username: "test222",
+            password: "ttest123",
+        },
+        {
+            name: "王小明",
+            tel: "0910123456e",
+            addr: "台中市公益路",
+            email: "test12346@gmail.com",
+            username: "test333",
+            password: "ttest123",
+        },
 
-    <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
 
-  </body>
+
+    function search() {
+        let searchTerm = document.getElementById("searchTerm").value.toLowerCase();
+        let dateresult = document.getElementById("dateresult");
+        dateresult.innerHTML = "";
+
+        //增表
+        let table = document.createElement("table");
+        table.innerHTML =
+            "<tr><th>姓名</th><th>電話</th><th>地址</th><th>電子郵件</th><th>帳號</th><th>密碼</th><th></th></tr>";
+        let hasdateresult = false;
+
+        for (let i = 0; i < testdata.length; i++) {
+            let test = testdata[i];
+            if (
+                test.name.toString().toLowerCase().includes(searchTerm) ||
+                test.tel.toString().toLowerCase().includes(searchTerm) ||
+                test.addr.toString().toLowerCase().includes(searchTerm) ||
+                test.email.toString().toLowerCase().includes(searchTerm) ||
+                test.username.toString().toLowerCase().includes(searchTerm) ||
+                test.password.toString().toLowerCase().includes(searchTerm)
+            ) {
+                let row = table.insertRow(-1);
+                let nameCell = row.insertCell(0);
+                let telCell = row.insertCell(1);
+                let addrCell = row.insertCell(2);
+                let emailCell = row.insertCell(3);
+                let usernameCell = row.insertCell(4);
+                let passwordCell = row.insertCell(5);
+                let deleteCell = row.insertCell(6);
+                let addCell = row.insertCell(7);
+                nameCell.innerHTML = test.name;
+                telCell.innerHTML = test.tel;
+                addrCell.innerHTML = test.addr;
+                emailCell.innerHTML = test.email;
+                usernameCell.innerHTML = test.username;
+                passwordCell.innerHTML = test.password;
+                deleteCell.innerHTML = `<button onclick="deleteRow(${i})">刪除</button>`;
+                addCell.innerHTML = `<button onclick="addRow(${i})">修改</button>`;
+                hasdateresult = true;
+            }
+        }
+
+        if (!hasdateresult) {
+            let row = table.insertRow(-1);
+            let cell = row.insertCell(0);
+            cell.colSpan = 8;
+            cell.innerHTML = "查無資料";
+        }
+
+        dateresult.appendChild(table);
+    }
+    //僅測試
+    function deleteRow(index) {
+        let deleteconfirm = confirm("確定要刪除？");
+        if (deleteconfirm) {
+            testdata.splice(index, 1);
+            search();
+        }
+    }
+    /*
+    function deleteRow(index) {
+            let confirmation = confirm("確定要刪除？");
+            if (confirmation) {
+                $.ajax({
+                    url: '',
+                    method: 'POST',
+                    testdata: {  },
+                    success: function (response) {
+                    },
+                    error: function (xhr, status, error) {
+                    }
+                });
+            }
+        }
+  */
+    //測試
+    function addRow(index) {
+        // 顯示
+        div.style.display = "block";
+
+        // 填入
+        let selectedData = testdata[index];
+        document.getElementById("name").value = selectedData.name;
+        document.getElementById("tel").value = selectedData.tel;
+        document.getElementById("addr").value = selectedData.addr;
+        document.getElementById("email").value = selectedData.email;
+        document.getElementById("username").value = selectedData.username;
+        document.getElementById("password").value = selectedData.password;
+
+        // 確定
+
+
+
+        let confirmButton = document.getElementById("confirm-button");
+        confirmButton.onclick = function () {
+            selectedData.name = document.getElementById("name").value;
+            selectedData.tel = document.getElementById("tel").value;
+            selectedData.addr = document.getElementById("addr").value;
+            selectedData.email = document.getElementById("email").value;
+            selectedData.username = document.getElementById("username").value;
+            selectedData.password = document.getElementById("password").value;
+            div.style.display = "none";
+
+
+            search();
+        };
+    }
+    let div = document.getElementById('background-pop');
+    let close = document.getElementById('close-button');
+    function show() {
+        div.style.display = "block";
+    }
+    close.onclick = function close() {
+        div.style.display = "none";
+    }
+    window.onclick = function close(e) {
+        if (e.target == div) {
+            div.style.display = "none";
+        }
+    }
+</script>
+<!-- JavaScript -->
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.js"></script>
+
+</body>
 </html>

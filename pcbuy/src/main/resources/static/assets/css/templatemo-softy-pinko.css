@@ -847,7 +847,7 @@ parallax & home seperator
 }
 
 .mini:before {
-  content: '';
+  content: 'AMD';
   position: absolute;
   width: 140%;
   height: 140%;
@@ -855,7 +855,8 @@ parallax & home seperator
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-image: url(../images/work-process-bg.png);
+  /*background-image: url(../images/work-process-bg.png);*/
+  background-color:gray;
   z-index: 2;
   top: -20%;
   left: -20%;
