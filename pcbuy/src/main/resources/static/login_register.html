@@ -11,11 +11,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 
 <body>
+<link rel="stylesheet" href="./assets/css/login_register.css">
 <div class="shell">
-    <link rel="stylesheet" href="./assets/css/login_register.css">
     <!--登入-->
     <div class="container a-container" id="a-container">
-        <form class="a-form" id="a-form" action="/users/login" method="post" >
+        <form class="form" id="a-form" action="/users/login" method="post" >
             <h2 class="form_title title">登入會員</h2>
             <div class="form_icons"></div>
             <input type="text" class="form_input" placeholder="帳號" name="username" required>
@@ -28,55 +28,55 @@
 
     <!--註冊-->
     <div class="container b-container" id="b-container">
-        <form class="b-form" id="b-form" action="/users/register" method="post" onsubmit="return formRegisterSubmit()">
+        <form class="form" id="b-form" action="/users/register" method="post" onsubmit="return formRegisterSubmit()">
             <h2 class="form_title title">註冊帳號</h2>
             <div class="form_icons">
                 <div class="form-group">
                     <label for="name" class="control-label">姓名：</label>
                     <input type="text" class="form_input" id="name" name="name" placeholder="輸入姓名" required
                            minlength="2" maxlength="20">
-<!--                           oninvalid="setCustomValidity('請輸入姓名，長度限制最少2字數，最多20字數內')">-->
+                    <!--                           oninvalid="setCustomValidity('請輸入姓名，長度限制最少2字數，最多20字數內')">-->
                 </div>
                 <div class="form-group">
                     <label for="tel" class="control-label">電話：</label>
                     <input type="text" class="form_input" id="tel" name="tel" placeholder="輸入手機號碼(格式:09xxxxxxxx)" required>
-<!--                           maxlength="10" pattern="[09]{2}[0-9]{8}"-->
-<!--                           oninvalid="setCustomValidity('請輸入正確的手機號瑪格式:09xxxxxxxx')">-->
+                    <!--                           maxlength="10" pattern="[09]{2}[0-9]{8}"-->
+                    <!--                           oninvalid="setCustomValidity('請輸入正確的手機號瑪格式:09xxxxxxxx')">-->
                 </div>
                 <div class="form-group">
                     <label for="addr" class="control-label">地址：</label>
                     <input type="text" class="form_input" id="addr" name="addr" placeholder="輸入地址" required>
-<!--                           minlength="6" maxlength="200"-->
-<!--                           oninvalid="setCustomValidity('請輸入地址，長度限制100字以內')">-->
+                    <!--                           minlength="6" maxlength="200"-->
+                    <!--                           oninvalid="setCustomValidity('請輸入地址，長度限制100字以內')">-->
                 </div>
                 <div class="form-group">
                     <label for="email" class="control-label">信箱：</label>
                     <input type="email" class="form_input" id="email" name="email" placeholder="輸入電子郵件地址" required>
-<!--                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"-->
-<!--                           oninvalid="setCustomValidity('請輸入正確電子郵件格式')">-->
+                    <!--                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"-->
+                    <!--                           oninvalid="setCustomValidity('請輸入正確電子郵件格式')">-->
                 </div>
                 <div class="form-group">
                     <label for="username" class="control-label">帳號：</label>
                     <input type="text" class="form_input" id="username" name="username" placeholder="輸入帳號(最少7位數)" required>
-<!--                           minlength="7" maxlength="20"-->
-<!--                           oninvalid="setCustomValidity('請輸入帳號，長度限制20字以內')">-->
+                    <!--                           minlength="7" maxlength="20"-->
+                    <!--                           oninvalid="setCustomValidity('請輸入帳號，長度限制20字以內')">-->
                 </div>
                 <div class="form-group">
                     <label for="password" class="control-label">密碼：</label>
                     <input type="password" class="form_input" id="password" name="password" placeholder="輸入密碼(需含英數至少六個字元)" required>
-<!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
-<!--                           oninvalid="setCustomValidity('請輸入正確的密碼格式:含英數至少六個字元')" >-->
+                    <!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
+                    <!--                           oninvalid="setCustomValidity('請輸入正確的密碼格式:含英數至少六個字元')" >-->
                 </div>
 
                 <div class="form-group">
                     <label for="password" class="control-label">密碼確認：</label>
                     <input type="password" class="form_input" id="password_confirm" name="password" placeholder="輸入確認密碼" required
-                    value="">
-<!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
-<!--                           onchange="iinf(document.getElementById('password').value != document.getElementById('password_confirm').value){setCustomValidity('密碼不吻合')}">-->
+                           value="">
+                    <!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
+                    <!--                           onchange="iinf(document.getElementById('password').value != document.getElementById('password_confirm').value){setCustomValidity('密碼不吻合')}">-->
                 </div>
             </div>
-            <input  type="submit" class="register_form_submit" id="signrule" value="SIGN UP"></input>
+            <input type="submit" class="register_form_submit" id="signrule" value="SIGN UP"></input>
         </form>
     </div>
 
@@ -133,43 +133,43 @@
 
 <script>
     function formRegisterSubmit() {
-            var x = true
-            $('#b-form input').each(function (){
-                if($(this).val() === ""){
-                    x = false
-                }
-            })
-            if (!x){
-                alert("有東西還沒填")
-            }
-            else if ( $('#password_confirm').val()!==$('#password').val()){
+        var x = true
+        $('#b-form input').each(function (){
+            if($(this).val() === ""){
                 x = false
-                alert("密碼不相符，請再次確認")
             }
-            if(x){
-                $.ajax({
-                    type: 'post',
-                    url: '/users/register',
-                    data: JSON.stringify({
-                        username:$('#username').val(),
-                        password:$('#password').val(),
-                        name:$('#name').val(),
-                        tel:$('#tel').val(),
-                        addr:$('#addr').val(),
-                        email:$('#email').val()
-                    }),
-                    contentType : 'application/json',
-                    success: function(data) {
-                        console.log(data)
-                        alert("您已註冊成功，請登入!");
-                        location.href = "/index.html"
-                    },
-                    error:function(data){
-                        console.log(data)
-                        alert("該帳號已被註冊！")
-                    }
-                });
-            }
+        })
+        if (!x){
+            alert("有東西還沒填")
+        }
+        else if ( $('#password_confirm').val()!==$('#password').val()){
+            x = false
+            alert("密碼不相符，請再次確認")
+        }
+        if(x){
+            $.ajax({
+                type: 'post',
+                url: '/users/register',
+                data: JSON.stringify({
+                    username:$('#username').val(),
+                    password:$('#password').val(),
+                    name:$('#name').val(),
+                    tel:$('#tel').val(),
+                    addr:$('#addr').val(),
+                    email:$('#email').val()
+                }),
+                contentType : 'application/json',
+                success: function(data) {
+                    console.log(data)
+                    alert("您已註冊成功，請登入!");
+                    location.href = "/index.html"
+                },
+                error:function(data){
+                    console.log(data)
+                    alert("該帳號已被註冊！")
+                }
+            });
+        }
         return false
     }
 </script>
