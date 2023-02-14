@@ -28,6 +28,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 //        QueryWrapper<Users_old> wrapper = new QueryWrapper<>(); //硅谷老師教法
 //        wrapper.eq("username", username);
 //        Users_old users = usersMapper.selectOne(wrapper);
+        System.out.println("loadUserByUsername()被呼叫了");
         String queryUsername  = userDao.getUserByUsername(username).getUsername();
         String queryPassword  = userDao.getUserByUsername(username).getPassword();
         String queryAuthority = userDao.getUserByUsername(username).getAuth();

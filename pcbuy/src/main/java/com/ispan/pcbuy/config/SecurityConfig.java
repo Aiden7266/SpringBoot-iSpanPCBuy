@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //自定義自己編寫的登入頁面
         http.formLogin()
                 .loginPage("/login_register.html") //登入頁面設置
-                .loginProcessingUrl("/login") //登入時訪問的URL
+//                .loginPage("/login.html") //登入頁面設置
+                .loginProcessingUrl("/users/login") //登入時訪問的URL 要和form表單的action相同
                 .defaultSuccessUrl("/index.html",true) //登入後跳轉路徑
                 .failureUrl("/login-error").permitAll();
         //退出
@@ -55,14 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //設定訪問權限
         http.authorizeRequests()
-                    .antMatchers("/assets/**","index_assets/**","/index.html","contact_us.html","intro.html","login_register.html","rank.html","unauth.html","/").permitAll() //設置哪些路徑可以直接訪問，不需要認證
+                .antMatchers("/users/login","/users/register","/assets/**","index_assets/**","/index.html","contact_us.html","intro.html","login_register.html","rank.html","unauth.html","/","login.html","register.html").permitAll() //設置哪些路徑可以直接訪問，不需要認證
 //                    1.antMatchers("/loginSuccess").hasAuthority("role") //只賦予單個權限可以訪問
 //                    2.antMatchers("/loginSuccess").hasAnyAuthority("role","manger") //賦予多個權限可以訪問
 //                    3.antMatchers("/loginSuccess").hasRole("sale")
-                    .antMatchers("/admin/**").hasAnyRole("admin")
-                    .antMatchers("/member/**").hasAnyRole("member","admin")
-                    .anyRequest().authenticated()
-                    .and().rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
+                .antMatchers("/admin/**").hasAnyRole("admin")
+                .antMatchers("/member/**").hasAnyRole("member","admin")
+                .anyRequest().authenticated()
+                .and().rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
                 .tokenValiditySeconds(600) //設置記住我的有效時長(秒)
                 .userDetailsService(userDetailsService)
                 .and().csrf().disable(); //關閉csrf防護

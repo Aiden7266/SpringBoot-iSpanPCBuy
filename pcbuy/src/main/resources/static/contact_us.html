@@ -91,7 +91,7 @@
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                                <li><a href="index.html"> 產品購買 </a></li>
+                                <li><a href="index.html#jump"> 產品購買 </a></li>
                                 <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
                                 <li><a href="rank.html"> 天梯效能排行 </a></li>
                                 <li><a href="contact_us.html" style="color: #ff589e"> 聯絡我們 </a></li>
@@ -148,25 +148,26 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                         <fieldset>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="完整姓名"
-                                                   required="">
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="完整姓名" required
+                                                   oninvalid="setCustomValidity('請輸入名字');" onchange="setCustomValidity('');">
                                         </fieldset>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                         <fieldset>
-                                            <input name="email" type="email" class="form-control" id="email"
-                                                   placeholder="E-Mail 地址" required="">
+                                            <input name="email" type="email" class="form-control" id="email"placeholder="E-Mail 地址" required
+                                                   oninvalid="setCustomValidity('請輸入email');" onchange="setCustomValidity('');">
                                         </fieldset>
                                     </div>
                                     <div class="col-lg-12">
                                         <fieldset>
-                                                <textarea name="message" rows="6" class="form-control" id="message"
-                                                          placeholder="您的留言" required=""></textarea>
+                                            <textarea name="message" rows="6" class="form-control" id="message" placeholder="您的留言" required
+                                                      oninvalid="setCustomValidity('請輸入想詢問的內容');" onchange="setCustomValidity('');"></textarea>
                                         </fieldset>
                                     </div>
                                     <div class="col-lg-12">
                                         <fieldset>
-                                            <button type="submit" id="form-submit" class="main-button">發送訊息</button>
+                                            <input type="submit" id="form-submit" class="footer__link" value="發送訊息">
+                                            <a id="mailTo"></a>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -214,5 +215,45 @@
         <!-- Global Init -->
         <script src="../index_assets/js/custom.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+
+ <script>
+     var initBody='';
+     function chk(){
+         if(document.form.name.value==''){
+           alert('名字未填');
+           document.form.name.focus();
+           return false;
+         }else if(document.form.email.value==''){
+           alert('信箱未填');
+           document.form.email.focus();
+           return false;
+         }else if(document.form.message.value==''){
+           alert('訊息未填');
+           document.form.message.focus();
+           return false;
+         }
+         return true;
+         var to="lisayes396@gmail.com";
+         var name= nameText.value;
+         var email= emailText.value;
+         var message = messageText.value;
+
+         body =  "我們是PCBUY電腦商城 您好!" + '%0A';
+         body += "----------------------------------------------" + '%0A';
+         body += "今日想詢問或是反映的內容是: " + '%0A%0A%0A';
+         body += "" + message + '%0A%0A%0A';
+         body += "From:   " + name + '%0A';
+         body += "Email:  " + email;
+
+         mailTo.href="mailto:" + to + "?subject=" + "有關PCBUY電腦商城的顧客相關問題" + "&body=" + body;
+         mailTo.click();
+     }
+
+         function init(){
+             messageText.value= initBody;
+             toText.value = initTo;
+         }
+
+ </script>
     </body>
 </html>
