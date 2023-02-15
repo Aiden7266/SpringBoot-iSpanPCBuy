@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII) {
-
+        System.out.println("我是Service.getCategoryByFilter()" + category + " " + filterI);
         if (category.name().equals("MB")) {
             if(filterI != null) {
                 return productDao.getMbByFilter(category, filterI);
@@ -52,9 +52,8 @@ public class ProductServiceImpl implements ProductService {
                 return productDao.getDramByFilter(category, "DDR5");
             }else if (filterI == null) {
                 return productDao.getProductsFromCategory(category.name());
-            }
-            else {
-                return null;
+            }else {
+                return productDao.getDramByFilter(category, "DDR4");
             }
             /*
         }else if (category.name().equals("POWER")){

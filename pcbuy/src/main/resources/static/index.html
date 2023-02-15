@@ -136,7 +136,8 @@
 <br><br><br><br><br>
 <!-- ***** Features Small Start ***** -->
 <div class="container shop" id="purchase" style="font-family:sans-serif;" >
-    <div class="card shadow-sm text-center p-2 " style="border-radius: 20px">
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center; ">
             <div class="col-3">
                 <img id="cpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
@@ -175,7 +176,7 @@
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
             <div class="col-2" style="text-align:right;margin-right: auto">
                 <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                <a id="mbPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
             </div>
         </div>
     </div>
@@ -183,48 +184,43 @@
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="col-3">
-                <img class="imgbig" src="" alt="記憶體照片" width="130" height="130" style="">
+                <img id="dramImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" width="130" height="130" style="">
             </div>
             <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="h5 my-2">
                     <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
                 </div>
                 <br>
-                <select>
-                    <option value="test1">test1</option>
-                    <option value="test2">test2</option>
-                    <option value="test3">test3</option>
+                <select id = "DRAM" onchange="onSelectDRAM()">
+                    <option selected="selected" disabled="disabled" id="disabledDRAM" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" value="" socket="" price="" watt="">請選擇一項記憶體</option>
                 </select>
             </div>
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
             <div class="col-2" style="text-align:right;margin-right: auto">
                 <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                <a id="dramPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
             </div>
         </div>
     </div>
 
-
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="col-3">
-                <img class="imgbig" src="./assets/images/product_picture/gputest.png" alt="顯示卡照片" width="130" height="130">
+                <img  id="gpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" width="130" height="130">
             </div>
             <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="h5 my-2">
                     <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
                 </div>
                 <br>
-                <select>
-                    <option value="test1">test1</option>
-                    <option value="test2">test2</option>
-                    <option value="test3">test3</option>
+                <select id = "GPU" onchange="onSelectGPU()">
+                    <option selected="selected" disabled="disabled" id="disabledGPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" value="" series="" price="" watt="">請選擇一項顯示卡</option>
                 </select>
             </div>
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
             <div class="col-2" style="text-align:right;margin-right: auto">
                 <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                <a id="gpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
             </div>
         </div>
     </div>
@@ -406,6 +402,7 @@
     $(document).ready(function () {
         //第一層選單
         showItemCPU()
+        showItemGPU()
     })
 </script>
 
@@ -441,8 +438,94 @@
         console.log("cpuPrice=" + cpuPriceSelected)
         $('#cpuImage').attr('src',cpuImageUrlSelected);
         $('#cpuPrice').text("NT$"+cpuPriceSelected)
-        calculator()
+
+        $('#MB').empty().append("<option value = '' series = '' disabled='disabled' selected='selected'>請選擇一項主機板</option>")
+        mbWatt=0; mbPrice=0; $('#mbImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg")
+        $('#mbPrice').text("NT$")
+
+        $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
+        dramWatt=0; dramPrice=0; $('#dramImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
+        $('#dramPrice').text("NT$")
+
         showItemMB(cpuSocketSelected)
+        calculator()
+    }
+
+    function onSelectMB() {
+        var mbIdSelected       = $('#MB').find(':selected').val()
+        var mbNameSelected     = $('#MB').find(':selected').text()
+        var mbSeriesSelected   = $('#MB').find(':selected').attr('series')
+        var mbImageUrlSelected = $('#MB').find(':selected').attr('imageUrl');
+        var mbWattSelected     = $('#MB').find(':selected').attr('watt');
+        var mbPriceSelected    = $('#MB').find(':selected').attr('price');
+        mbWatt  = mbWattSelected
+        mbPrice = mbPriceSelected
+        console.log("mbId=" + mbIdSelected)
+        console.log("mbName=" + mbNameSelected)
+        console.log("mbSeries=" + mbSeriesSelected)
+        console.log("mbImageUrl=" + mbImageUrlSelected)
+        console.log("mbWatt=" + mbWattSelected)
+        console.log("mbPrice=" + mbPriceSelected)
+        $('#mbImage').attr('src',mbImageUrlSelected);
+        $('#mbPrice').text("NT$"+mbPriceSelected)
+
+        // $('#MB').empty().append("<option value = '' series = ''>請選擇一項主機板</option>")
+        $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
+        dramWatt=0; dramPrice=0; $('#dramImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
+        $('#dramPrice').text("NT$")
+        showItemDRAM(mbSeriesSelected)
+
+        calculator()
+    }
+
+    function onSelectDRAM() {
+        var dramIdSelected       = $('#DRAM').find(':selected').val()
+        var dramNameSelected     = $('#DRAM').find(':selected').text()
+        var dramSocketSelected   = $('#DRAM').find(':selected').attr('socket')
+        var dramImageUrlSelected = $('#DRAM').find(':selected').attr('imageUrl');
+        var dramWattSelected     = $('#DRAM').find(':selected').attr('watt');
+        var dramPriceSelected    = $('#DRAM').find(':selected').attr('price');
+        dramWatt  = dramWattSelected
+        dramPrice = dramPriceSelected
+        console.log("dramId=" + dramIdSelected)
+        console.log("dramName=" + dramNameSelected)
+        console.log("dramSocket=" + dramSocketSelected)
+        console.log("dramImageUrl=" + dramImageUrlSelected)
+        console.log("dramWatt=" + dramWattSelected)
+        console.log("dramPrice=" + dramPriceSelected)
+        $('#dramImage').attr('src',dramImageUrlSelected);
+        $('#dramPrice').text("NT$"+dramPriceSelected)
+
+        // $('#MB').empty().append("<option value = '' series = ''>請選擇一項主機板</option>")
+        // $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
+        // mbWatt=0; mbPrice=0; $('#mbImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
+        // $('#dramPrice').text("NT$")
+        // showItemDRAM(mbSeriesSelected)
+
+        calculator()
+    }
+
+    function onSelectGPU() {
+        var gpuIdSelected       = $('#GPU').find(':selected').val()
+        var gpuNameSelected     = $('#GPU').find(':selected').text()
+        var gpuSeriesSelected   = $('#GPU').find(':selected').attr('series')
+        var gpuLengthSelected   = $('#GPU').find(':selected').attr('gpuLength')
+        var gpuImageUrlSelected = $('#GPU').find(':selected').attr('imageUrl');
+        var gpuWattSelected     = $('#GPU').find(':selected').attr('watt');
+        var gpuPriceSelected    = $('#GPU').find(':selected').attr('price');
+        gpuWatt  = gpuWattSelected
+        gpuPrice = gpuPriceSelected
+        console.log("gpuId=" + gpuIdSelected)
+        console.log("gpuName=" + gpuNameSelected)
+        console.log("gpuSeries=" + gpuSeriesSelected)
+        console.log("gpuLength=" + gpuLengthSelected)
+        console.log("gpuImageUrl=" + gpuImageUrlSelected)
+        console.log("gpuWatt=" + gpuWattSelected)
+        console.log("gpurice=" + gpuPriceSelected)
+        $('#gpuImage').attr('src',gpuImageUrlSelected);
+        $('#gpuPrice').text("NT$"+gpuPriceSelected)
+
+        calculator()
     }
 
     function showItemCPU(){
@@ -451,12 +534,14 @@
             type: "get",
             dataType: "json",
             success: function (data) {
+                console.log(data)
                 $.each(data, function (key, value) {
                     // $('#cpuName').append('<option value="' + key + '">' + data[].productName + '</option>')
                     // $('#CPU').append('<option value=" '+data[key].productId+' "socket=' +data[key].socket+ '>' + data[key].productName + '</option>')
+                    $('#CPU').append('<option value="'+ data[key].productId+ '"socket="'  +data[key].socket+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')                    })
+                // 備用格式$('#CPU').append('<option value=" '+ data[key].productId+ ' "socket=" '  +data[key].socket+ ' " imageUrl=" ' +data[key].imageUrl+  ' "watt=" '+data[key].watt+ ' " price='+data[key].price + '>' + data[key].productName+ '</option>')                    })
 
-                    $('#CPU').append('<option value=" '+ data[key].productId + ' "socket= " '  +data[key].socket + ' " imageUrl= " ' +data[key].imageUrl+  ' "watt= " '+data[key].watt + ' " price='+data[key].price + '>' + data[key].productName + '</option>')                    })
-            },
+    },
             error: function (data) {
                 alert("fail");
             }
@@ -472,7 +557,43 @@
             success: function (data) {
                 console.log(data)
                 $.each(data, function (key, value) {
-                    $('#MB').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+                    $('#MB').append('<option value=" '+ data[key].productId+' "series="'  +data[key].series+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')
+                })
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        })
+    }
+
+    function showItemDRAM(mbSeries){
+        $.ajax({
+            url: 'http://localhost:8080/products/DRAM/Filter',
+            type: "get",
+            data:{"filterI":mbSeries},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    $('#DRAM').append('<option value=" '+ data[key].productId+ ' "socket=" '  +data[key].socket+ ' " imageUrl=" ' +data[key].imageUrl+  ' "watt=" '+data[key].watt+ ' " price='+data[key].price + '>' + data[key].productName+ '</option>')
+                })
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        })
+    }
+
+    function showItemGPU(){
+        $.ajax({
+            url: 'http://localhost:8080/products/GPU/Filter',
+            type: "get",
+            data:{},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    $('#GPU').append('<option value="'+ data[key].productId+'"gpuLength="'  +data[key].gpuLength+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')
                 })
             },
             error: function (data) {

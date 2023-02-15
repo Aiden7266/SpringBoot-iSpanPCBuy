@@ -78,6 +78,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override //藉由CPU腳位篩選並列出符合的主機板
     public List<Product> getMbByFilter(ProductCategory category, String filterI) {
+        System.out.println("我是Dao.getMbByFilter" + category + " " + filterI);
         String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ";
         Map<String, Object> map = new HashMap<>();
         map.put("category", category.name());
