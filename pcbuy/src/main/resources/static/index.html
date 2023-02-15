@@ -226,7 +226,7 @@
     </div>
 
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
+        <div style="display: flex; flex-direction: row; align-items: center;"—>
             <div class="col-3">
                 <img id="storageImage" class="imgbig"  src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" width="130" height="130">
             </div>
@@ -250,23 +250,25 @@
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="col-3">
-                <img class="imgbig" src="" alt="散熱器照片" width="130" height="130" style="">
+                <img id="coolerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" width="130" height="130" style="">
             </div>
             <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="h5 my-2">
                     <span class="badge  font-weight-bold" style="font-size: 25px;color:black">散熱器</span>
                 </div>
                 <br>
-                <select>
-                    <option value="test1">test1</option>
-                    <option value="test2">test2</option>
-                    <option value="test3">test3</option>
+                <select id = "COOLER" onchange="onSelectCOOLER()">
+                    <option  selected="selected" disabled="disabled" id="disabledCOOLER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" value="" series="" price="" watt="">請選擇一項散熱器</option>
+                    <optgroup label="空冷式" id="coolers"></optgroup>
+                    <optgroup label="水冷式" id="coolers-Liquid"></optgroup>
+
+
                 </select>
             </div>
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
             <div class="col-2" style="text-align:right;margin-right: auto">
                 <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                <a id="coolerPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
             </div>
         </div>
     </div>
@@ -619,6 +621,24 @@
                 console.log(data)
                 $.each(data, function (key, value) {
                     $('#GPU').append('<option value="'+data[key].productId+'"gpuLength="'+data[key].gpuLength+'"imageUrl="'+data[key].imageUrl+'"watt="'+data[key].watt+'"price='+data[key].price+'>'+data[key].productName+'</option>')
+                })
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        })
+    }
+
+    function showItemSTORAGE(){
+        $.ajax({
+            url: 'http://localhost:8080/products/STORAGE/Filter',
+            type: "get",
+            data:{},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    $('#STORAGE').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"watt="'+data[key].watt+'"price='+data[key].price+'>'+data[key].productName+'</option>')
                 })
             },
             error: function (data) {
