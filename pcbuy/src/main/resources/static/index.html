@@ -664,6 +664,24 @@
             }
         })
     }
+
+    function showItemCOOLER(){
+        $.ajax({
+            url: 'http://localhost:8080/products/COOLER/Filter',
+            type: "get",
+            data:{},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    $('#STORAGE').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"watt="'+data[key].watt+'"price='+data[key].price+'>'+data[key].productName+'</option>')
+                })
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        })
+    }
 </script>
 </body>
 </html>

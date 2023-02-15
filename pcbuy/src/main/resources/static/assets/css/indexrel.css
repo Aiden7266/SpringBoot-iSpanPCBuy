@@ -120,11 +120,11 @@ option {
 
 
 .imgbig {
-    background-color: #8261ee;
     transition: transform 0.5s;
     width:130px;
     height:130px;
     border-radius: 200px;
+    background-color:mediumpurple;
 }
 
 

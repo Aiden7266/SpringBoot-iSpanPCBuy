@@ -59,7 +59,10 @@
         }
         th{
             background-color: #5c6264;
+
         }
+
+
     </style>
 </head>
 
@@ -83,6 +86,7 @@
                 <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i>  商品管理 </a></li>
                 <li><a href="admin_member.html"><i class="fa fa-user-md"></i>  會員管理 </a></li>
                 <li><a href="admin_order.html"><i class="fa fa-file-text"></i>  訂單管理 </a></li>
+                <li><a href="../index.html" style="position:fixed; bottom:0; left:0;"><i class="fa fa-backward"></i>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
@@ -101,10 +105,11 @@
                     <li><a href="admin_index.html"><i class="fa fa-home"></i> 首頁</a></li>
                     <li class="active">會員管理</li>
                 </ol>
+
                 <div class="col-lg-12">
 
-                    <label for="searchTerm">搜索：</label> <input id="searchTerm" placeholder="輸入帳號" type="text">
-                    <button onclick="search()">查詢</button>
+                    <label for="searchTerm">搜索：</label> <input id="searchTerm" placeholder="輸入帳號" type="text"> <button
+                        onclick="search()">查詢</button>
                     <div id="dateresult"></div>
                     <div id="background-pop">
                         <div id="div-pop">
@@ -173,14 +178,12 @@
             username: "test333",
             password: "ttest123",
         },
-
-
+    ];
 
     function search() {
         let searchTerm = document.getElementById("searchTerm").value.toLowerCase();
         let dateresult = document.getElementById("dateresult");
         dateresult.innerHTML = "";
-
         //增表
         let table = document.createElement("table");
         table.innerHTML =
