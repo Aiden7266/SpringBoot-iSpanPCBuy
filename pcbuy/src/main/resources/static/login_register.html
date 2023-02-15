@@ -34,46 +34,44 @@
                 <div class="form-group">
                     <label for="name" class="control-label">姓名：</label>
                     <input type="text" class="form_input" id="name" name="name" placeholder="輸入姓名" required
-                           minlength="2" maxlength="20">
-                    <!--                           oninvalid="setCustomValidity('請輸入姓名，長度限制最少2字數，最多20字數內')">-->
+                           minlength="2" maxlength="20"
+                           oninvalid="setCustomValidity('請輸入姓名，長度限制最少2字數，最多20字數內')">
                 </div>
                 <div class="form-group">
                     <label for="tel" class="control-label">電話：</label>
-                    <input type="text" class="form_input" id="tel" name="tel" placeholder="輸入手機號碼(格式:09xxxxxxxx)" required>
-                    <!--                           maxlength="10" pattern="[09]{2}[0-9]{8}"-->
-                    <!--                           oninvalid="setCustomValidity('請輸入正確的手機號瑪格式:09xxxxxxxx')">-->
+                    <input type="text" class="form_input" id="tel" name="tel" placeholder="輸入手機號碼(格式:09xxxxxxxx)" required
+                           maxlength="10" pattern="[09]{2}[0-9]{8}"
+                           oninvalid="setCustomValidity('請輸入正確的手機號瑪格式:09xxxxxxxx')">
                 </div>
                 <div class="form-group">
                     <label for="addr" class="control-label">地址：</label>
-                    <input type="text" class="form_input" id="addr" name="addr" placeholder="輸入地址" required>
-                    <!--                           minlength="6" maxlength="200"-->
-                    <!--                           oninvalid="setCustomValidity('請輸入地址，長度限制100字以內')">-->
+                    <input type="text" class="form_input" id="addr" name="addr" placeholder="輸入地址" required
+                           minlength="6" maxlength="200"
+                           oninvalid="setCustomValidity('請輸入地址，長度限制100字以內');onchange()">
                 </div>
                 <div class="form-group">
                     <label for="email" class="control-label">信箱：</label>
-                    <input type="email" class="form_input" id="email" name="email" placeholder="輸入電子郵件地址" required>
-                    <!--                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"-->
-                    <!--                           oninvalid="setCustomValidity('請輸入正確電子郵件格式')">-->
+                    <input type="email" class="form_input" id="email" name="email" placeholder="輸入電子郵件地址" required
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           oninvalid="setCustomValidity('請輸入正確電子郵件格式')">
                 </div>
                 <div class="form-group">
                     <label for="username" class="control-label">帳號：</label>
-                    <input type="text" class="form_input" id="username" name="username" placeholder="輸入帳號(最少7位數)" required>
-                    <!--                           minlength="7" maxlength="20"-->
-                    <!--                           oninvalid="setCustomValidity('請輸入帳號，長度限制20字以內')">-->
+                    <input type="text" class="form_input" id="username" name="username" placeholder="輸入帳號(最少7位數)" required
+                           minlength="7" maxlength="20"
+                           oninvalid="setCustomValidity('請輸入帳號，長度限制最少7字，最多20字以內')">
                 </div>
                 <div class="form-group">
                     <label for="password" class="control-label">密碼：</label>
-                    <input type="password" class="form_input" id="password" name="password" placeholder="輸入密碼(需含英數至少六個字元)" required>
-                    <!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
-                    <!--                           oninvalid="setCustomValidity('請輸入正確的密碼格式:含英數至少六個字元')" >-->
+                    <input type="password" class="form_input" id="password" name="password" placeholder="輸入密碼(需含英數至少六個字元)" required
+                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"
+                           oninvalid="setCustomValidity('請輸入正確的密碼格式:含英數至少六個字元，注意不得有特殊字元')" >
                 </div>
 
                 <div class="form-group">
                     <label for="password" class="control-label">密碼確認：</label>
                     <input type="password" class="form_input" id="password_confirm" name="password" placeholder="輸入確認密碼" required
-                           value="">
-                    <!--                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$"-->
-                    <!--                           onchange="iinf(document.getElementById('password').value != document.getElementById('password_confirm').value){setCustomValidity('密碼不吻合')}">-->
+                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$">
                 </div>
             </div>
             <input type="submit" class="register_form_submit" id="signrule" value="SIGN UP"></input>

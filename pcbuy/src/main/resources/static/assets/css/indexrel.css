@@ -1,12 +1,11 @@
 select {
     color: #333;
     background-color: #f9f9f9;
-    width: 500px;
+    width: 400px;
     margin-top: -25px;
     height: 35px;
     border-radius: 30px;
     text-align:-webkit-center;
-
 }
 
 option {
@@ -55,7 +54,7 @@ option {
 
 .shopbtn {
     height: 2.8em;
-    width: 8em;
+    width: 7em;
     background: transparent;
     -webkit-animation: jello-horizontal 0.9s both;
     animation: jello-horizontal 0.9s both;
@@ -64,10 +63,20 @@ option {
     color: #8261EE;
     font-size: 15px;
     border-radius: 20px;
+    font-weight:bold;
+    font-family:sans-serif;
 }
 
 .shopbtn:hover {
     background: #8261EE;
+    opacity: 0.8;
+    color: #ffffff;
+    animation: squeeze 0.9s both;
+}
+
+.shopbtn:focus{
+    background: #8261EE;
+    opacity: 0.8;
     color: #ffffff;
     animation: squeeze 0.9s both;
 }
@@ -111,11 +120,11 @@ option {
 
 
 .imgbig {
+    background-color: #8261ee;
     transition: transform 0.5s;
     width:130px;
     height:130px;
     border-radius: 200px;
-
 }
 
 

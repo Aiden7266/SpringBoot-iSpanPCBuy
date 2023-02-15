@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description">
@@ -14,394 +14,472 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
-  </head>
-    <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- 載入首頁時判斷有無使用者 -->
-    <script>
-        $(document).ready(function() {
-          $.ajax({
-              url: 'http://localhost:8080/users/userinfo',
-              type: "get",
-              dataType: "json",
-              success:function (data){
-                  if (data.username !== undefined){
-                      if((data.auth).includes("admin")){
-                          $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
-                      }else {
-                          $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
-                      }
-                      $('#logInOutDiv').text('登出').attr('href','/logout')
-                  }else if (data.username == undefined){
-                      $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                      $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                  }
-              },
-              error:function (){
-                  $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-              }
-          })
+<!-- 載入首頁時判斷有無使用者 -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/users/userinfo',
+            type: "get",
+            dataType: "json",
+            success:function (data){
+                if (data.username !== undefined){
+                    if((data.auth).includes("admin")){
+                        $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
+                    }else {
+                        $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
+                    }
+                    $('#logInOutDiv').text('登出').attr('href','/logout')
+                }else if (data.username == undefined){
+                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            },
+            error:function (){
+                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+            }
+        })
 
-            $('#logInOutDiv').click(function (){
-                $.ajax({
-                    url: 'http://localhost:8080/users/userinfo',
-                    type: "get",
-                    dataType: "json",
-                    success:function (data){
-                        if (data.username !== undefined){
-                            $.ajax({
-                                url: 'http://localhost:8080/users/logoutUser',
-                                type: "get",
-                                // dataType: "json",
-                                success:function (){
-                                    // alert("已清除使用者資訊")
-                                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                                },
-                                error:function (){
-                                    // alert("出錯！已清除使用者資訊")
-                                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                                }
-                            })
-                        }else if (data.username == undefined){
-                            $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                            $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                        }
-                    },
-                    error:function (){
+        $('#logInOutDiv').click(function (){
+            $.ajax({
+                url: 'http://localhost:8080/users/userinfo',
+                type: "get",
+                dataType: "json",
+                success:function (data){
+                    if (data.username !== undefined){
+                        $.ajax({
+                            url: 'http://localhost:8080/users/logoutUser',
+                            type: "get",
+                            // dataType: "json",
+                            success:function (){
+                                // alert("已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            },
+                            error:function (){
+                                // alert("出錯！已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            }
+                        })
+                    }else if (data.username == undefined){
+                        $('#memberDiv').text('會員中心').attr('href','/login_register.html')
                         $('#logInOutDiv').text('登入').attr('href','/login_register.html')
                     }
-                })
+                },
+                error:function (){
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
             })
         })
-    </script>
+    })
+</script>
 
-    <body>
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
+<body>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="#welcome" class="logo">
+                        <img src="/assets/images/logo.png" alt="Softy Pinko"/>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+
+                    <ul class="nav">
+                        <li><a href="#purchase"> 產品購買 </a></li>
+                        <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                        <li><a href="rank.html"> 天梯效能排行 </a></li>
+                        <li><a href="contact_us.html"> 聯絡我們 </a></li>
+                        <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()"> 會員中心 </a></li>
+                        <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>菜單欄</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area" id="welcome">
+    <!-- ***** Header Text Start ***** -->
+    <div class="header-text">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="#welcome" class="logo">
-                            <img src="/assets/images/logo.png" alt="Softy Pinko"/>
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-
-                        <ul class="nav">
-                            <li><a href="#purchase"> 產品購買 </a></li>
-                            <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
-                            <li><a href="rank.html"> 天梯效能排行 </a></li>
-                            <li><a href="contact_us.html"> 聯絡我們 </a></li>
-                            <li><a href="login_register.html" id="memberDiv" onclick="clearUserInfo()"> 會員中心 </a></li>
-                            <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>菜單欄</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-
-    <!-- ***** Welcome Area Start ***** -->
-    <div class="welcome-area" id="welcome">
-        <!-- ***** Header Text Start ***** -->
-        <div class="header-text">
-            <div class="container">
-                <div class="row">
-                    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
-                        <br><br><br>
-                        <h1>
-                            <strong></strong> <br>
-                        </h1>
-                        <p></p>
-                        <a href="#purchase" class="main-button-slider">開始選購</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Header Text End ***** -->
-    </div>
-    <!-- ***** Welcome Area End ***** -->
-
-    <br><br>
-    <!-- ***** Features Small Start ***** -->
-    <div class="container shop" id="purchase">
-        <div class="card shadow-sm text-center p-2 ">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="./assets/images/product_picture/cputest.jpg"  width="130" height="130">
-                </div>
-                <div class="col-5" style= "display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">處理器</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style= "text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="" alt="主機板照片" width="130" height="130">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">主機板</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="" alt="記憶體照片" width="130" height="130" style="">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="./assets/images/product_picture/gputest.png" alt="顯示卡照片" width="130" height="130">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig"  src="" alt="儲存碟照片" width="130" height="130">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">儲存碟</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="" alt="散熱器照片" width="130" height="130" style="">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">散熱器</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="" alt="電源供應器照片" width="130" height="130" style="">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">電源供應器</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card shadow-sm text-center p-2">
-            <div style="display: flex; flex-direction: row; align-items: center;">
-                <div class="col-3">
-                    <img class="imgbig" src="" alt="機殼照片" width="130" height="130" style="">
-                </div>
-                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="h5 my-2">
-                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">機殼</span>
-                    </div>
-                    <br>
-                    <select>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
-                    </select>
-                </div>
-                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-                <div class="col-2" style="text-align:right;margin-right: auto">
-                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                    <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="itemcount">
-            <div class="inner">
-                <div class="d-flex">
-                    <div class="bordtest " style="display: flex;">
-                        <div class="anyitem " style="font-size: 20px;"> 耗電量 </div>
-                        <a class="font-weight-bold text-warning text-decoration-none "
-                           style="font-size: 25px;margin-left:30px "> 1000w </a>
-                    </div>
-                    <div class="bordtest " style="display: flex;">
-                        <div class="anyitem" style="font-size: 20px;">總價錢</div>
-                        <a class="font-weight-bold text-danger text-decoration-none "
-                           style="font-size: 25px;margin-left:30px;">1000w</a>
-                    </div>
-                    <div class="bordtest" style="margin-left: auto;">
-<!--                        <button type="submit" id="clear" class="main-button">清空重選</button>-->
-                    </div>
-                    <div class="bordtest" style=" margin-left: auto;">
-                        <button type="submit" id="form-submit" class="shopbtn">加進購物車</button>
-                    </div>
+                <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+                    <br><br><br>
+                    <h1>
+                        <strong></strong> <br>
+                    </h1>
+                    <p></p>
+                    <a href="#purchase" class="main-button-slider">開始選購</a>
                 </div>
             </div>
         </div>
     </div>
+    <!-- ***** Header Text End ***** -->
+</div>
+
+<!-- ***** Welcome Area End ***** -->
+<div id="jump"></div>
+<br><br><br><br><br>
+<!-- ***** Features Small Start ***** -->
+<div class="container shop" id="purchase" style="font-family:sans-serif;" >
+    <div class="card shadow-sm text-center p-2 " style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center; ">
+            <div class="col-3">
+                <img id="cpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
+            </div>
+            <div class="col-5" style= "display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">處理器</span>
+                </div>
+                <br>
+                <select id = "CPU" onchange="onSelectCPU()">
+                    <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項CPU</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style= "text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a id="cpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
+            </div>
+        </div>
     </div>
 
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-<!--                    <ul class="social">-->
-<!--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
-<!--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
-<!--                        <li><a href="#"><i class="fa fa-rss"></i></a></li>-->
-<!--                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>-->
-<!--                    </ul>-->
-                </div>
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img id="mbImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" width="130" height="130">
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="copyright">Copyright &copy;2023 PCBuy company</p>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">主機板</span>
+                </div>
+                <br>
+                <select id = "MB" onchange="onSelectMB()">
+                    <option selected="selected" disabled="disabled" id="disabledMB" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" value="" socket="" price="" watt="">請選擇一項主機板</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig" src="" alt="記憶體照片" width="130" height="130" style="">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig" src="./assets/images/product_picture/gputest.png" alt="顯示卡照片" width="130" height="130">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig"  src="" alt="儲存碟照片" width="130" height="130">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">儲存碟</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig" src="" alt="散熱器照片" width="130" height="130" style="">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">散熱器</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig" src="" alt="電源供應器照片" width="130" height="130" style="">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">電源供應器</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div class="col-3">
+                <img class="imgbig" src="" alt="機殼照片" width="130" height="130" style="">
+            </div>
+            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="h5 my-2">
+                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">機殼</span>
+                </div>
+                <br>
+                <select>
+                    <option value="test1">test1</option>
+                    <option value="test2">test2</option>
+                    <option value="test3">test3</option>
+                </select>
+            </div>
+            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+            <div class="col-2" style="text-align:right;margin-right: auto">
+                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="itemcount">
+        <div class="inner">
+            <div class="d-flex">
+                <div class="bordtest " style="display: flex;">
+                    <div class="anyitem " style="font-size: 20px;"> 耗電量 </div>
+                    <a id="totalWatt" class="font-weight-bold text-warning text-decoration-none "
+                       style="font-size: 25px;margin-left:30px ">0瓦</a>
+                </div>
+                <div class="bordtest " style="display: flex;">
+                    <div class="anyitem" style="font-size: 20px;">總價錢</div>
+                    <a id="totalPrice" class="font-weight-bold text-danger text-decoration-none "
+                       style="font-size: 25px;margin-left:30px;">0元</a>
+                </div>
+                <div class="bordtest" style="margin-left: auto;">
+                    <!--                        <button type="submit" id="clear" class="main-button">清空重選</button>-->
+                </div>
+                <div class="bordtest" style=" margin-left: auto;">
+                    <button type="submit" id="form-submit" class="shopbtn">加進購物車</button>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</div>
+</div>
 
-    <!-- jQuery -->
-    <script src="/assets/js/jquery-2.1.0.min.js"></script>
+<!-- ***** Footer Start ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <!--                    <ul class="social">-->
+                <!--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
+                <!--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
+                <!--                        <li><a href="#"><i class="fa fa-rss"></i></a></li>-->
+                <!--                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>-->
+                <!--                    </ul>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="copyright">Copyright &copy;2023 PCBuy company</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
-    <!-- Bootstrap -->
-    <script src="/assets/js/popper.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="/assets/js/jquery-2.1.0.min.js"></script>
 
-    <!-- Plugins -->
-    <script src="/assets/js/scrollreveal.min.js"></script>
-    <script src="/assets/js/waypoints.min.js"></script>
-    <script src="/assets/js/jquery.counterup.min.js"></script>
-    <script src="/assets/js/imgfix.min.js"></script>
+<!-- Bootstrap -->
+<script src="/assets/js/popper.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 
-    <!-- Global Init -->
-    <script src="/assets/js/custom.js"></script>
+<!-- Plugins -->
+<script src="/assets/js/scrollreveal.min.js"></script>
+<script src="/assets/js/waypoints.min.js"></script>
+<script src="/assets/js/jquery.counterup.min.js"></script>
+<script src="/assets/js/imgfix.min.js"></script>
+
+<!-- Global Init -->
+<script src="/assets/js/custom.js"></script>
 
 
-    <!-- 加 -->
-    <script type="text/javascript">
-        window.addEventListener('scroll', function () {
-            let top = window.scrollY;
-            if (top > 850) {
-                $('.itemcount').css('display', 'block');
-            } else {
-                $('.itemcount').css('display', 'none');
+<!-- 加 -->
+<script type="text/javascript">
+    window.addEventListener('scroll', function () {
+        let top = window.scrollY;
+        if (top > 320) {
+            $('.itemcount').css('display', 'block');
+        } else {
+            $('.itemcount').css('display', 'none');
+        }
+    });
+</script>
+<!--  畫面預設載入CPU的選單   -->
+<script>
+    jQuery.support.cors = true;
+    $(document).ready(function () {
+        //第一層選單
+        showItemCPU()
+    })
+</script>
+
+<!-- 首頁商品下拉選單的onChange方法在此-->
+<script>
+
+    var cpuPrice=0, mbPrice=0, dramPrice=0, gpuPrice=0, storagePrice=0, coolerPrice=0, powerPrice=0, casePrice=0
+    var cpuWatt=0, mbWatt=0, dramWatt=0, gpuWatt=0, storageWatt=0, powerWatt=0
+    var totalWatt=0, totalPrice=0
+
+    function calculator(){
+        // totalWatt  = cpuWatt + mbWatt + dramWatt + gpuWatt + storageWatt
+        totalWatt = parseInt(cpuWatt) + parseInt(mbWatt) + parseInt(dramWatt) + parseInt(gpuWatt) + parseInt(storageWatt)
+        totalPrice = parseInt(cpuPrice) + parseInt(mbPrice) + parseInt(dramPrice) + parseInt(gpuPrice) + parseInt(storagePrice) + parseInt(coolerPrice) + parseInt(powerPrice) + parseInt(casePrice)
+        $('#totalWatt').text(totalWatt + "瓦")
+        $('#totalPrice').text(totalPrice + "元")
+    }
+
+    function onSelectCPU() {
+        var cpuIdSelected       = $('#CPU').find(':selected').val()
+        var cpuNameSelected     = $('#CPU').find(':selected').text()
+        var cpuSocketSelected   = $('#CPU').find(':selected').attr('socket')
+        var cpuImageUrlSelected = $('#CPU').find(':selected').attr('imageUrl');
+        var cpuWattSelected     = $('#CPU').find(':selected').attr('watt');
+        var cpuPriceSelected    = $('#CPU').find(':selected').attr('price');
+        cpuWatt  = cpuWattSelected
+        cpuPrice = cpuPriceSelected
+        console.log("cpuId=" + cpuIdSelected)
+        console.log("cpuName=" + cpuNameSelected)
+        console.log("cpuSocket=" + cpuSocketSelected)
+        console.log("cpuImageUrl=" + cpuImageUrlSelected)
+        console.log("cpuWatt=" + cpuWattSelected)
+        console.log("cpuPrice=" + cpuPriceSelected)
+        $('#cpuImage').attr('src',cpuImageUrlSelected);
+        $('#cpuPrice').text("NT$"+cpuPriceSelected)
+        calculator()
+        showItemMB(cpuSocketSelected)
+    }
+
+    function showItemCPU(){
+        $.ajax({
+            url: 'http://localhost:8080/products/CPU/List',
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (key, value) {
+                    // $('#cpuName').append('<option value="' + key + '">' + data[].productName + '</option>')
+                    // $('#CPU').append('<option value=" '+data[key].productId+' "socket=' +data[key].socket+ '>' + data[key].productName + '</option>')
+
+                    $('#CPU').append('<option value=" '+ data[key].productId + ' "socket= " '  +data[key].socket + ' " imageUrl= " ' +data[key].imageUrl+  ' "watt= " '+data[key].watt + ' " price='+data[key].price + '>' + data[key].productName + '</option>')                    })
+            },
+            error: function (data) {
+                alert("fail");
             }
         });
-    </script>
-    </body>
+    }
+
+    function showItemMB(cpuSocket){
+        $.ajax({
+            url: 'http://localhost:8080/products/MB/Filter',
+            type: "get",
+            data:{"filterI":cpuSocket},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    $('#MB').append('<option value =" '+data[key].productId+' "series = ' + data[key].series + '>' + data[key].productName + '</option>')
+                })
+            },
+            error: function (data) {
+                alert("fail");
+            }
+        })
+    }
+</script>
+</body>
 </html>
