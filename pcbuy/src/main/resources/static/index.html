@@ -282,7 +282,7 @@
                 </div>
                 <br>
                 <select id = "POWER" onchange="onSelectPOWER()">
-                    <option  selected="selected" disabled="disabled" id="disabledPOWER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" value="" series="" price="" watt="">請選擇一項散熱器</option>
+                    <option  selected="selected" disabled="disabled" id="disabledPOWER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" value="" series="" price="" watt="">請選擇一項電源供應器</option>
                     <optgroup label="450瓦以上" id="power_450"></optgroup>
                     <optgroup label="650瓦以上" id="power_650"></optgroup>
                     <optgroup label="850瓦以上" id="power_850"></optgroup>
@@ -404,6 +404,7 @@
         showItemGPU()
         showItemSTORAGE()
         showItemCOOLER()
+        showItemPOWER()
     })
 </script>
 
@@ -417,6 +418,17 @@
     function calculator(){
         // totalWatt  = cpuWatt + mbWatt + dramWatt + gpuWatt + storageWatt
         totalWatt = parseInt(cpuWatt) + parseInt(mbWatt) + parseInt(dramWatt) + parseInt(gpuWatt) + parseInt(storageWatt)
+
+        if (totalWatt > powerWatt){
+            $('#POWER').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項電源供應器</option>")
+            $('#POWER').append("<optgroup label='450瓦以上' id='power_450'></optgroup>")
+            $('#POWER').append("<optgroup label='650瓦以上' id='power_650'></optgroup>")
+            $('#POWER').append("<optgroup label='850瓦以上' id='power_850'></optgroup>")
+            powerWatt=0; powerPrice=0; $('#powerImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg")
+            $('#powerPrice').text("NT$")
+            showItemPOWER(totalWatt)
+        }
+
         totalPrice = parseInt(cpuPrice) + parseInt(mbPrice) + parseInt(dramPrice) + parseInt(gpuPrice) + parseInt(storagePrice) + parseInt(coolerPrice) + parseInt(powerPrice) + parseInt(casePrice)
         $('#totalWatt').text(totalWatt + "瓦")
         $('#totalPrice').text(totalPrice + "元")
@@ -450,7 +462,6 @@
 
         showItemMB(cpuSocketSelected)
         calculator()
-        showItemPOWER(totalWatt)
     }
 
     function onSelectMB() {
@@ -572,6 +583,27 @@
         console.log("coolerPrice=" + coolerPriceSelected)
         $('#coolerImage').attr('src',coolerImageUrlSelected);
         $('#coolerPrice').text("NT$"+coolerPriceSelected)
+
+        calculator()
+    }
+
+    function onSelectPOWER() {
+        var powerIdSelected       = $('#POWER').find(':selected').val()
+        var powerNameSelected     = $('#POWER').find(':selected').text()
+        var powerSeriesSelected   = $('#POWER').find(':selected').attr('series')
+        var powerImageUrlSelected = $('#POWER').find(':selected').attr('imageUrl');
+        var powerWattSelected     = $('#POWER').find(':selected').attr('watt');
+        var powerPriceSelected    = $('#POWER').find(':selected').attr('price');
+        powerWatt  = powerWattSelected
+        powerPrice = powerPriceSelected
+        console.log("powerId=" + powerIdSelected)
+        console.log("powerName=" + powerNameSelected)
+        console.log("powerSeries=" + powerSeriesSelected)
+        console.log("powerImageUrl=" + powerImageUrlSelected)
+        console.log("powerWatt=" + powerWattSelected)
+        console.log("powerPrice=" + powerPriceSelected)
+        $('#powerImage').attr('src',powerImageUrlSelected);
+        $('#powerPrice').text("NT$"+powerPriceSelected)
 
         calculator()
     }
@@ -701,17 +733,17 @@
         $.ajax({
             url: 'http://localhost:8080/products/POWER/Filter',
             type: "get",
-            data:{filterI:totalWatt},
+            data:{"filterI":totalWatt},
             dataType: "json",
             success: function (data) {
                 console.log(data)
                 $.each(data, function (key, value) {
                     if(parseInt(data[key].watt) >= 450 && parseInt(data[key].watt) < 650){
-                        $('#power_450').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#power_450').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"watt="'+data[key].watt+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }else if (parseInt(data[key].watt) >= 650 && parseInt(data[key].watt) < 850){
-                        $('#power_650').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#power_650').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"watt="'+data[key].watt+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }else {
-                        $('#power_850').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#power_850').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"watt="'+data[key].watt+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }
                 })
             },

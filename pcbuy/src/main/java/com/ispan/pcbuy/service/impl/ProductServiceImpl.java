@@ -56,10 +56,13 @@ public class ProductServiceImpl implements ProductService {
                 return productDao.getDramByFilter(category, "DDR4");
             }
         }else if (category.name().equals("POWER")){
-            if(Integer.parseInt(filterI) > 0){
+            if (filterI == null) {
+                return productDao.getProductsFromCategory(category.name());
+            }else if(Integer.parseInt(filterI) > 0){
                 int totalWatt = Integer.parseInt(filterI);
                 return productDao.getPowerByFilter(category, totalWatt);
-            }else {
+            }
+            else {
                 return null;
             }
             /*
