@@ -299,23 +299,21 @@
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="col-3">
-                <img class="imgbig" src="" alt="機殼照片" width="130" height="130" style="">
+                <img id="caseImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" width="130" height="130" style="">
             </div>
             <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="h5 my-2">
                     <span class="badge  font-weight-bold" style="font-size: 25px;color:black">機殼</span>
                 </div>
                 <br>
-                <select>
-                    <option value="test1">test1</option>
-                    <option value="test2">test2</option>
-                    <option value="test3">test3</option>
+                <select id = "CASE" onchange="onSelectCASE()">
+                    <option  selected="selected" disabled="disabled" id="disabledCASE" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" value="" series="" price="" watt="">請選擇一項機殼</option>
                 </select>
             </div>
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
             <div class="col-2" style="text-align:right;margin-right: auto">
                 <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">$4,290</a>
+                <a id="casePrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
             </div>
         </div>
     </div>
@@ -414,6 +412,8 @@
     var cpuPrice=0, mbPrice=0, dramPrice=0, gpuPrice=0, storagePrice=0, coolerPrice=0, powerPrice=0, casePrice=0
     var cpuWatt=0, mbWatt=0, dramWatt=0, gpuWatt=0, storageWatt=0, powerWatt=0
     var totalWatt=0, totalPrice=0
+    var sizeForCase
+    var gpuLengthForCase=0, coolerLengthForCase=0, coolerHeightForCase=0
 
     function calculator(){
         // totalWatt  = cpuWatt + mbWatt + dramWatt + gpuWatt + storageWatt
@@ -474,6 +474,7 @@
         var mbPriceSelected    = $('#MB').find(':selected').attr('price');
         mbWatt  = mbWattSelected
         mbPrice = mbPriceSelected
+        sizeForCase = mbSizeSelected
         console.log("mbId=" + mbIdSelected)
         console.log("mbName=" + mbNameSelected)
         console.log("mbSeries=" + mbSeriesSelected)
@@ -484,11 +485,15 @@
         $('#mbImage').attr('src',mbImageUrlSelected);
         $('#mbPrice').text("NT$"+mbPriceSelected)
 
-        // $('#MB').empty().append("<option value = '' series = ''>請選擇一項主機板</option>")
-        $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
+        $('#DRAM').empty().append("<option value = '' socket='' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
         dramWatt=0; dramPrice=0; $('#dramImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
         $('#dramPrice').text("NT$")
         showItemDRAM(mbSeriesSelected)
+
+        $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
+        casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
+        $('#casePrice').text("NT$")
+        showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
     }
@@ -529,6 +534,7 @@
         var gpuPriceSelected    = $('#GPU').find(':selected').attr('price');
         gpuWatt  = gpuWattSelected
         gpuPrice = gpuPriceSelected
+        gpuLengthForCase = gpuLengthSelected
         console.log("gpuId=" + gpuIdSelected)
         console.log("gpuName=" + gpuNameSelected)
         console.log("gpuLength=" + gpuLengthSelected)
@@ -537,6 +543,11 @@
         console.log("gpuPrice=" + gpuPriceSelected)
         $('#gpuImage').attr('src',gpuImageUrlSelected);
         $('#gpuPrice').text("NT$"+gpuPriceSelected)
+
+        $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
+        casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
+        $('#casePrice').text("NT$")
+        showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
     }
@@ -573,6 +584,8 @@
         var coolerPriceSelected     = $('#COOLER').find(':selected').attr('price');
         coolerWatt  = coolerWattSelected
         coolerPrice = coolerPriceSelected
+        coolerLengthForCase = coolerLengthSelected
+        coolerHeightForCase = coolerHeightSelected
         console.log("coolerId=" + coolerIdSelected)
         console.log("coolerName=" + coolerNameSelected)
         console.log("coolerSeries=" + coolerSeriesSelected)
@@ -583,6 +596,11 @@
         console.log("coolerPrice=" + coolerPriceSelected)
         $('#coolerImage').attr('src',coolerImageUrlSelected);
         $('#coolerPrice').text("NT$"+coolerPriceSelected)
+
+        $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
+        casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
+        $('#casePrice').text("NT$")
+        showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
     }
@@ -604,6 +622,22 @@
         console.log("powerPrice=" + powerPriceSelected)
         $('#powerImage').attr('src',powerImageUrlSelected);
         $('#powerPrice').text("NT$"+powerPriceSelected)
+
+        calculator()
+    }
+
+    function onSelectCASE() {
+        var caseIdSelected       = $('#CASE').find(':selected').val()
+        var caseNameSelected     = $('#CASE').find(':selected').text()
+        var caseImageUrlSelected = $('#CASE').find(':selected').attr('imageUrl');
+        var casePriceSelected    = $('#CASE').find(':selected').attr('price');
+        casePrice = casePriceSelected
+        console.log("caseId=" + caseIdSelected)
+        console.log("caseName=" + caseNameSelected)
+        console.log("caseImageUrl=" + caseImageUrlSelected)
+        console.log("casePrice=" + casePriceSelected)
+        $('#caseImage').attr('src',caseImageUrlSelected);
+        $('#casePrice').text("NT$"+casePriceSelected)
 
         calculator()
     }
@@ -715,11 +749,11 @@
                 console.log(data)
                 $.each(data, function (key, value) {
                     if(data[key].series === "氣冷式"){
-                        $('#coolers').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#coolers').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeight="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }else if (data[key].series === "水冷式"){
-                        $('#coolers-Liquid').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#coolers-Liquid').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeight="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }else {
-                        $('#coolers').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeigth="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        $('#coolers').append('<option value="'+data[key].productId+'"series="'+data[key].series+'"imageUrl="'+data[key].imageUrl+'"size="'+data[key].size+'"coolerLength="'+data[key].coolerLength+'"coolerHeight="'+data[key].coolerHeight+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                     }
                 })
             },
@@ -749,6 +783,81 @@
             },
             error: function (data) {
                 alert("fail");
+            }
+        })
+    }
+
+    function showItemCASE(size, gpuLength, coolerLength, coolerHeight){
+        console.log("我是showItemCASE() 傳進的參數為" + size +" "+ gpuLength +" "+ coolerLength +" "+ coolerHeight )
+        $.ajax({
+            url: 'http://localhost:8080/products/CASE/List',
+            type: "get",
+            data:{},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                if(size === "E-ATX"){
+                    console.log("showItemCASE()的size=Ｅ-ATX 所以我進來了")
+                    $.each(data, function (key, value) {
+                        if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight){
+                            console.log("執行點1")
+                            $('#CASE').append('<option value="'+data[key].productId+'"imageUrl="'+data[key].imageUrl+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
+                        }
+                    })
+                }else if (size === "ATX"){
+                    console.log("showItemCASE()的size=ATX 所以我進來了")
+                    $.each(data, function (key, value) {
+                        if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點2")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點3")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        }
+                    })
+                }else if (size === "m-ATX"){
+                    $.each(data, function (key, value) {
+                        if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點4")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點5")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "m-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點6")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        }
+                    })
+                }else if (size === "mini-iTX"){
+                    $.each(data, function (key, value) {
+                        if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點7")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點8")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "m-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點9")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        } else if (data[key].size === "mini-iTX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點10")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        }
+                    })
+                }else if (size === undefined){
+                    console.log("林北沒定義size!")
+                    $.each(data, function (key, value) {
+                        if (parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
+                            console.log("執行點11")
+                            $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
+                        }
+                    })
+
+                }
+            },
+            error: function (data) {
+                console.log(data)
+                // alert("fail");
             }
         })
     }
