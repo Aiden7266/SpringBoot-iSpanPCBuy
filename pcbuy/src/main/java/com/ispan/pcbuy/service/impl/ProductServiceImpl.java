@@ -55,14 +55,14 @@ public class ProductServiceImpl implements ProductService {
             }else {
                 return productDao.getDramByFilter(category, "DDR4");
             }
-            /*
         }else if (category.name().equals("POWER")){
             if(Integer.parseInt(filterI) > 0){
-                int watt = Integer.parseInt(filterI);
-                return productDao.getCategoryByCalculate(category, watt);
+                int totalWatt = Integer.parseInt(filterI);
+                return productDao.getPowerByFilter(category, totalWatt);
             }else {
                 return null;
             }
+            /*
         }else if (category.name().equals("CASE")){
             //需要三個參數 1.顯卡長度 2.冷排長度 3.散熱器高度
             return null;

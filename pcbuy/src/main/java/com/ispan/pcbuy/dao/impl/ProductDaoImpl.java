@@ -97,6 +97,16 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
+    @Override //藉由目前總瓦數篩選並列出符合的電源供應器
+    public List<Product> getPowerByFilter(ProductCategory category, Integer totalWatt) {
+        String sql = "SELECT * FROM product WHERE category = :category AND watt >= :totalWatt ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", category.name());
+        map.put("totalWatt", totalWatt);
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+        return productList;
+    }
+
     @Override
     public Product getProductById(Integer productId) {
          String sql = "SELECT * FROM product WHERE product_id = :productId";
