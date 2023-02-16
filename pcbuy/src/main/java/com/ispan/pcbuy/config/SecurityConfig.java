@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //設定訪問權限
         http.authorizeRequests()
-                .antMatchers("/users/login","/users/register","/assets/**","index_assets/**","/index.html","/contact_us.html","/intro.html","/login_register.html","/rank.html","/unauth.html","/","/login.html","/products/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
+                .antMatchers("/users/userinfo","/users/login","/users/register","/assets/**","index_assets/**","/index.html","/contact_us.html","/intro.html","/login_register.html","/rank.html","/unauth.html","/","/login.html","/products/**").permitAll() //設置哪些路徑可以直接訪問，不需要認證
 //                    1.antMatchers("/loginSuccess").hasAuthority("role") //只賦予單個權限可以訪問
 //                    2.antMatchers("/loginSuccess").hasAnyAuthority("role","manger") //賦予多個權限可以訪問
 //                    3.antMatchers("/loginSuccess").hasRole("sale")

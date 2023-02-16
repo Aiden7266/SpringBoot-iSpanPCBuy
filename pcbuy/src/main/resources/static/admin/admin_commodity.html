@@ -421,6 +421,7 @@
                         productId : selectedId
                     },
                     success: function (data){
+                        console.log("delete->success")
                         checkModal.close()
                         CRUDreload($('#categorySelect').find(':selected').val())
                     }
@@ -952,6 +953,7 @@
     //增刪修結束後停留在當前頁面並且刷新
     function CRUDreload(category) {
         $('td').remove().load()
+        console.log("td清除完畢")
         $('#categorySelect').val(category)
         $('h1').text($('#categorySelect').find(':selected').text())
         $('#showproductname').text("商品管理 / " + $('#categorySelect').find(':selected').val())

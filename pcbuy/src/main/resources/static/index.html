@@ -21,60 +21,7 @@
 <!-- 載入首頁時判斷有無使用者 -->
 <script>
     $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/users/userinfo',
-            type: "get",
-            dataType: "json",
-            success:function (data){
-                if (data.username !== undefined){
-                    if((data.auth).includes("admin")){
-                        $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
-                    }else {
-                        $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
-                    }
-                    $('#logInOutDiv').text('登出').attr('href','/logout')
-                }else if (data.username == undefined){
-                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                }
-            },
-            error:function (){
-                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-            }
-        })
 
-        $('#logInOutDiv').click(function (){
-            $.ajax({
-                url: 'http://localhost:8080/users/userinfo',
-                type: "get",
-                dataType: "json",
-                success:function (data){
-                    if (data.username !== undefined){
-                        $.ajax({
-                            url: 'http://localhost:8080/users/logoutUser',
-                            type: "get",
-                            // dataType: "json",
-                            success:function (){
-                                // alert("已清除使用者資訊")
-                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                            },
-                            error:function (){
-                                // alert("出錯！已清除使用者資訊")
-                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                            }
-                        })
-                    }else if (data.username == undefined){
-                        $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                        $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                    }
-                },
-                error:function (){
-                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                }
-            })
-        })
     })
 </script>
 
@@ -397,6 +344,65 @@
 <script>
     jQuery.support.cors = true;
     $(document).ready(function () {
+
+        $.ajax({
+            url: 'http://localhost:8080/users/userinfo',
+            type: "get",
+            dataType: "json",
+            success:function (data){
+                console.log("載入使用者資訊")
+                if (data.username !== undefined){
+                    if((data.auth).includes("admin")){
+                        $('#memberDiv').text('會員中心').attr('href','/admin/admin_index.html')
+                    }else {
+                        $('#memberDiv').text('會員中心').attr('href','/member/member_index.html')
+                    }
+                    $('#logInOutDiv').text('登出').attr('href','/logout')
+                }else if (data.username == undefined){
+                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            },
+            error:function (){
+                console.log("載入使用者資訊 error")
+
+                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+            }
+        })
+
+        $('#logInOutDiv').click(function (){
+            $.ajax({
+                url: 'http://localhost:8080/users/userinfo',
+                type: "get",
+                dataType: "json",
+                success:function (data){
+                    if (data.username !== undefined){
+                        $.ajax({
+                            url: 'http://localhost:8080/users/logoutUser',
+                            type: "get",
+                            // dataType: "json",
+                            success:function (){
+                                // alert("已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            },
+                            error:function (){
+                                // alert("出錯！已清除使用者資訊")
+                                $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                            }
+                        })
+                    }else if (data.username == undefined){
+                        $('#memberDiv').text('會員中心').attr('href','/login_register.html')
+                        $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                    }
+                },
+                error:function (){
+                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
+                }
+            })
+        })
+
         //第一層選單
         showItemCPU()
         showItemGPU()

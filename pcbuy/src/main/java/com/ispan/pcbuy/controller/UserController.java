@@ -30,16 +30,16 @@ public class UserController {
 
     @GetMapping("/userinfo")
     public ResponseEntity<User> userinfo(){
-        System.out.println("userinfo被呼叫了");
+//        System.out.println("userinfo被呼叫了");
         String nowUsername = userDetailsService.getUsername();
         User user = userService.getUserByUsername(nowUsername);
-
+//        System.out.println("現在的user="+user);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping("/logoutUser")
     public void logout(){
-        System.out.println("清除使用者資料");
+//        System.out.println("清除使用者資料");
         userDetailsService.setUsername(null);
     }
 
