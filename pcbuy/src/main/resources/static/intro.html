@@ -9,44 +9,13 @@
     <title>hardware 產品介紹</title>
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
 
 </head>
 <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/users/userinfo',
-            type: "get",
-            dataType: "json",
-            success:function (data){
-                if (data === 404){
-                    console.log("尚未登入")
-                    $('#memberDiv').attr('href','/login_register.html')
-                    // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                }else {
-                    if((data.auth).includes("admin")){
-                        console.log("目前登入的使用者為"+data.username+" 權限:管理員")
-                        // $('#logInOutDiv').text('登出').attr('href','/logout')
-                        $('#memberDiv').attr('href','/admin/admin_index.html')
-                    }else {
-                        console.log("目前登入的使用者為"+data.username+" 權限:會員")
-                        // $('#logInOutDiv').text('登出').attr('href','/logout')
-                        $('#memberDiv').attr('href','/member/member_index.html')
-                    }
-                }
-            },
-            error:function (data){
-                console.log("載入使用者資訊error")
-                // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-            }
-        })
-    })
-</script>
 
 <body>
 <!-- ***** Header Area Start ***** -->
@@ -62,12 +31,11 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html#jump"> 產品購買 </a></li>
-                        <li><a href="intro.html" style="color: #ff589e"> 電腦主機零組件介紹 </a></li>
-                        <li><a href="rank.html"> 天梯效能排行  </a></li>
+                        <li><a href="index.html"> 產品購買 </a></li>
+                        <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                        <li><a href="rank.html"> 天梯效能排行 </a></li>
                         <li><a href="contact_us.html"> 聯絡我們 </a></li>
-                        <li><a href="login_register.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
-<!--                        <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>-->
+                        <li><a href="/member/member_index.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>菜單欄</span>
@@ -97,9 +65,9 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">中央處理器(CPU)</h5>
-                            <p>CPU 會解釋電腦程式指令以及處理</p>
-                            <p>   電腦中的資料，讓電腦在開啟應用程式</p>
-                            <p>   或變更檔案時，完成所請求的任務。</p>
+                            <p>1. 解釋電腦程式指令</p>
+                            <p>2. 處理電腦中的資料</p>
+                            <p>3. 能執行複雜電腦程式的邏輯機器</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -109,8 +77,9 @@
                                 <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg"
                                         alt="" width="70px"></i>
                             </div>
-                            <h5 class="features-title">CPU散熱器</h5>
-                            <p>CPU 會產生大量的熱量，高溫可能導致損壞，為了保護重要元件並保持 CPU 在低溫下運轉，建議購買好的 CPU 散熱器。</p>
+                            <h5 class="features-title">散熱器</h5>
+                            <p>1. CPU會產生大量熱量，高溫可能導致損壞。</p>
+                            <p>2. 風扇和散熱鰭片是必要配備為了保護重要元件並保持 CPU 在低溫下運轉，建議購買好的 CPU 散熱器。</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -226,17 +195,17 @@
 
 
         <!-- jQuery -->
-        <script src="../index_assets/js/jquery-2.1.0.min.js"></script>
+        <script src="/assets/js/jquery-2.1.0.min.js"></script>
         <!-- Bootstrap -->
-        <script src="../index_assets/js/popper.js"></script>
-        <script src="../index_assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/popper.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
         <!-- Plugins -->
-        <script src="../index_assets/js/scrollreveal.min.js"></script>
-        <script src="../index_assets/js/waypoints.min.js"></script>
-        <script src="../index_assets/js/jquery.counterup.min.js"></script>
-        <script src="../index_assets/js/imgfix.min.js"></script>
+        <script src="/assets/js/scrollreveal.min.js"></script>
+        <script src="/assets/js/waypoints.min.js"></script>
+        <script src="/assets/js/jquery.counterup.min.js"></script>
+        <script src="/assets/js/imgfix.min.js"></script>
         <!-- Global Init -->
-        <script src="../index_assets/js/custom.js"></script>
+        <script src="/assets/js/custom.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
      </body>
 </html>

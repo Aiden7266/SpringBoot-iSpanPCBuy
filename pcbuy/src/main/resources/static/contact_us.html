@@ -9,44 +9,13 @@
     <title> hardware 聯絡我們</title>
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
 
 </head>
 <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/users/userinfo',
-            type: "get",
-            dataType: "json",
-            success:function (data){
-                if (data === 404){
-                    console.log("尚未登入")
-                    $('#memberDiv').attr('href','/login_register.html')
-                    // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                }else {
-                    if((data.auth).includes("admin")){
-                        console.log("目前登入的使用者為"+data.username+" 權限:管理員")
-                        // $('#logInOutDiv').text('登出').attr('href','/logout')
-                        $('#memberDiv').attr('href','/admin/admin_index.html')
-                    }else {
-                        console.log("目前登入的使用者為"+data.username+" 權限:會員")
-                        // $('#logInOutDiv').text('登出').attr('href','/logout')
-                        $('#memberDiv').attr('href','/member/member_index.html')
-                    }
-                }
-            },
-            error:function (data){
-                console.log("載入使用者資訊error")
-                // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-            }
-        })
-    })
-</script>
 
     <body>
 
@@ -63,12 +32,11 @@
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                                <li><a href="index.html#jump"> 產品購買 </a></li>
+                                <li><a href="index.html"> 產品購買 </a></li>
                                 <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
                                 <li><a href="rank.html"> 天梯效能排行 </a></li>
-                                <li><a href="contact_us.html" style="color: #ff589e"> 聯絡我們 </a></li>
-                                <li><a href="login_register.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
-<!--                                <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>-->
+                                <li><a href="contact_us.html"> 聯絡我們 </a></li>
+                                <li><a href="/member/member_index.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
                             </ul>
                             <a class='menu-trigger'>
                                 <span>菜單欄</span>
@@ -175,17 +143,17 @@
 
 
         <!-- jQuery -->
-        <script src="../index_assets/js/jquery-2.1.0.min.js"></script>
+        <script src="/assets/js/jquery-2.1.0.min.js"></script>
         <!-- Bootstrap -->
-        <script src="../index_assets/js/popper.js"></script>
-        <script src="../index_assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/popper.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
         <!-- Plugins -->
-        <script src="../index_assets/js/scrollreveal.min.js"></script>
-        <script src="../index_assets/js/waypoints.min.js"></script>
-        <script src="../index_assets/js/jquery.counterup.min.js"></script>
-        <script src="../index_assets/js/imgfix.min.js"></script>
+        <script src="/assets/js/scrollreveal.min.js"></script>
+        <script src="/assets/js/waypoints.min.js"></script>
+        <script src="/assets/js/jquery.counterup.min.js"></script>
+        <script src="/assets/js/imgfix.min.js"></script>
         <!-- Global Init -->
-        <script src="../index_assets/js/custom.js"></script>
+        <script src="/assets/js/custom.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
 
  <script>
