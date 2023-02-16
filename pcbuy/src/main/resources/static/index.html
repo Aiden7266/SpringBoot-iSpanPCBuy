@@ -88,7 +88,11 @@
                 </div>
                 <br>
                 <select id = "CPU" onchange="onSelectCPU()">
-                    <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項CPU</option>
+                    <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項處理器</option>
+
+                    <optgroup label="intel" id="intel"></optgroup>
+                    <optgroup label="AMD" id="AMD"></optgroup>
+
                 </select>
             </div>
             <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
@@ -397,7 +401,7 @@
         })
 
         //第一層選單
-        showItemCPU()
+        showItemCPUv2()
         showItemGPU()
         showItemSTORAGE()
         showItemCOOLER()
@@ -655,6 +659,27 @@
                 // 備用格式$('#CPU').append('<option value=" '+ data[key].productId+ ' "socket=" '  +data[key].socket+ ' " imageUrl=" ' +data[key].imageUrl+  ' "watt=" '+data[key].watt+ ' " price='+data[key].price + '>' + data[key].productName+ '</option>')                    })
 
     },
+            error: function (data) {
+                alert("fail");
+            }
+        });
+    }
+
+    function showItemCPUv2(){
+        $.ajax({
+            url: 'http://localhost:8080/products/CPU/List',
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $.each(data, function (key, value) {
+                    if(data[key].brand === "intel"){
+                        $('#intel').append('<option value="'+ data[key].productId+ '"socket="'  +data[key].socket+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')
+                    }else if (data[key].brand === "AMD"){
+                        $('#AMD').append('<option value="'+ data[key].productId+ '"socket="'  +data[key].socket+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')
+                    }else {}
+                })
+            },
             error: function (data) {
                 alert("fail");
             }
