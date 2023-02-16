@@ -43,7 +43,7 @@
             <li class="dropdown user-dropdown">
               <a href="#"><i class="fa fa-user"></i> 管理員 </a>
             <li class="divider"></li>
-            <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
+            <li><a href="/logout" id="logout"><i class="fa fa-power-off"></i> Log Out</a></li>
           </ul>
         </div>
       </nav>
@@ -64,6 +64,17 @@
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script>
+      $('#logout').click(function (){
+        $.ajax({
+          url: 'http://localhost:8080/users/logoutUser',
+          type: "get",
+          success:function () {
+            alert("已登出")
+          }
+        })
+      })
+    </script>
 
   </body>
 </html>

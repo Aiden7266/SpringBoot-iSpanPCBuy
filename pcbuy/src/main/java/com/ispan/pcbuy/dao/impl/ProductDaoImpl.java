@@ -60,7 +60,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override //抓出該Category所有的品項
     public List<Product> getProductsFromCategory(String category) {
-        String sql = "SELECT * FROM product WHERE category = :category ";
+        String sql = "SELECT * FROM product WHERE category = :category ORDER BY product_name";
         Map<String, Object> map = new HashMap<>();
         map.put("category", category);
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
@@ -79,7 +79,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override //藉由CPU腳位篩選並列出符合的主機板
     public List<Product> getMbByFilter(ProductCategory category, String filterI) {
         System.out.println("我是Dao.getMbByFilter" + category + " " + filterI);
-        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ";
+        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ORDER BY product_name";
         Map<String, Object> map = new HashMap<>();
         map.put("category", category.name());
         map.put("socket", filterI);
@@ -89,7 +89,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override //藉由主機板晶片組篩選並列出符合的記憶體
     public List<Product> getDramByFilter(ProductCategory category, String filterI) {
-        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ";
+        String sql = "SELECT * FROM product WHERE category = :category AND socket = :socket ORDER BY product_name";
         Map<String, Object> map = new HashMap<>();
         map.put("category", category.name());
         map.put("socket", filterI);
@@ -99,7 +99,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override //藉由目前總瓦數篩選並列出符合的電源供應器
     public List<Product> getPowerByFilter(ProductCategory category, Integer totalWatt) {
-        String sql = "SELECT * FROM product WHERE category = :category AND watt >= :totalWatt ";
+        String sql = "SELECT * FROM product WHERE category = :category AND watt >= :totalWatt ORDER BY product_name";
         Map<String, Object> map = new HashMap<>();
         map.put("category", category.name());
         map.put("totalWatt", totalWatt);

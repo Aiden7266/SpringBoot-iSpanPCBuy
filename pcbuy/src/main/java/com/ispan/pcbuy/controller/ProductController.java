@@ -73,7 +73,7 @@ public class ProductController {
     @GetMapping("/products/{category}/List")
     public ResponseEntity<List<Product>> getProductsFromCategory(
             @PathVariable(required = true) String category){
-        System.out.println("我是Category = " + category);
+//        System.out.println("我是Category = " + category);
         productService.getProductsFromCategory(category);
         List<Product> productList = productService.getProductsFromCategory(category);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
@@ -94,10 +94,10 @@ public class ProductController {
             @RequestParam(required = false) String filterI,
             @RequestParam(required = false) String filterII,
             @RequestParam(required = false) String filterIII){
-        System.out.println("我是Category  = " + category.name());
-        System.out.println("我是FilterI   = " + filterI);
-        System.out.println("我是FilterII  = " + filterII);
-        System.out.println("我是FilterIII = " + filterIII);
+//        System.out.println("我是Category  = " + category.name());
+//        System.out.println("我是FilterI   = " + filterI);
+//        System.out.println("我是FilterII  = " + filterII);
+//        System.out.println("我是FilterIII = " + filterIII);
         List<Product> productList = productService.getCategoryByFilter(category, filterI, filterII, filterIII);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }

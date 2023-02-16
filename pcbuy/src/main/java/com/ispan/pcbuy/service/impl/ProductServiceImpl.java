@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII) {
-        System.out.println("我是Service.getCategoryByFilter()" + category + " " + filterI);
+//        System.out.println("我是Service.getCategoryByFilter()" + category + " " + filterI);
         if (category.name().equals("MB")) {
             if(filterI != null) {
                 return productDao.getMbByFilter(category, filterI);
