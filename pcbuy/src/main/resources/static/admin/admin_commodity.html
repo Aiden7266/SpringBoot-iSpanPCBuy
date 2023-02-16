@@ -317,18 +317,6 @@
     </form>
 </dialog>
 
-<script>
-    $('#logout').click(function (){
-        $.ajax({
-            url: 'http://localhost:8080/users/logoutUser',
-            type: "get",
-            success:function () {
-                alert("已登出")
-            }
-        })
-    })
-</script>
-
 <script type="text/javascript">
     jQuery.support.cors = true;
     var categoryName = "CPU" //(第一次進入預設選取CPU)

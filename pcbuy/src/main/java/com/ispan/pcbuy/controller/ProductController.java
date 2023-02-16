@@ -73,20 +73,10 @@ public class ProductController {
     @GetMapping("/products/{category}/List")
     public ResponseEntity<List<Product>> getProductsFromCategory(
             @PathVariable(required = true) String category){
-//        System.out.println("我是Category = " + category);
         productService.getProductsFromCategory(category);
         List<Product> productList = productService.getProductsFromCategory(category);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
-
-//    @GetMapping("/products/MB")
-//    public ResponseEntity<List<Product>> getMbBySocket(
-//            @RequestParam(required = true) String socket){
-//        System.out.println("我是Socket = " + socket);
-//        List<Product> productList = productService.getMbBySocket(socket);
-//        return ResponseEntity.status(HttpStatus.OK).body(productList);
-//    }
-
 
     @GetMapping("/products/{category}/Filter")
     public ResponseEntity<List<Product>> getCategoryByFilter(
@@ -103,7 +93,7 @@ public class ProductController {
     }
 
     @PostMapping("/productCreate")
-    public  ResponseEntity<Product> createProductTest(HttpServletRequest httpServletRequest){
+    public  ResponseEntity<Product> createProduct(HttpServletRequest httpServletRequest){
         ProductRequest productRequest = new ProductRequest();
         productRequest.setProductName(httpServletRequest.getParameter("productName"));
         productRequest.setCategory((ProductCategory.valueOf(httpServletRequest.getParameter("category"))));
@@ -202,7 +192,7 @@ public class ProductController {
     }
 
 //    -------------------------------------------------------------------------
-
+/* 暫時用不到
     @PostMapping("/products/CPU")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid CpuRequest cpuRequest){
         Integer productId = productService.createProduct(cpuRequest);
@@ -251,7 +241,7 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
-
+*/
     @PostMapping("/products")
     public  ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest){
         Integer productId = productService.createProduct(productRequest);

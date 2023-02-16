@@ -10,11 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 
 @Component("userDetailsService")
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService, UserDetails
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService
 {
     @Autowired
     private UserDao userDao;
@@ -34,47 +33,9 @@ public class UserDetailsService implements org.springframework.security.core.use
         String queryAuthority = userDao.getUserByUsername(username).getAuth();
         if(queryUsername == null){ //資料庫沒有這個使用者，認證失敗
             throw new UsernameNotFoundException("此帳號不存在");
-        }else {
-            setUsername(queryUsername);
         }
-
         //從資料庫查詢的users物件，獲取帳號密碼，再回傳
         List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(queryAuthority);
         return new User(queryUsername, queryPassword, auths);
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }

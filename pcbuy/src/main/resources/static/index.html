@@ -33,13 +33,11 @@
                     <!-- ***** Menu Start ***** -->
 
                     <ul class="nav">
-<!--                        <li><a href="javascript:void(0)" id="logInOutDiv"></a></li>-->
                         <li><a href="#purchase"> 產品購買 </a></li>
                         <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
                         <li><a href="rank.html"> 天梯效能排行 </a></li>
                         <li><a href="contact_us.html"> 聯絡我們 </a></li>
-                        <li><a href="login_register.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
-<!--                        <li><a href="login_register.html" id="memberDiv"></a></li>-->
+                        <li><a href="/admin/admin_index.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>菜單欄</span>
@@ -60,11 +58,9 @@
             <div class="row">
                 <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
                     <br><br><br>
-                    <h1>
-                        <strong></strong> <br>
-                    </h1>
+                    <span style="font-size: 50px;color: snow;font-family:serif,sans-serif,cursive,fantasy,monospace;">開始打造屬於你的電腦</span>
                     <p></p>
-                    <a href="#purchase" class="main-button-slider">開始選購</a>
+                    <a href="#purchase" class="main-button-slider">點我選購</a>
                 </div>
             </div>
         </div>
@@ -76,7 +72,7 @@
 <div id="jump"></div>
 <br><br><br><br><br>
 <!-- ***** Features Small Start ***** -->
-<div class="container shop" id="purchase" style="font-family:sans-serif;" >
+<div class="container shop" id="purchase" style="font-family:sans-serif;">
 
     <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
         <div style="display: flex; flex-direction: row; align-items: center; ">
@@ -342,84 +338,14 @@
 <script>
     jQuery.support.cors = true;
     $(document).ready(function () {
-        $.ajax({
-                    url: 'http://localhost:8080/users/userinfo',
-                    type: "get",
-                    dataType: "json",
-                    success:function (data){
-                        if (data === 404){
-                            console.log("尚未登入")
-                            $('#memberDiv').attr('href','/login_register.html')
-                            // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                        }else {
-                            if((data.auth).includes("admin")){
-                                console.log("目前登入的使用者為"+data.username+" 權限:管理員")
-                                // $('#logInOutDiv').text('登出').attr('href','/logout')
-                                $('#memberDiv').attr('href','/admin/admin_index.html')
-                            }else {
-                                console.log("目前登入的使用者為"+data.username+" 權限:會員")
-                                // $('#logInOutDiv').text('登出').attr('href','/logout')
-                                $('#memberDiv').attr('href','/member/member_index.html')
-                            }
-                        }
-                    },
-                    error:function (data){
-                        console.log("載入使用者資訊error")
-                // $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-            }
-        })
 
-        //第一層選單
+        //先載入不需要篩選的Category
         showItemCPUv2()
         showItemGPU()
         showItemSTORAGE()
         showItemCOOLER()
         showItemPOWER()
     })
-
-    $('#').click(function (){
-        $.ajax({
-            url: 'http://localhost:8080/users/logoutUser',
-            type: "get"
-        })
-    })
-    /*
-    $('#logInOutDiv').click(function (){
-        $.ajax({
-            url: 'http://localhost:8080/users/userinfo',
-            type: "get",
-            dataType: "json",
-            success:function (data){
-                if (data.username !== undefined){
-                    $.ajax({
-                        url: 'http://localhost:8080/users/logoutUser',
-                        type: "get",
-                        // dataType: "json",
-                        success:function (){
-                            alert("已清除使用者資訊")
-                            $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                            $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                        },
-                        error:function (){
-                            alert("出錯！已清除使用者資訊")
-                            $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                            $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                        }
-                    })
-                }else if (data.username == undefined){
-                    $('#memberDiv').text('會員中心').attr('href','/login_register.html')
-                    $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-                }
-            },
-            error:function (){
-                $('#logInOutDiv').text('登入').attr('href','/login_register.html')
-            }
-        })
-    })
-
-
-
-     */
 </script>
 
 <!-- 首頁商品下拉選單的onChange方法在此-->
@@ -432,7 +358,6 @@
     var gpuLengthForCase=0, coolerLengthForCase=0, coolerHeightForCase=0
 
     function calculator(){
-        // totalWatt  = cpuWatt + mbWatt + dramWatt + gpuWatt + storageWatt
         totalWatt = parseInt(cpuWatt) + parseInt(mbWatt) + parseInt(dramWatt) + parseInt(gpuWatt) + parseInt(storageWatt)
 
         if (totalWatt > powerWatt){

@@ -6,5 +6,26 @@
 </head>
 <body>
   <h1>沒有權限訪問該頁面</h1>
+  <br>
+  <input type="button" id="test" value="測試">
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+
+<script>
+    $('#test').click(function () {
+        console.log("123")
+        $.ajax({
+            url: 'http://localhost:8080/users/currentUser',
+            type: "get",
+            dataType: "text",
+            success: function (data) {
+                console.log("success "+data)
+            },error:function (data){
+                console.log("error "+data)
+            }
+        })
+    })
+</script>
 </html>

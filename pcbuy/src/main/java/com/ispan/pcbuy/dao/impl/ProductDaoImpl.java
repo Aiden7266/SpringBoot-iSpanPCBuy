@@ -67,15 +67,6 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
-//    @Override
-//    public List<Product> getMbBySocket(String socket) {
-//        String sql = "SELECT * FROM product WHERE category = 'MB' AND socket = :socket ";
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("socket", socket);
-//        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
-//        return productList;
-//    }
-
     @Override //藉由CPU腳位篩選並列出符合的主機板
     public List<Product> getMbByFilter(ProductCategory category, String filterI) {
         System.out.println("我是Dao.getMbByFilter" + category + " " + filterI);
@@ -107,7 +98,7 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
-    @Override
+    @Override //藉由ID搜尋產品
     public Product getProductById(Integer productId) {
          String sql = "SELECT * FROM product WHERE product_id = :productId";
 

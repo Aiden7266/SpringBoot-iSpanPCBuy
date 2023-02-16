@@ -17,8 +17,6 @@ public interface ProductDao {
 
     List<Product> getPowerByFilter(ProductCategory category, Integer totalWatt);
 
-//    List<Product> getMbBySocket(String socket);
-
     List<Product> getMbByFilter(ProductCategory category, String filterI);
 
     List<Product> getDramByFilter(ProductCategory category, String filterI);
