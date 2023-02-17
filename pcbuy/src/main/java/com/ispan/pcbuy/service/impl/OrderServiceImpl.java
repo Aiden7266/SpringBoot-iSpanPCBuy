@@ -4,6 +4,7 @@ import com.ispan.pcbuy.dao.OrderDao;
 import com.ispan.pcbuy.dao.ProductDao;
 import com.ispan.pcbuy.dto.BuyItem;
 import com.ispan.pcbuy.dto.CreateOrderRequest;
+import com.ispan.pcbuy.model.Order;
 import com.ispan.pcbuy.model.OrderItem;
 import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.service.OrderService;
@@ -51,5 +52,17 @@ public class OrderServiceImpl implements OrderService {
         orderDao.createOrderItems(orderId, orderItemList);
 
         return orderId;
+    }
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        return order;
     }
 }
