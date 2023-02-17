@@ -2,8 +2,11 @@ package com.ispan.pcbuy.dao.impl;
 
 import com.ispan.pcbuy.dao.OrderDao;
 
+import com.ispan.pcbuy.dto.CreateCartRequest;
+import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
 import com.ispan.pcbuy.model.OrderItem;
+import com.ispan.pcbuy.rowmapper.CartRowMapper;
 import com.ispan.pcbuy.rowmapper.OrderItemRowMapper;
 import com.ispan.pcbuy.rowmapper.OrderRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +95,36 @@ public class OrderDaoImpl implements OrderDao {
         map.put("orderId", orderId);
 
         List<OrderItem> orderItemList =namedParameterJdbcTemplate.query(sql, map, new OrderItemRowMapper());
-//        OrderItemRowMapper
         return orderItemList;
+    }
+
+    @Override
+    public void createCart(Integer userId, List<Cart> cartList) {
+        String sql = "INSERT INTO cart (user_id, product_id)" +
+                "VALUES (:userId, :productId)";
+
+        MapSqlParameterSource[] parameterSources = new MapSqlParameterSource[cartList.size()];
+
+        for (int i = 0 ; i < cartList.size(); i++){
+            Cart cart = cartList.get(i);
+
+            parameterSources[i] = new MapSqlParameterSource();
+            parameterSources[i].addValue("userId", userId);
+            parameterSources[i].addValue("productId", cart.getProductId());
+        }
+        namedParameterJdbcTemplate.batchUpdate(sql,parameterSources);
+    }
+
+    @Override
+    public List<Cart> getCart(Integer userId) {
+        String sql = "SELECT c.cart_id, c.user_id, c.product_id, p.product_name, p.description, p.image_url " +
+                "FROM cart as c " +
+                "LEFT JOIN product as p ON c.product_id = p.product_id " +
+                "WHERE c.user_id = :userId";
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<Cart> cartList =namedParameterJdbcTemplate.query(sql, map, new CartRowMapper());
+        return cartList;
     }
 }

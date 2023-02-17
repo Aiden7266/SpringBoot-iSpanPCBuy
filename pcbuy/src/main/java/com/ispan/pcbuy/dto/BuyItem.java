@@ -3,12 +3,14 @@ package com.ispan.pcbuy.dto;
 import lombok.Data;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class BuyItem {
 
-    @NonNull
+    @NotNull
     private Integer productId;
 
-    @NonNull
+    @NotNull
     private Integer quantity;
 }

@@ -32,10 +32,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    @GetMapping("/currentUser")
-    public String getCurrentUser(){
+    @GetMapping("/current")
+    public ResponseEntity<?> getCurrentUser(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("目前的使用者" + name);
-        return name;
+        User user = userService.getUserByUsername(name);
+//        System.out.println("目前的使用者" + name);
+        if (user != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }
     }
 }

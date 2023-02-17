@@ -277,7 +277,7 @@
                     <!--                        <button type="submit" id="clear" class="main-button">清空重選</button>-->
                 </div>
                 <div class="bordtest" style=" margin-left: auto;">
-                    <button type="submit" id="form-submit" class="shopbtn">加進購物車</button>
+                    <input type="button" id="CART" class="shopbtn" value="加進購物車"></input>
                 </div>
             </div>
         </div>
@@ -823,6 +823,82 @@
             }
         })
     }
+</script>
+
+<script>
+    $('#CART').click(function () {
+
+        $.ajax({
+            url: '/users/current',
+            type: "get",
+            dataType: "json",
+            success:function (data){
+                console.log(data)
+
+                var selectAll = true
+                $('SELECT').each(function (){
+                    if($(this).val() == null){
+                        selectAll = false
+                    }
+                })
+                if (!selectAll){
+                    alert("有品項尚未選擇")
+                }else {
+                    $.ajax({
+                        url: '/users/' + data.userId + '/cart',
+                        type: "post",
+                        dataType: "text",
+                        contentType : 'application/json',
+                        data:JSON.stringify({
+                            buyItemList:[
+                                {
+                                    productId:$('#CPU').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#MB').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#DRAM').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#GPU').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#STORAGE').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#COOLER').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#POWER').val(),
+                                    quantity:1
+                                },
+                                {
+                                    productId:$('#CASE').val(),
+                                    quantity:1
+                                }
+                            ]
+                        }),
+                        success:function () {
+                            alert("已加進購物車")
+                            location.href =  "/member/member_cart.html";
+                        },error:function () {
+                            alert("error")
+                        }
+                    })
+                }
+            },error:function (data) {
+                alert("您尚未登入")
+            }
+        })
+
+    })
 </script>
 </body>
 </html>

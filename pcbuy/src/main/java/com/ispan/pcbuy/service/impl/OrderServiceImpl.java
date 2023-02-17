@@ -3,7 +3,9 @@ package com.ispan.pcbuy.service.impl;
 import com.ispan.pcbuy.dao.OrderDao;
 import com.ispan.pcbuy.dao.ProductDao;
 import com.ispan.pcbuy.dto.BuyItem;
+import com.ispan.pcbuy.dto.CreateCartRequest;
 import com.ispan.pcbuy.dto.CreateOrderRequest;
+import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
 import com.ispan.pcbuy.model.OrderItem;
 import com.ispan.pcbuy.model.Product;
@@ -64,5 +66,24 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderItemList(orderItemList);
 
         return order;
+    }
+
+    @Override
+    public void createCart(Integer userId, CreateCartRequest createCartRequest) {
+
+        List<Cart> cartList = new ArrayList<>();
+        for(BuyItem buyItem : createCartRequest.getBuyItemList()) {
+
+            //轉換BuyItem to Cart
+            Cart cart = new Cart();
+            cart.setProductId(buyItem.getProductId());
+            cartList.add(cart);
+        }
+        orderDao.createCart(userId, cartList);
+    }
+
+    @Override
+    public List<Cart> getCart(Integer userId) {
+        return orderDao.getCart(userId);
     }
 }
