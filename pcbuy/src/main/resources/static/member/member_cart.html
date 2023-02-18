@@ -21,7 +21,8 @@
 
 <style>
     img{
-        width:80px
+        width:100px;
+        height: 100px;
     }
     input {
         margin: auto;
@@ -35,6 +36,11 @@
         font-family:'Times New Roman';
         BORDER-style:none;
     }
+    #cart tr,td{
+        /*height: 45px;*/
+        font-size: 20px;
+    }
+
 </style>
 
 <body>
@@ -99,9 +105,9 @@
                     </tr>
                     <tr >
                         <td></td>
-                        <td style="font-size: xx-large;text-align: left">TotalPrice</td>
-                        <td style="text-align: right"><button class="button" style="background-color:#ec971f" id="bt1" name="delete_cart" >清空購物車</button></td>
-                        <td style="text-align: left"> <button class="button" style="background-color:#4CAF50"  id="bt2" name="create_order">去買單</button></td>
+                        <td style="font-style: inherit;font-size: xx-large;text-align: left" id="price">TotalPrice</td>
+                        <td style="text-align: right"><button class="button" style="background-color:#ec971f" id="cartClear" name="delete_cart" >清空購物車</button></td>
+                        <td style="text-align: left"> <button class="button" style="background-color:#4CAF50"  id="order" name="create_order">去買單</button></td>
                     </tr>
                 </table>
            </div>
@@ -125,18 +131,25 @@
                     type: "get",
                     dataType: "json",
                     success:function (cart){
+                        var totalPrice = 0
                         $.each(cart, function (key, value) {
+                            var url = cart[key].imageUrl
                             $('#cart').append('<tr>')
-                            $('#cart').append('<td><img src=' + cart[key].imageUrl +'/></td>')
+                            $('#cart').append('<td><img src=' + url +'/></td>')
                             $('#cart').append('<td>' + cart[key].productName + '</td>')
                             $('#cart').append('<td>' + cart[key].price + '</td>')
                             $('#cart').append('<td><input value="1" disabled></td>')
                             $('#cart').append('</tr>')
+                            totalPrice = totalPrice + cart[key].price
                         })
+                        $('#price').text("總計：NT$" + totalPrice.toLocaleString('zh-TW'))
                     }
                 })
             }
         })
+    })
+    $('#cartClear').click(function () {
+        
     })
 </script>
 
