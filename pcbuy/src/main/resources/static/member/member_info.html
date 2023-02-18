@@ -18,35 +18,36 @@
 
   <body>
 
-    <div id="wrapper">
+  <div id="wrapper">
+      <!--        style="background-color:#eab0b0"-->
+      <nav class="navbar navbar-inverse navbar-fixed-top"  >
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="member_index.html" >會員中心</a>
+          </div>
 
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="member_index.html">會員中心</a>
-        </div>
+          <div>
+              <ul class="nav navbar-nav side-nav">
+                  <li class="active"><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
+                  <li><a href="member_cart.html"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
+                  <li><a href="member_order.html"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
+                  <li><a href="member_info.html" style="background-color: #eab0b0; color:black;"><i class="fa fa-user"></i>  會員資訊 </a></li>
+                  <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
+                  <li><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
+              </ul>
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav">
-            <li class="active"><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-            <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
-            <li><a href="member_cart.html"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
-            <li><a href="member_order.html"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
-            <li><a href="/admin/admin_index.html" style="position:fixed; bottom:50px; left:0;"><i class="fa fa-backward"></i> 進階模式 </a></li>
-            <li><a href="../index.html" style="position:fixed; bottom:0; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right navbar-user">
-                <li class="dropdown user-dropdown">
-                  <a href="#"><i class="fa fa-user"></i> lisa </a>
-                <li class="divider"></li>
-              <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out </a></li>
-          </ul>
-        </div>
+              <ul class="nav navbar-nav navbar-right navbar-user">
+                  <li>
+                      <a href=""><i class="fa fa-user"></i> lisa </a>
+                  <li></li>
+                  <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
+                  </li>
+              </ul>
+          </div>
       </nav>
 
       <div id="page-wrapper">

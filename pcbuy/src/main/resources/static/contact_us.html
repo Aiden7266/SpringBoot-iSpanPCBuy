@@ -12,11 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
-
 </head>
-<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <body>
 
  <!-- ***** Header Area Start ***** -->
@@ -25,18 +21,17 @@
                 <div class="row">
                     <div class="col-12">
                         <nav class="main-nav">
-                            <!-- ***** Logo Start ***** -->
                             <a href="index.html" class="logo">
                                 <img src="/assets/images/PCBUY_logo.png" style="width: 120px"/>
                             </a>
-                            <!-- ***** Logo End ***** -->
+
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
                                 <li><a href="index.html"> 產品購買 </a></li>
-                                <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                                <li><a href="intro.html" > 電腦主機零組件介紹 </a></li>
                                 <li><a href="rank.html"> 天梯效能排行 </a></li>
-                                <li><a href="contact_us.html"> 聯絡我們 </a></li>
-                                <li><a href="/member/member_index.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
+                                <li><a href="contact_us.html" style="color: #ff589e"> 聯絡我們 </a></li>
+                                <li><a href="/member/member_index.html" id="memberDiv" class="fa fa-user">會員中心</a></li>
                             </ul>
                             <a class='menu-trigger'>
                                 <span>菜單欄</span>
@@ -73,7 +68,7 @@
                         <div class="contact-text">
                             <h4>門市位置</h4>
                             <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58249.67090556209!2d120.59557811637737!3d24.150526199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9650422ae1%3A0x334dfd5796c49ff6!2z6LOH5bGV5ZyL6ZqbLeWOnyDos4fnrZbmnIMt5pW45L2N5pWZ6IKy56CU56m25omALeS4reWNgA!5e0!3m2!1szh-TW!2stw!4v1673577114346!5m2!1szh-TW!2stw"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.69603122221!2d121.52948895078019!3d25.044387733888783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a96351b88ab5%3A0x962af1bf51754fe0!2z5Y6f5YO55bGLLeWFieiPr-mWgOW4gg!5e0!3m2!1szh-TW!2stw!4v1676685306888!5m2!1szh-TW!2stw"
                                     width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
@@ -84,7 +79,7 @@
                     <!-- ***** Contact Form Start ***** -->
                     <div class="col-lg-8 col-md-6 col-sm-12">
                         <div class="contact-form">
-                            <form id="contact" action="" method="get">
+                            <form id="contact" action="" method="get" >
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                         <fieldset>
@@ -106,7 +101,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <fieldset>
-                                            <input type="submit" id="form-submit" class="footer__link" value="發送訊息">
+                                            <input type="submit" id="form-submit" class="footer_link" value="發送訊息">
                                             <a id="mailTo"></a>
                                         </fieldset>
                                     </div>
@@ -152,48 +147,45 @@
         <script src="/assets/js/waypoints.min.js"></script>
         <script src="/assets/js/jquery.counterup.min.js"></script>
         <script src="/assets/js/imgfix.min.js"></script>
-        <!-- Global Init -->
-        <script src="/assets/js/custom.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
 
  <script>
-     var initBody='';
-     function chk(){
-         if(document.form.name.value==''){
-           alert('名字未填');
-           document.form.name.focus();
-           return false;
-         }else if(document.form.email.value==''){
-           alert('信箱未填');
-           document.form.email.focus();
-           return false;
-         }else if(document.form.message.value==''){
-           alert('訊息未填');
-           document.form.message.focus();
-           return false;
-         }
-         return true;
-         var to="lisayes396@gmail.com";
-         var name= nameText.value;
-         var email= emailText.value;
-         var message = messageText.value;
+     // var initBody='';
+     // function chk(){
+     //     if(document.form.name.value==''){
+     //       alert('名字未填');
+     //       document.form.name.focus();
+     //       return false;
+     //     }else if(document.form.email.value==''){
+     //       alert('信箱未填');
+     //       document.form.email.focus();
+     //       return false;
+     //     }else if(document.form.message.value==''){
+     //       alert('訊息未填');
+     //       document.form.message.focus();
+     //       return false;
+     //     }
+     //     return true;
+     //     var to="lisayes396@gmail.com";
+     //     var name= nameText.value;
+     //     var email= emailText.value;
+     //     var message = messageText.value;
+     //
+     //     body =  "我們是PCBUY電腦商城 您好!" + '%0A';
+     //     body += "----------------------------------------------" + '%0A';
+     //     body += "今日想詢問或是反映的內容是: " + '%0A%0A%0A';
+     //     body += "" + message + '%0A%0A%0A';
+     //     body += "From:   " + name + '%0A';
+     //     body += "Email:  " + email;
+     //
+     //     mailTo.href="mailto:" + to + "?subject=" + "有關PCBUY電腦商城的顧客相關問題" + "&body=" + body;
+     //     mailTo.click();
+     // }
+     //
+     //     function init(){
+     //         messageText.value= initBody;
+     //         toText.value = initTo;
+     //     }
 
-         body =  "我們是PCBUY電腦商城 您好!" + '%0A';
-         body += "----------------------------------------------" + '%0A';
-         body += "今日想詢問或是反映的內容是: " + '%0A%0A%0A';
-         body += "" + message + '%0A%0A%0A';
-         body += "From:   " + name + '%0A';
-         body += "Email:  " + email;
-
-         mailTo.href="mailto:" + to + "?subject=" + "有關PCBUY電腦商城的顧客相關問題" + "&body=" + body;
-         mailTo.click();
-     }
-
-         function init(){
-             messageText.value= initBody;
-             toText.value = initTo;
-         }
-
- </script>
+        </script>
     </body>
 </html>

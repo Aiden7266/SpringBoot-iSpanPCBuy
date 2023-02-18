@@ -12,30 +12,25 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
-
 </head>
-<script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <body>
-<!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
                         <img src="/assets/images/PCBUY_logo.png" style="width: 120px"/>
                     </a>
-                    <!-- ***** Logo End ***** -->
+
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.html"> 產品購買 </a></li>
-                        <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
+                        <li><a href="intro.html" style="color: #ff589e"> 電腦主機零組件介紹 </a></li>
                         <li><a href="rank.html"> 天梯效能排行 </a></li>
                         <li><a href="contact_us.html"> 聯絡我們 </a></li>
-                        <li><a href="/member/member_index.html" id="memberDiv"><img src="/assets/images/member.png" style="width: 40px; "></a></li>
+                        <li><a href="/member/member_index.html" id="memberDiv" class="fa fa-user">會員中心</a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>菜單欄</span>
@@ -64,10 +59,10 @@
                                 <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"
                                         alt="" width="70px"></i>
                             </div>
-                            <h5 class="features-title">中央處理器(CPU)</h5>
-                            <p>1. 解釋電腦程式指令</p>
-                            <p>2. 處理電腦中的資料</p>
-                            <p>3. 能執行複雜電腦程式的邏輯機器</p>
+                            <h5 class="features-title">中央處理器 ( CPU ) </h5>
+                            <p>1. 解釋電腦程式的指令</p>
+                            <p>2. 處理電腦中運行資料</p>
+                            <p>3. 能執行複雜電腦程式</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -77,9 +72,10 @@
                                 <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg"
                                         alt="" width="70px"></i>
                             </div>
-                            <h5 class="features-title">散熱器</h5>
-                            <p>1. CPU會產生大量熱量，高溫可能導致損壞。</p>
-                            <p>2. 風扇和散熱鰭片是必要配備為了保護重要元件並保持 CPU 在低溫下運轉，建議購買好的 CPU 散熱器。</p>
+                            <h5 class="features-title"> CPU 散熱器 </h5>
+                            <p>1. 保持 CPU 在良好的低溫下運轉。</p>
+                            <p>2. 將熱量吸收，發散至機箱內、外。</p>
+                            <br>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -90,9 +86,10 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">主機板</h5>
-                            <p>提供一系列接合點，形成一個能整合</p>
-                            <p>處理器、記憶體、儲存裝置、顯示卡、 </p>
-                            <p>音效卡和各種外部裝置的連接平台。 </p>
+                            <p>1. 供一系列接合點連接平台。</p>
+                            <p>2. 整合電腦主機內、外裝置。</p>
+                            <p>3. 主機板重要元件為晶片組。</p>
+
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -103,7 +100,9 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">記憶體</h5>
-                            <p>記憶體是系統的短期資料儲存區，存放電腦正在使用中的資訊，以便快速地存取。執行的程式越多，需要的記憶體就越多。</p>
+                            <p>1. 為系統存放短期資料的儲存區空間。</p>
+                            <p>2. 當執行程式越多，所需空間就越多。</p>
+                            <p>3. 資料產生後由內向外部記憶體讀寫。</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -113,10 +112,10 @@
                                 <i><img src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg"
                                         alt="" width="70px"></i>
                             </div>
-                            <h5 class="features-title">顯示卡</h5>
-                            <p>提供中央處理器以外的微處理器計算圖像</p>
-                            <p> 資訊，並將電腦系統所需要的顯示資訊</p>
-                            <p>  進行轉換並提供掃描給顯示裝置。</p>
+                            <h5 class="features-title">顯示卡 ( GPU )</h5>
+                            <p>1. 簡稱顯卡，以GPU為核心的擴充卡。</p>
+                            <p>2. 是一種微處理器幫助計算圖像資訊。</p>
+                            <p>2. 所需顯示資訊轉換掃描給顯示裝置。</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -127,7 +126,9 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">硬碟</h5>
-                            <p>硬碟是用來儲存電腦上的數位內容與資料的硬體。與電腦中的其他元件相互配合，在需要使用應用程式與檔案時呈現出來。</p>
+                            <p>1. 儲存電腦上的數位內容與資料的硬體。</p>
+                            <p>2. 配合其他元件，執行程式時顯示出來。</p>
+                            <br>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -138,7 +139,10 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">電源供應器</h5>
-                            <p>是電能轉換類的電源，將標準交流電轉成低壓穩定的直流電，或直接將直流電轉成低壓穩定的直流電給某些特殊器材使用。</p>
+                            <p>1. 稱火牛，電牛之意，指電力供應者。</p>
+                            <p>2. 電能轉電源類，交流電轉低壓直流電。</p>
+                            <p>3. 直流電轉低壓直流電，特殊器材使用。</p>
+                            <br>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -149,7 +153,10 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">機殼</h5>
-                            <p>機殼需要保持良好的風流，因此應該有許多風扇安裝點。需要可讓空氣進入的大開口，並加以過濾避免灰塵進入機殼。 </p>
+                            <p>可據個人品味選擇，但需牢記幾項因素:</p>
+                            <p>1. 保持良好風流、需有風扇安裝點。</p>
+                            <p>2. 找尋開口讓空氣進入和過濾灰塵。 </p>
+                            <p>3. 檢查機殼能否容納的主機板大小。</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12"
@@ -160,7 +167,9 @@
                                         alt="" width="70px"></i>
                             </div>
                             <h5 class="features-title">週邊多媒體設備</h5>
-                            <p>週邊設備泛指主機以外的相關硬體設備，這些設備依其用途，可區分為輔助儲存設備、輸入設備、及輸出設備等3大類</p>
+                            <p>1. 週邊設備泛指主機外相關硬體設備。</p>
+                            <p>2. 區分輔助儲存、輸入、輸出等設備。</p>
+                            <br><br>
                         </div>
                     </div>
                     <!-- ***** Features Small Item End ***** -->
@@ -193,19 +202,5 @@
             </div>
         </footer>
 
-
-        <!-- jQuery -->
-        <script src="/assets/js/jquery-2.1.0.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="/assets/js/popper.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>
-        <!-- Plugins -->
-        <script src="/assets/js/scrollreveal.min.js"></script>
-        <script src="/assets/js/waypoints.min.js"></script>
-        <script src="/assets/js/jquery.counterup.min.js"></script>
-        <script src="/assets/js/imgfix.min.js"></script>
-        <!-- Global Init -->
-        <script src="/assets/js/custom.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
      </body>
 </html>

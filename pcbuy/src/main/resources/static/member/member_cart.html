@@ -15,7 +15,6 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!-- Page Specific CSS -->
-
     <link rel="stylesheet" href="css/cart.css">
 </head>
 
@@ -46,9 +45,9 @@
 <body>
 
 <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <button type="button" class="navbar-toggle">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -58,11 +57,11 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active"><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-                <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
-                <li><a href="member_cart.html"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
+                <li><a href="member_cart.html"  style="background-color: #eab0b0; color:black;"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
                 <li><a href="member_order.html"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
-                <li><a href="/admin/admin_index.html" style="position:fixed; bottom:50px; left:0;"><i class="fa fa-backward"></i> 進階模式 </a></li>
-                <li><a href="../index.html" style="position:fixed; bottom:0; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
+                <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
+                <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
+                <li><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
@@ -149,7 +148,7 @@
         })
     })
     $('#cartClear').click(function () {
-        
+
     })
 </script>
 

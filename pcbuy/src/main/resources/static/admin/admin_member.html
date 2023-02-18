@@ -5,16 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description">
     <meta name="author">
-
     <title>管理員 - 後台會員管理</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-
     <!-- Add custom CSS here -->
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <style>
+        #dateresult table {
+            border-collapse: collapse;
+            border-radius: 10px;
+            font-family: "Times New Roman";
+        }
+        #dateresult table tr {
+            border-radius: 10px;
+            background-color: darkslategray;
+            color: #ffffff;
+            text-align: center;
+            font-size: 17px;
+            font-family: "Times New Roman";
+            border: 1px solid black;
+        }
+        #dateresult table td {
+            text-align: center;
+            padding: 15px;
+            background: #e6e6e6;
+            box-shadow: -2px -2px 5px #c4c4c4;
+            color: #000000;
+            font-size: 15px;
+            border: 1px solid black;
+        }
+
         #background-pop {
             display: none;
             position: fixed;
@@ -23,24 +45,31 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 40px;
         }
+
         #div-pop {
             background: #ffffff;
             margin-top: 200px;
-            margin-left: 250px;
-            width: 70%;
-
+            margin-left: 450px;
+            width: 60%;
+            height: 400px;
+            border-radius: 8px;
             overflow: auto;
         }
+
         .div-top {
             width: 100%;
             height: auto;
-            background-color: #000000;
+            background: linear-gradient(darkslategray, #585355);
             color: #ffffff;
+
         }
+
         .div-top div {
             padding: 3px 5px 5px 8px;
         }
+
         span {
             color: white;
             margin-bottom: 10px;
@@ -48,21 +77,66 @@
             cursor: pointer;
             float: right;
         }
+
         .div-content {
-            width: auto;
-            height: 200px;
+            width: 90%;
+            height: 80%;
+            margin: 0 auto;
+            background-color: #faf9f9;
             overflow: auto;
+            padding-top: 30px;
+            padding-left: 50px;
         }
-        .div-footer {
+
+        .div-content th {
+            background-color: #515557;
+            width: 80px;
+            color: #faf9f9;
+            vertical-align: middle;
             text-align: center;
-            background-color: darkgray;
-        }
-        th{
-            background-color: #5c6264;
-
+            font-size: 17px;
         }
 
+        .div-content tr {
+            border-bottom: solid 13px white;
+            font-size: 15px;
+        }
 
+        .div-content tr:last-child {
+            border-bottom: none;
+        }
+
+        .div-content table {
+            border-width: 5px;
+        }
+
+        .div-content input {
+            transition: 0.3s;
+            width: 400px;
+        }
+
+        .div-content input:focus {
+            outline-color: #e8e8e8;
+            background: #e8e8e8;
+            box-shadow: inset 20px 20px 60px #c6e2f0,
+            inset -20px -20px 60px #ffffff;
+            transition: 0.3s;
+        }
+
+        .div-footer {
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        #confirm-button {
+            border-radius: 20px;
+            background-color: darkslategray;
+            font-size: 13px;
+        }
+        .btn{
+            border-radius: 10px;
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -83,11 +157,11 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active"><a href="admin_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-                <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i>  商品管理 </a></li>
-                <li><a href="admin_member.html"><i class="fa fa-user-md"></i>  會員管理 </a></li>
-                <li><a href="admin_order.html"><i class="fa fa-file-text"></i>  訂單管理 </a></li>
-                <li><a href="/member/member_index.html" style="position:fixed; bottom:50px; left:0;"><i class="fa fa-backward"></i> 一般模式 </a></li>
-                <li><a href="../index.html" style="position:fixed; bottom:0; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
+                <li><a href="admin_member.html"><i class="fa fa-user-md"></i> 會員管理 </a></li>
+                <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i> 商品管理 </a></li>
+                <li><a href="admin_order.html"><i class="fa fa-file-text"></i> 訂單管理 </a></li>
+                <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
+                <li><a href="/member/member_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-adjust"></i> 一般模式 </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
@@ -106,43 +180,50 @@
                     <li><a href="admin_index.html"><i class="fa fa-home"></i> 首頁</a></li>
                     <li class="active">會員管理</li>
                 </ol>
+                <div class="col-lg-8" style="border-radius: 30px;">
 
-                <div class="col-lg-12">
+                    <label for="searchTerm" style="font-size: 30px"> 搜索：
+                        <br>
+                        <input class="form-control" id="searchTerm" placeholder="請輸入帳號" type="text">
+                    </label>
+                         <button class="btn" onclick="search()"> 查詢 </button>
 
-                    <label for="searchTerm">搜索：</label> <input id="searchTerm" placeholder="輸入帳號" type="text"> <button
-                        onclick="search()">查詢</button>
-                    <div id="dateresult"></div>
+                    <br><br>
+                    <div id="dateresult" ></div>
                     <div id="background-pop">
                         <div id="div-pop">
                             <div class="div-top">
-                                <span id="close-button">x</span>
-                                <div>
-                                    會員資料修改
+                                <div style="font-size: x-large">
+                                    會員資料
                                 </div>
                             </div>
-                            <div class="div-content">
-                                <table>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>電話</th>
-                                        <th>地址</th>
-                                        <th>電子郵件</th>
-                                        <th>帳號</th>
-                                        <th>密碼</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <td><input id="name"></td>
-                                        <td><input id="tel"></td>
-                                        <td><input id="addr"></td>
-                                        <td><input id="email"></td>
-                                        <td><input id="username"></td>
-                                        <td><input id="password"></td>
-                                    </tr>
-                                </table>
-                            </div>
+
+                                <form onsubmit="return validateForm()" class="div-content">
+                                    <table>
+                                        <tr>
+                                            <th> 姓名 </th>
+                                            <td><input disabled  class="form-control" id="name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th> 電話 </th>
+                                            <td><input  disabled class="form-control" id="tel"></td>
+                                        </tr>
+                                        <tr>
+                                            <th> 地址 </th>
+                                            <td><input disabled class="form-control" id="addr"></td>
+                                        </tr>
+                                        <tr>
+                                            <th> 電子郵件 </th>
+                                            <td><input disabled class="form-control" id="email"></td>
+                                        </tr>
+                                        <tr>
+                                            <th> 帳號 </th>
+                                            <td><input disabled class="form-control" id="username"></td>
+                                        </tr>
+                                    </table>
+                                </form>
                             <div class="div-footer">
-                                <button id="confirm-button">確定</button>
+                                <button type="button" class="btn btn-primary px-20 " id="confirm-button" > 確定 </button>
                             </div>
                         </div>
                     </div>
@@ -152,6 +233,7 @@
     </div>
 </div>
 </div>
+
 <script>
     //僅測試
     let testdata = [
@@ -160,15 +242,15 @@
             tel: "0910123456q",
             addr: "台中市公益路",
             email: "test12346@gmail.com",
-            username: "test111",
+            username: "atest1",
             password: "ttest123",
         },
         {
-            name: "王小明",
+            name: "王中明",
             tel: "0910123456w",
             addr: "台中市公益路",
             email: "test12346@gmail.com",
-            username: "test222",
+            username: "btest",
             password: "ttest123",
         },
         {
@@ -176,19 +258,27 @@
             tel: "0910123456e",
             addr: "台中市公益路",
             email: "test12346@gmail.com",
-            username: "test333",
+            username: "ctest",
             password: "ttest123",
         },
-    ];
+    ]
 
     function search() {
         let searchTerm = document.getElementById("searchTerm").value.toLowerCase();
         let dateresult = document.getElementById("dateresult");
         dateresult.innerHTML = "";
+
         //增表
         let table = document.createElement("table");
         table.innerHTML =
-            "<tr><th>姓名</th><th>電話</th><th>地址</th><th>電子郵件</th><th>帳號</th><th>密碼</th><th></th></tr>";
+            "<tr>" +
+            "<th>&nbsp 姓名 &nbsp</th>" +
+            "<th>&nbsp 電話 &nbsp</th>" +
+            "<th>&nbsp 地址 &nbsp</th>" +
+            "<th>&nbsp 電子郵件 &nbsp</th>" +
+            "<th>&nbsp 帳號 &nbsp</th>" +
+            "<th>&nbsp 詳細資料 &nbsp</th>" +
+            "</tr>";
         let hasdateresult = false;
 
         for (let i = 0; i < testdata.length; i++) {
@@ -207,17 +297,15 @@
                 let addrCell = row.insertCell(2);
                 let emailCell = row.insertCell(3);
                 let usernameCell = row.insertCell(4);
-                let passwordCell = row.insertCell(5);
-                let deleteCell = row.insertCell(6);
-                let addCell = row.insertCell(7);
+
+                let showCell = row.insertCell(5);
                 nameCell.innerHTML = test.name;
                 telCell.innerHTML = test.tel;
                 addrCell.innerHTML = test.addr;
                 emailCell.innerHTML = test.email;
                 usernameCell.innerHTML = test.username;
-                passwordCell.innerHTML = test.password;
-                deleteCell.innerHTML = `<button onclick="deleteRow(${i})">刪除</button>`;
-                addCell.innerHTML = `<button onclick="addRow(${i})">修改</button>`;
+
+                showCell.innerHTML = `<button onclick="showRow(${i})"> 點選查看 </button>`;
                 hasdateresult = true;
             }
         }
@@ -225,38 +313,14 @@
         if (!hasdateresult) {
             let row = table.insertRow(-1);
             let cell = row.insertCell(0);
-            cell.colSpan = 8;
-            cell.innerHTML = "查無資料";
+            cell.colSpan = 7;
+            cell.innerHTML = "查無此筆帳號資料";
         }
-
         dateresult.appendChild(table);
     }
-    //僅測試
-    function deleteRow(index) {
-        let deleteconfirm = confirm("確定要刪除？");
-        if (deleteconfirm) {
-            testdata.splice(index, 1);
-            search();
-        }
-    }
-    /*
-    function deleteRow(index) {
-            let confirmation = confirm("確定要刪除？");
-            if (confirmation) {
-                $.ajax({
-                    url: '',
-                    method: 'POST',
-                    testdata: {  },
-                    success: function (response) {
-                    },
-                    error: function (xhr, status, error) {
-                    }
-                });
-            }
-        }
-  */
+
     //測試
-    function addRow(index) {
+    function showRow(index) {
         // 顯示
         div.style.display = "block";
 
@@ -267,26 +331,20 @@
         document.getElementById("addr").value = selectedData.addr;
         document.getElementById("email").value = selectedData.email;
         document.getElementById("username").value = selectedData.username;
-        document.getElementById("password").value = selectedData.password;
 
         // 確定
-
-
-
         let confirmButton = document.getElementById("confirm-button");
+        let nameVerify = document.getElementById('nameverify');
+        let telVerify = document.getElementById('telverify');
+        let addrVerify = document.getElementById('addrverify');
+        let emailVerify = document.getElementById('emailverify');
+        let usernameVerify = document.getElementById('usernameverify');
         confirmButton.onclick = function () {
-            selectedData.name = document.getElementById("name").value;
-            selectedData.tel = document.getElementById("tel").value;
-            selectedData.addr = document.getElementById("addr").value;
-            selectedData.email = document.getElementById("email").value;
-            selectedData.username = document.getElementById("username").value;
-            selectedData.password = document.getElementById("password").value;
             div.style.display = "none";
-
-
             search();
-        };
-    }
+        }
+    };
+
     let div = document.getElementById('background-pop');
     let close = document.getElementById('close-button');
     function show() {
