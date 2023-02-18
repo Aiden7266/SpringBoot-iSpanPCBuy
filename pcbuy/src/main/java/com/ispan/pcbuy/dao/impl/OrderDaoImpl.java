@@ -127,4 +127,14 @@ public class OrderDaoImpl implements OrderDao {
         List<Cart> cartList =namedParameterJdbcTemplate.query(sql, map, new CartRowMapper());
         return cartList;
     }
+
+    @Override
+    public void clearCart(Integer userId) {
+        String sql = "DELETE FROM cart WHERE user_id = :userId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
 }

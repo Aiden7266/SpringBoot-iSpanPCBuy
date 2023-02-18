@@ -21,4 +21,6 @@ public interface OrderDao {
     void createCart(Integer userId, List<Cart> cartList);
 
     List<Cart> getCart(Integer userId);
+
+    void clearCart(Integer userId);
 }

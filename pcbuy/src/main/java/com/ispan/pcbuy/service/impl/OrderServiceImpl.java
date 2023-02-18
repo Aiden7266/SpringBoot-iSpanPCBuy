@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
         Integer orderId = orderDao.createOrder(userId, totalAmount);
 
         orderDao.createOrderItems(orderId, orderItemList);
-
+        orderDao.clearCart(userId);
         return orderId;
     }
 
@@ -89,6 +89,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void clearCart(Integer userId) {
-
+        orderDao.clearCart(userId);
     }
 }

@@ -40,6 +40,49 @@
         font-size: 20px;
     }
 
+    #cartClear span{
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+    #order span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+    #cartClear span:after{
+        content: '↺';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -15px;
+        transition: 0.5s;
+    }
+    #order span:after{
+        content: '➠';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -15px;
+        transition: 0.5s;
+    }
+    #cartClear:hover span {
+        padding-right: 15px;
+    }
+    #order:hover span {
+        padding-right: 15px;
+    }
+    #cartClear:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+    #order:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
 </style>
 
 <body>
@@ -104,9 +147,9 @@
                     </tr>
                     <tr >
                         <td></td>
-                        <td style="font-style: inherit;font-size: xx-large;text-align: left" id="price">TotalPrice</td>
-                        <td style="text-align: right"><button class="button" style="background-color:#ec971f" id="cartClear" name="delete_cart" >清空購物車</button></td>
-                        <td style="text-align: left"> <button class="button" style="background-color:#4CAF50"  id="order" name="create_order">去買單</button></td>
+                        <td style="font-style: inherit;font-size: xx-large;text-align: left" id="price"></td>
+                        <td style="text-align: right"><button class="button" style="background-color:#ec971f;width: 150px" id="cartClear" name="delete_cart" ><span>清空購物車</span></button></td>
+                        <td style="text-align: left"> <button class="button" style="background-color:#4CAF50;width: 150px"  id="order" name="create_order"><span>送出訂單</span></button></td>
                     </tr>
                 </table>
            </div>
@@ -118,15 +161,19 @@
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
     jQuery.support.cors = true;
+    var userId
+    var username
+    var buyItemList = []
     $(document).ready(function () {
         $.ajax({
             url: '/users/current',
             type: "get",
             dataType: "json",
             success: function (userinfo) {
-                console.log(userinfo.username)
+                userId = userinfo.userId
+                username = userinfo.username
                 $.ajax({
-                    url: '/users/' + userinfo.userId +'/cart',
+                    url: '/users/' + userId +'/cart',
                     type: "get",
                     dataType: "json",
                     success:function (cart){
@@ -140,14 +187,62 @@
                             $('#cart').append('<td><input value="1" disabled></td>')
                             $('#cart').append('</tr>')
                             totalPrice = totalPrice + cart[key].price
+
+                            let buyItem = {}
+                            buyItem.productId = cart[key].productId
+                            buyItem.quantity = 1
+                            buyItemList.push(buyItem)
                         })
                         $('#price').text("總計：NT$" + totalPrice.toLocaleString('zh-TW'))
+                        console.log(buyItemList)
+                    },error:function (){
+
                     }
                 })
             }
         })
     })
+
+    function cartClear(){
+        if (buyItemList.length > 0){
+            $.ajax({
+                url: '/users/' + userId + '/cart',
+                type: "delete",
+                dataType: "text",
+                success:function (){
+                    // alert("已清空購物車")
+                    console.log("已清空購物車")
+                }
+            })
+        }else {
+            alert("購物車已經是空的了！")
+        }
+
+    }
+
     $('#cartClear').click(function () {
+        cartClear()
+    })
+    $('#order').click(function () {
+        if (buyItemList.length > 0){
+            $.ajax({
+                url: '/users/' + userId + '/orders',
+                type: "post",
+                dataType: "json",
+                contentType : 'application/json',
+                data:JSON.stringify({buyItemList}),
+                success:function (odrerData){
+                    console.log(odrerData)
+                    // cartClear()
+                    alert("成功創建訂單")
+                    location.href = "/member/member_order.html";
+                },error:function () {
+                    alert("創建訂單失敗")
+                }
+            })
+        }else {
+            alert("購物車是空的！")
+        }
 
     })
 </script>
