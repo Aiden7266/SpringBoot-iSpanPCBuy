@@ -117,7 +117,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Cart> getCart(Integer userId) {
-        String sql = "SELECT c.cart_id, c.user_id, c.product_id, p.product_name, p.description, p.image_url " +
+        String sql = "SELECT c.cart_id, c.user_id, c.product_id, p.product_name, p.price, p.description, p.image_url " +
                 "FROM cart as c " +
                 "LEFT JOIN product as p ON c.product_id = p.product_id " +
                 "WHERE c.user_id = :userId";

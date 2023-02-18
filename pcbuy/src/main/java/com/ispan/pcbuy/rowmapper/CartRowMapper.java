@@ -17,6 +17,7 @@ public class CartRowMapper implements RowMapper<Cart> {
 
         //額外擴充去接收JOIN後的數據
         cart.setProductName(resultSet.getString("product_name"));
+        cart.setPrice(resultSet.getInt("price"));
         cart.setDescription(resultSet.getString("description"));
         cart.setImageUrl(resultSet.getString("image_url"));
 

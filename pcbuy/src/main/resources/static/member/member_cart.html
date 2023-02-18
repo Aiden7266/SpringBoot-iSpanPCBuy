@@ -6,7 +6,7 @@
     <meta name="description">
     <meta name="author">
 
-    <title>購物車-會員頁面</title>
+     <title>購物車-會員頁面</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -15,9 +15,27 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!-- Page Specific CSS -->
-    <link rel="stylesheet" href="css/morris-0.4.3.min.css">
+
     <link rel="stylesheet" href="css/cart.css">
 </head>
+
+<style>
+    img{
+        width:80px
+    }
+    input {
+        margin: auto;
+        text-align: center;
+        border-radius: 20px;
+        width:25px
+    }
+    #cartTable td,th,tr{
+        vertical-align:middle;
+        text-align: center;
+        font-family:'Times New Roman';
+        BORDER-style:none;
+    }
+</style>
 
 <body>
 
@@ -61,222 +79,30 @@
         </div>
 
         <div class="out">
-                <table class="table" >
-                    <thead class="thead-primary">
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th></th>
-                        <th>產品</th>
-                        <th>價格</th>
-                        <th>數量</th>
-                        <th><button  class="button"  style="background-color:#ec971f" id="bt1" name="delete_cart">清空購物車</button></th>
-                        <th><button  class="button"   style="background-color:#4CAF50" id="bt2" name="create_order" >去買單</button></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-1.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-2.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-3.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-4.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-1.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-2.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-3.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity" >
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    <tr class="alert" role="alert">
-                        <td>
-                        </td>
-                        <td>
-                            <div class="img" style="background-image: url(images/product-4.png);"></div>
-                        </td>
-                        <td>
-                            <div class="description">
-                                <span>要放商品名稱 product_name </span>
-                                <span>description 的地方</span>
-                            </div>
-                        </td>
-                        <td>NT 價錢喔</td>
-
-                        <td class="quantity">
-                            <div>
-                                <input type="text" name="quantity" class="quantity form-control input-number" value="1" disabled>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="total">
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                        <td style="background-color: #99b19c"></td>
-                    </tr>
-<!--total price-->
-                    <tr class="total_price" role="alert">
-                        <td></td>
-                        <td  style="font-size: xx-large;font-family:'Times New Roman'; text-align: left">總金額</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="font-size: xx-large;font-family:'Times New Roman'; text-align: left">NT $123,000</td>
+                <table class="table" id="cartTable">
+                        <tr>
+                            <th>圖片</th>
+                            <th>名稱</th>
+                            <th>價格</th>
+                            <th>數量</th>
                         </tr>
-                    </tbody>
+                    <tbody id="cart"></tbody>
+
+                    <tr class="total">
+                        <td style="background-color: #eab0b0"></td>
+                        <td style="background-color: #eab0b0"></td>
+                        <td style="background-color: #eab0b0"></td>
+                        <td style="background-color: #eab0b0"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                        <td style="font-size: xx-large;text-align: left">TotalPrice</td>
+                        <td style="text-align: right"><button class="button" style="background-color:#ec971f" id="bt1" name="delete_cart" >清空購物車</button></td>
+                        <td style="text-align: left"> <button class="button" style="background-color:#4CAF50"  id="bt2" name="create_order">去買單</button></td>
+                    </tr>
                 </table>
            </div>
          </div>
@@ -285,6 +111,34 @@
 <!-- JavaScript -->
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+    jQuery.support.cors = true;
+    $(document).ready(function () {
+        $.ajax({
+            url: '/users/current',
+            type: "get",
+            dataType: "json",
+            success: function (userinfo) {
+                console.log(userinfo.username)
+                $.ajax({
+                    url: '/users/' + userinfo.userId +'/cart',
+                    type: "get",
+                    dataType: "json",
+                    success:function (cart){
+                        $.each(cart, function (key, value) {
+                            $('#cart').append('<tr>')
+                            $('#cart').append('<td><img src=' + cart[key].imageUrl +'/></td>')
+                            $('#cart').append('<td>' + cart[key].productName + '</td>')
+                            $('#cart').append('<td>' + cart[key].price + '</td>')
+                            $('#cart').append('<td><input value="1" disabled></td>')
+                            $('#cart').append('</tr>')
+                        })
+                    }
+                })
+            }
+        })
+    })
+</script>
 
 
 </html>

@@ -9,7 +9,8 @@ public class Cart {
     private Integer userId;
     private Integer productId;
 
-    private String productName;
-    private String description;
-    private String imageUrl;
+    private String  productName;
+    private Integer price;
+    private String  description;
+    private String  imageUrl;
 }
