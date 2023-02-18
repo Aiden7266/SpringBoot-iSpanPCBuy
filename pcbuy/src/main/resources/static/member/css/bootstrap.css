@@ -2632,11 +2632,6 @@ input[type="button"].btn-block {
           transition: height 0.35s ease;
 }
 
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
 
 .glyphicon {
   position: relative;
@@ -4796,17 +4791,16 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+  background-color: #ebc59c;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: whitesmoke;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #ffffff;
+  color: darkgray;
   background-color: transparent;
 }
 
@@ -6619,7 +6613,7 @@ button.close {
 }
 
 .text-hide {
-  font: 0/0 a;
+
   color: transparent;
   text-shadow: none;
   background-color: transparent;
@@ -6635,9 +6629,7 @@ button.close {
   position: fixed;
 }
 
-@-ms-viewport {
-  width: device-width;
-}
+
 
 .visible-xs,
 tr.visible-xs,
