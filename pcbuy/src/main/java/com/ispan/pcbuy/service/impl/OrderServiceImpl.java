@@ -2,17 +2,20 @@ package com.ispan.pcbuy.service.impl;
 
 import com.ispan.pcbuy.dao.OrderDao;
 import com.ispan.pcbuy.dao.ProductDao;
+import com.ispan.pcbuy.dao.UserDao;
 import com.ispan.pcbuy.dto.BuyItem;
 import com.ispan.pcbuy.dto.CreateCartRequest;
 import com.ispan.pcbuy.dto.CreateOrderRequest;
-import com.ispan.pcbuy.model.Cart;
-import com.ispan.pcbuy.model.Order;
-import com.ispan.pcbuy.model.OrderItem;
-import com.ispan.pcbuy.model.Product;
+import com.ispan.pcbuy.dto.OrderStateRequest;
+import com.ispan.pcbuy.model.*;
 import com.ispan.pcbuy.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,13 @@ import java.util.List;
 @Component
 public class OrderServiceImpl implements OrderService {
 
+    private final static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private ProductDao productDao;
@@ -29,11 +37,34 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest) {
+        //檢查 user 是否存在
+
+        User user = userDao.getUserById(userId);
+
+        if (user == null){
+            log.warn("該 userId {} 不存在",userId);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+
+
         int totalAmount = 0;
         List<OrderItem> orderItemList = new ArrayList<>();
 
         for(BuyItem buyItem : createOrderRequest.getBuyItemList()){
             Product product = productDao.getProductById(buyItem.getProductId());
+
+            // 檢查 product 是否存在、庫存是否足夠
+            if(product == null){
+                log.warn("商品 {} 不存在", buyItem.getProductId());
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            } else if (product.getStock() < buyItem.getQuantity()) {
+                log.warn("商品 {} 庫存數量不足，無法購買！剩餘庫存{}，欲購買數量{}", product.getProductName(),product.getStock(),buyItem.getQuantity());
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+
+            //扣除商品庫存
+            productDao.updateStock(product.getProductId(), product.getStock() - buyItem.getQuantity());
 
             // 計算總價錢
             int amount = buyItem.getQuantity() * product.getPrice();
@@ -90,5 +121,37 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void clearCart(Integer userId) {
         orderDao.clearCart(userId);
+    }
+
+    @Override
+    public List<Order> getOrderByUserId(Integer userId) {
+
+        List<Order> orderList = orderDao.getOrderByUserId(userId);
+
+        for (int i=0 ; i<orderList.size() ; i++){
+
+            List<OrderItem> orderItemList =orderDao.getOrderItemsByOrderId(orderList.get(i).getOrderId());
+
+            orderList.get(i).setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
+
+    @Override
+    public void updateOrders(Integer userId, OrderStateRequest orderStateRequest) {
+        Integer orderId = orderStateRequest.getOrderId();
+        String state = orderStateRequest.getState();
+
+        List<Order> orderList = orderDao.getOrderByUserId(userId);
+        for(Order order:orderList){
+            if (orderId.equals(order.getOrderId())){
+                orderDao.updateOrders(orderId, state);
+                break;
+            }else {
+                log.warn("該筆訂單不存在於 {} 使用者下",userId);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        }
     }
 }

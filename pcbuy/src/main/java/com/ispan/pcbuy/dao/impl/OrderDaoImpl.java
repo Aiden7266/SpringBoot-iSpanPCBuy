@@ -29,11 +29,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Integer createOrder(Integer userId, Integer totalAmount) {
-        String sql = "INSERT INTO `order` (user_id, total_amount, created_date, last_modified_date)" +
-                "VALUES (:userId, :totalAmount, :createDate, :lastModifiedDate)";
+        String sql = "INSERT INTO `order` (user_id, total_amount, `state`, created_date, last_modified_date)" +
+                "VALUES (:userId, :totalAmount, :state, :createDate, :lastModifiedDate)";
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("totalAmount", totalAmount);
+        map.put("state", "尚未結帳");
 
         Date now = new Date();
         map.put("createDate", now);
@@ -69,7 +70,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order getOrderById(Integer orderId) {
-        String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date " +
+        String sql = "SELECT order_id, user_id, total_amount, `state`, created_date, last_modified_date " +
                      "FROM `order` WHERE order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
@@ -136,5 +137,34 @@ public class OrderDaoImpl implements OrderDao {
         map.put("userId", userId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    @Override
+    public List<Order> getOrderByUserId(Integer userId) {
+        String sql = "SELECT order_id, user_id, total_amount, `state`, created_date, last_modified_date " +
+                "FROM `order` WHERE user_id = :userId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<Order> orderList = namedParameterJdbcTemplate.query(sql, map, new OrderRowMapper());
+
+        if(orderList.size() > 0) {
+            return orderList;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void updateOrders(Integer orderId, String state) {
+        String sql = "UPDATE `order` SET `state` = :state, last_modified_date = :lastModifiedDate " +
+                "WHERE order_id = :orderId ";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderId", orderId);
+        map.put("state", state);
+        map.put("lastModifiedDate", new Date());
+        namedParameterJdbcTemplate.update(sql,map);
     }
 }

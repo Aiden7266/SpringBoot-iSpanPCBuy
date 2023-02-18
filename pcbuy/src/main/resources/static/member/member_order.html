@@ -1,26 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description">
-    <meta name="author">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description">
+  <meta name="author">
 
-    <title>訂單詳情-會員頁面</title>
+  <title>購物車-會員頁面</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!-- Add custom CSS here -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-  </head>
+  <!-- Add custom CSS here -->
+  <link href="css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <!-- Page Specific CSS -->
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.js"></script>
 
-  <body>
+<style>
+  img{
+    width:100px;
+    height: 100px;
+  }
+  input {
+    margin: auto;
+    text-align: center;
+    border-radius: 20px;
+    width:25px
+  }
+  #cartTable td,th,tr{
+    vertical-align:middle;
+    text-align: center;
+    font-family:'Times New Roman';
+    BORDER-style:none;
+  }
+  #cart tr,td{
+    /*height: 45px;*/
+    font-size: 20px;
+  }
+
+  #cartClear span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #order span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #cartClear span:after{
+    content: '↺';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+  }
+  #order span:after{
+    content: '➠';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+  }
+  #cartClear:hover span {
+    padding-right: 15px;
+  }
+  #order:hover span {
+    padding-right: 15px;
+  }
+  #cartClear:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  #order:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  /*.collapsible {*/
+  /*  background-color: #777;*/
+  /*  color: white;*/
+  /*  cursor: pointer;*/
+  /*  padding: 18px;*/
+  /*  width: 100%;*/
+  /*  border: none;*/
+  /*  text-align: left;*/
+  /*  outline: none;*/
+  /*  font-size: 15px;*/
+  /*}*/
+
+  /*.active, .collapsible:hover {*/
+  /*  background-color: #555;*/
+  /*}*/
+
+  /*.content {*/
+  /*  padding: 0 18px;*/
+  /*  max-height: 0;*/
+  /*  overflow: hidden;*/
+  /*  transition: max-height 0.2s ease-out;*/
+  /*  background-color: #f1f1f1;*/
+  /*}*/
+
+</style>
+
+<body>
+
 
   <div id="wrapper">
-    <!--        style="background-color:#eab0b0"-->
-    <nav class="navbar navbar-inverse navbar-fixed-top"  >
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle">
           <span class="icon-bar"></span>
@@ -29,210 +124,124 @@
         </button>
         <a class="navbar-brand" href="member_index.html"><img src="../assets/images/PCBUY_logo.png" style="width: 80px;height: 17px;position: relative">&nbsp;會員中心</a>
       </div>
-
-      <div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
           <li><a href="member_cart.html"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
-          <li><a href="member_order.html" style="background-color: #ebc59c; color:black;"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
+          <li><a href="member_order.html"  style="background-color: #ebc59c; color:black;"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
           <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
           <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
           <li><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
         </ul>
-
         <ul class="nav navbar-nav navbar-right navbar-user">
-          <li>
-            <a href=""><i class="fa fa-user"></i> lisa </a>
-          <li></li>
-          <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
-          </li>
+          <li class="dropdown user-dropdown">
+            <a href="#"><i class="fa fa-user"></i> lisa </a>
+          <li class="divider"></li>
+          <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out </a></li>
         </ul>
       </div>
     </nav>
 
       <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                  <h1>訂單詳情</h1>
-                  <ol class="breadcrumb">
-                      <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-                      <li class="active"> 我的訂單 </li>
-                  </ol>
-            </div>
+          <div class="col-lg-12">
+            <h1>我的訂單</h1>
+            <ol class="breadcrumb">
+              <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
+              <li> 我的訂單 </li>
+            </ol>
+          </div>
         </div>
 
-      <table class="table table-striped">
-            <thead>
-                  <tr>
-                    <th scope="col">訂單編號</th>
-                    <th scope="col">202301310003</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-            </thead>
-            <tbody>
-                  <tr>
-                    <th scope="row">產品</th>
-                    <td>(照片)</td>
-                    <td>(品名)</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>(照片)</td>
-                    <td>(品名)</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>(照片)</td>
-                    <td>(品名)</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">收件地址</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">下單時間</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">訂單金額</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">處理狀態</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-            </tbody>
-      </table>
+        <div class="out" id="allOrder">
+          <table class="table">
+            <tr>
+              <th>圖片</th>
+              <th>名稱</th>
+              <th>價格</th>
+              <th>狀態</th>
+            </tr>
+            </table>
+        </div>
 
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">訂單編號</th>
-            <th scope="col">202301310003</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">產品</th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">收件地址</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">下單時間</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">訂單金額</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">處理狀態</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          </tbody>
-        </table>
+<!--        <div class="out" id="allOrder">-->
+
+<!--          <div>-->
+<!--            <table class="table" >-->
+<!--              <tr>-->
+<!--                <th>圖片</th>-->
+<!--                <th>名稱</th>-->
+<!--                <th>價格</th>-->
+<!--                <th>狀態</th>-->
+<!--              </tr>-->
+<!--              <tbody >-->
 
 
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">訂單編號</th>
-            <th scope="col">202301310003</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">產品</th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row"></th>
-            <td>(照片)</td>
-            <td>(品名)</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">收件地址</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">下單時間</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">訂單金額</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">處理狀態</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          </tbody>
-        </table>
-      
+<!--              </tbody>-->
+<!--            </table>-->
+
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <table class="table">-->
+<!--              <tr>-->
+<!--                <td>圖片</td>-->
+<!--                <td>名稱</td>-->
+<!--                <td>價格</td>-->
+<!--                <td>狀態</td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--          </div>-->
+
+
+
+<!--        </div>-->
+
+
+      </div>
     </div>
-    </div>
+  </div>
 
-    <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
+</body>
+<!-- JavaScript -->
+<script type="text/javascript">
+  $(document).ready(function () {
 
-  </body>
+    var userId
+    var username
+
+    $.ajax({
+      url: '/users/current',
+      type: "get",
+      dataType: "json",
+      success: function (userinfo) {
+        userId = userinfo.userId
+        username = userinfo.username
+        $.ajax({
+          url: '/users/' + userId + '/orders',
+          type: "get",
+          dataType: "json",
+          success: function (orders) {
+            console.log(orders)
+            $.each(orders, function (key, value) {
+
+              $('#allOrder').after('<div class="out"><table class="table" id='+ key +'><tr><th>訂單編號：'+ orders[key].orderId +'</th><th>'+ new Date(orders[key].createdDate
+              ).toLocaleDateString() +'</th><th>金額：'+ orders[key].totalAmount +'</th><th>'+ orders[key].state +'</th></tr></table></div>')
+
+              $.each(orders[key].orderItemList, function (itemKey, value){
+                $('#'+ key).append('<tr><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td>' + orders[key].orderItemList[itemKey].productName + '</td><td>' + orders[key].orderItemList[itemKey].amount + '</td><td>' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+
+              })
+            })
+          }
+        })
+      }
+    })
+  })
+
+  $(this).click(function () {
+    $('#Div1').toggle(300);
+  })
+</script>
+
 </html>

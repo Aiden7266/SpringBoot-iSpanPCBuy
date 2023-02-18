@@ -1,7 +1,5 @@
 package com.ispan.pcbuy.dao;
 
-import com.ispan.pcbuy.dto.CreateCartRequest;
-import com.ispan.pcbuy.dto.CreateOrderRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
 import com.ispan.pcbuy.model.OrderItem;
@@ -23,4 +21,10 @@ public interface OrderDao {
     List<Cart> getCart(Integer userId);
 
     void clearCart(Integer userId);
+
+    List<Order> getOrderByUserId(Integer userId);
+
+    void updateOrders(Integer orderId, String state);
+
+
 }

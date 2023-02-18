@@ -2,6 +2,7 @@ package com.ispan.pcbuy.service;
 
 import com.ispan.pcbuy.dto.CreateCartRequest;
 import com.ispan.pcbuy.dto.CreateOrderRequest;
+import com.ispan.pcbuy.dto.OrderStateRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
 
@@ -18,4 +19,8 @@ public interface OrderService {
     List<Cart> getCart(Integer userId);
 
     void clearCart(Integer userId);
+
+    List<Order> getOrderByUserId(Integer userId);
+
+    void updateOrders(Integer userId, OrderStateRequest orderStateRequest);
 }
