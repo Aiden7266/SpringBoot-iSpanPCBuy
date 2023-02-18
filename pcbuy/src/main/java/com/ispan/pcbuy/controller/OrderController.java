@@ -45,4 +45,11 @@ public class OrderController {
         List<Cart> cartList = orderService.getCart(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(cartList);
     }
+
+    @DeleteMapping("/users/{userId}/cart")
+    public void clearCart(@PathVariable Integer userId){
+
+        orderService.clearCart(userId);
+
+    }
 }

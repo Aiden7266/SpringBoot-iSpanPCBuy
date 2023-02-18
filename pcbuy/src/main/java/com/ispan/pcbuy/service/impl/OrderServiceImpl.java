@@ -86,4 +86,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Cart> getCart(Integer userId) {
         return orderDao.getCart(userId);
     }
+
+    @Override
+    public void clearCart(Integer userId) {
+
+    }
 }

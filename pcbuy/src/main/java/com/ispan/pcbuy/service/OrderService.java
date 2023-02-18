@@ -16,4 +16,6 @@ public interface OrderService {
     void createCart(Integer userId, CreateCartRequest createCartRequest);
 
     List<Cart> getCart(Integer userId);
+
+    void clearCart(Integer userId);
 }
