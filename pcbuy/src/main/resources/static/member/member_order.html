@@ -149,59 +149,26 @@
             <ol class="breadcrumb">
               <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
               <li> 我的訂單 </li>
+              <li><a href="#" id="allToggle"> 一鍵收展☟ </a></li>
             </ol>
           </div>
         </div>
 
         <div class="out" id="allOrder">
-          <table class="table">
-            <tr>
-              <th>圖片</th>
-              <th>名稱</th>
-              <th>價格</th>
-              <th>狀態</th>
-            </tr>
-            </table>
+<!--          <table class="table">-->
+<!--            <tr>-->
+<!--              <th>圖片</th>-->
+<!--              <th>名稱</th>-->
+<!--              <th>價格</th>-->
+<!--              <th>狀態</th>-->
+<!--            </tr>-->
+<!--            </table>-->
         </div>
-
-<!--        <div class="out" id="allOrder">-->
-
-<!--          <div>-->
-<!--            <table class="table" >-->
-<!--              <tr>-->
-<!--                <th>圖片</th>-->
-<!--                <th>名稱</th>-->
-<!--                <th>價格</th>-->
-<!--                <th>狀態</th>-->
-<!--              </tr>-->
-<!--              <tbody >-->
-
-
-<!--              </tbody>-->
-<!--            </table>-->
-
-<!--          </div>-->
-
-<!--          <div>-->
-<!--            <table class="table">-->
-<!--              <tr>-->
-<!--                <td>圖片</td>-->
-<!--                <td>名稱</td>-->
-<!--                <td>價格</td>-->
-<!--                <td>狀態</td>-->
-<!--              </tr>-->
-<!--            </table>-->
-<!--          </div>-->
-
-
-
-<!--        </div>-->
-
 
       </div>
     </div>
   </div>
-
+  <button value=""/>
 </body>
 <!-- JavaScript -->
 <script type="text/javascript">
@@ -225,11 +192,11 @@
             console.log(orders)
             $.each(orders, function (key, value) {
 
-              $('#allOrder').after('<div class="out"><table class="table" id='+ key +'><tr><th>訂單編號：'+ orders[key].orderId +'</th><th>'+ new Date(orders[key].createdDate
-              ).toLocaleDateString() +'</th><th>金額：'+ orders[key].totalAmount +'</th><th>'+ orders[key].state +'</th></tr></table></div>')
+              $('#allOrder').after('<div class="out"><table class="table" id='+ key +'><tr><th>訂單編號：'+ orders[key].orderId +'</th><th>金額：'+ orders[key].totalAmount + " " + orders[key].state +'</th><th>' + new Date(orders[key].createdDate
+              ).toLocaleDateString() +'</th><th><button value='+ orders[key].orderId +' class="toggleBtn">☝</th></tr></table></div>')
 
               $.each(orders[key].orderItemList, function (itemKey, value){
-                $('#'+ key).append('<tr><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td>' + orders[key].orderItemList[itemKey].productName + '</td><td>' + orders[key].orderItemList[itemKey].amount + '</td><td>' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+                $('#'+ key).append('<tr class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td>' + orders[key].orderItemList[itemKey].productName + '</td><td>' + orders[key].orderItemList[itemKey].amount + '</td><td>' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
 
               })
             })
@@ -238,10 +205,17 @@
       }
     })
   })
-
-  $(this).click(function () {
-    $('#Div1').toggle(300);
+  $(document).on("click", ".toggleBtn",function () {
+    var selectedId = $(this).closest('table').attr('id')
+    var orderId = $(this).val()
+    console.log(orderId)
+    $('.'+selectedId).toggle(300)
   })
+
+  $('#allToggle').click(function () {
+    $('tr[class]').toggle(300)
+  })
+
 </script>
 
 </html>
