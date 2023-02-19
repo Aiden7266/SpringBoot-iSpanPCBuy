@@ -104,7 +104,7 @@
                 <li><a href="member_order.html"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
                 <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
                 <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
-                <li><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
+                <li id="promodel" style="display: none"><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
@@ -173,6 +173,7 @@
                 userId = userinfo.userId
                 username = userinfo.username
                 name = userinfo.name
+                if(userinfo.auth.includes('admin')){$('#promodel').show()}
                 $('#loginName').append(' ' + name)
                 $.ajax({
                     url: '/users/' + userId +'/cart',
@@ -185,7 +186,7 @@
                             $('#cart').append('<tr>')
                             $('#cart').append('<td><img src=' + url +'/></td>')
                             $('#cart').append('<td>' + cart[key].productName + '</td>')
-                            $('#cart').append('<td> NT$ ' + cart[key].price.toLocaleString('zh-TW')  + '</td>')
+                            $('#cart').append('<td> NT$ ' + cart[key].price.toLocaleString('zh-TW')  + ' 元</td>')
                             $('#cart').append('<td><input value="1" disabled></td>')
                             $('#cart').append('</tr>')
                             totalPrice = totalPrice + cart[key].price
@@ -195,7 +196,7 @@
                             buyItem.quantity = 1
                             buyItemList.push(buyItem)
                         })
-                        $('#price').text("總計：NT$" + totalPrice.toLocaleString('zh-TW'))
+                        $('#price').text("總計：NT$ " + totalPrice.toLocaleString('zh-TW') + " 元")
                         console.log(buyItemList)
                     },error:function (){
 
@@ -212,8 +213,8 @@
                 type: "delete",
                 dataType: "text",
                 success:function (){
-                    // alert("已清空購物車")
-                    console.log("已清空購物車")
+                    alert("已清空購物車")
+                    // console.log("已清空購物車")
                     location.reload()
                 }
             })

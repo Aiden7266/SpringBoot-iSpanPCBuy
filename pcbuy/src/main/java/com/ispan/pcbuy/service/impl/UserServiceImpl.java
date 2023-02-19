@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.service.impl;
 
 import com.ispan.pcbuy.dao.UserDao;
+import com.ispan.pcbuy.dto.PasswordUpdateRequest;
 import com.ispan.pcbuy.dto.UserLoginRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
@@ -77,5 +78,33 @@ public class UserServiceImpl implements UserService {
         userDao.userUpdate(userId, userUpdateRequest);
         User user = userDao.getUserById(userId);
         return user;
+    }
+
+    @Override
+    public void pwdUpdate(Integer userId, PasswordUpdateRequest passwordUpdateRequest) {
+        User user = userDao.getUserById(userId);
+        //判斷使用者輸入的密碼是否與資料庫內的一致
+        boolean matches = passwordEncoder.matches(passwordUpdateRequest.getPasswordOld(), user.getPassword());
+        if(matches){
+            String BCryptPasswordNew = passwordEncoder.encode(passwordUpdateRequest.getPasswordNew());
+            userDao.pwdUpdate(userId, BCryptPasswordNew);
+        }else {
+            log.warn("密碼錯誤！");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @Override
+    public void deleteUser(Integer userId, String password) {
+        User user = userDao.getUserById(userId);
+        //判斷使用者輸入的密碼是否與資料庫內的一致
+        boolean matches = passwordEncoder.matches(password, user.getPassword());
+        if(matches){
+            userDao.deleteUser(userId);
+        }else {
+            log.warn("密碼錯誤！");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }

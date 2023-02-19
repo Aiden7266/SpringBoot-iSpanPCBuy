@@ -1,10 +1,13 @@
 package com.ispan.pcbuy.controller;
 
+import com.ispan.pcbuy.dto.PasswordUpdateRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserDetailsService;
 import com.ispan.pcbuy.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,11 +37,25 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> register(@PathVariable Integer userId,
+    public ResponseEntity<User> updateUser(@PathVariable Integer userId,
                                          @RequestBody @Valid UserUpdateRequest userUpdateRequest){
-//        System.out.println("呼叫註冊功能");
         User user = userService.userUpdate(userId, userUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @PostMapping("/{userId}/pwdupdate")
+    public ResponseEntity<HttpStatus> updatePwd(@PathVariable Integer userId,
+                                       @RequestBody @Valid PasswordUpdateRequest passwordUpdateRequest){
+        System.out.println("呼叫改密碼");
+        userService.pwdUpdate(userId, passwordUpdateRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Integer userId,
+                                                 @RequestParam String password){
+        userService.deleteUser(userId, password);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/current")
