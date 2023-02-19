@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="#welcome" class="logo">
-                        <img src="/assets/images/PCBUY_logo.png" style="width: 120px"/>
+                        <img src="/assets/images/PCBUY_logo.png" style="width: 120px;"/>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -35,7 +35,7 @@
                     <ul class="nav">
                         <li><a href="#purchase"> 產品購買 </a></li>
                         <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
-                        <li><a href="rank.html"> 天梯效能排行 </a></li>
+                        <li><a href="rank.html"> 效能排行天梯 </a></li>
                         <li><a href="contact_us.html"> 聯絡我們 </a></li>
                         <li><a href="/member/member_index.html" id="memberDiv" class="fa fa-user">會員中心</a></li>
                     </ul>
@@ -58,9 +58,10 @@
             <div class="row">
                 <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
                     <br><br><br>
-                    <span style="font-size: 50px;color: snow;font-family:serif,sans-serif,cursive,fantasy,monospace;">開始打造屬於你的電腦</span>
-                    <p></p>
-                    <a href="#purchase" class="main-button-slider">點我選購</a>
+                    <p style="font-size: xx-large;font-family: 'Hoefler Text'">&nbsp;PCBUY&nbsp;<i class="fa fa-gears"></i></p>
+                    <span style="font-size: 50px;color: snow;font-family:serif,sans-serif,cursive,fantasy,monospace;">打造屬於你的電腦</span>
+                    <p style="font-family: 'Hoefler Text'">Let's build a computer</p>
+                    <a href="#purchase" class="main-button-slider">立即選購</a>
                 </div>
             </div>
         </div>
@@ -69,220 +70,219 @@
 </div>
 
 <!-- ***** Welcome Area End ***** -->
-<div id="jump"></div>
-<br><br><br><br><br>
-<!-- ***** Features Small Start ***** -->
-<div class="container shop" id="purchase" style="font-family:sans-serif;">
+<div id="jump" ></div>
+<div  style="background-color: snow">
+    <br><br><br><br><br>
+    <!-- ***** Features Small Start ***** -->
+    <div class="container shop" id="purchase" style="font-family:sans-serif;">
 
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center; ">
-            <div class="col-3">
-                <img id="cpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
-            </div>
-            <div class="col-5" style= "display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">處理器</span>
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center; ">
+                <div class="col-3">
+                    <img id="cpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
                 </div>
-                <br>
-                <select id = "CPU" onchange="onSelectCPU()">
-                    <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項處理器</option>
-
-                    <optgroup label="intel" id="intel"></optgroup>
-                    <optgroup label="AMD" id="AMD"></optgroup>
-
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style= "text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="cpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img id="mbImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" width="130" height="130">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">主機板</span>
+                <div class="col-5" style= "display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">處理器</span>
+                    </div>
+                    <br>
+                    <select id = "CPU" onchange="onSelectCPU()">
+                        <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項處理器</option>
+                            <optgroup label="intel" id="intel"></optgroup>
+                            <optgroup label="AMD" id="AMD"></optgroup>
+                    </select>
                 </div>
-                <br>
-                <select id = "MB" onchange="onSelectMB()">
-                    <option selected="selected" disabled="disabled" id="disabledMB" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" value="" socket="" price="" watt="">請選擇一項主機板</option>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="mbPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img id="dramImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" width="130" height="130" style="">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
-                </div>
-                <br>
-                <select id = "DRAM" onchange="onSelectDRAM()">
-                    <option selected="selected" disabled="disabled" id="disabledDRAM" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" value="" socket="" price="" watt="">請選擇一項記憶體</option>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="dramPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img  id="gpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" width="130" height="130">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
-                </div>
-                <br>
-                <select id = "GPU" onchange="onSelectGPU()">
-                    <option selected="selected" disabled="disabled" id="disabledGPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" value="" series="" price="" watt="">請選擇一項顯示卡</option>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="gpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;"—>
-            <div class="col-3">
-                <img id="storageImage" class="imgbig"  src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" width="130" height="130">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">硬碟</span>
-                </div>
-                <br>
-                <select id = "STORAGE" onchange="onSelectSTORAGE()">
-                    <option selected="selected" disabled="disabled" id="disabledSTORAGE" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" value="" series="" price="" watt="">請選擇一項硬碟</option>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a  id="storagePrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img id="coolerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" width="130" height="130" style="">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">散熱器</span>
-                </div>
-                <br>
-                <select id = "COOLER" onchange="onSelectCOOLER()">
-                    <option  selected="selected" disabled="disabled" id="disabledCOOLER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" value="" series="" price="" watt="">請選擇一項散熱器</option>
-                    <optgroup label="空冷式" id="coolers"></optgroup>
-                    <optgroup label="水冷式" id="coolers-Liquid"></optgroup>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="coolerPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img id="powerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" width="130" height="130" style="">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">電源供應器</span>
-                </div>
-                <br>
-                <select id = "POWER" onchange="onSelectPOWER()">
-                    <option  selected="selected" disabled="disabled" id="disabledPOWER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" value="" series="" price="" watt="">請選擇一項電源供應器</option>
-                    <optgroup label="450瓦以上" id="power_450"></optgroup>
-                    <optgroup label="650瓦以上" id="power_650"></optgroup>
-                    <optgroup label="850瓦以上" id="power_850"></optgroup>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="powerPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div class="col-3">
-                <img id="caseImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" width="130" height="130" style="">
-            </div>
-            <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="h5 my-2">
-                    <span class="badge  font-weight-bold" style="font-size: 25px;color:black">機殼</span>
-                </div>
-                <br>
-                <select id = "CASE" onchange="onSelectCASE()">
-                    <option  selected="selected" disabled="disabled" id="disabledCASE" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" value="" series="" price="" watt="">請選擇一項機殼</option>
-                </select>
-            </div>
-            <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
-            <div class="col-2" style="text-align:right;margin-right: auto">
-                <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
-                <a id="casePrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="itemcount">
-        <div class="inner">
-            <div class="d-flex">
-                <div class="bordtest " style="display: flex;">
-                    <div class="anyitem " style="font-size: 20px;"> 耗電量 </div>
-                    <a id="totalWatt" class="font-weight-bold text-warning text-decoration-none "
-                       style="font-size: 25px;margin-left:30px ">0瓦</a>
-                </div>
-                <div class="bordtest " style="display: flex;">
-                    <div class="anyitem" style="font-size: 20px;">總價錢</div>
-                    <a id="totalPrice" class="font-weight-bold text-danger text-decoration-none "
-                       style="font-size: 25px;margin-left:30px;">0元</a>
-                </div>
-                <div class="bordtest" style="margin-left: auto;">
-                    <!--                        <button type="submit" id="clear" class="main-button">清空重選</button>-->
-                </div>
-                <div class="bordtest" style=" margin-left: auto;">
-                    <input type="button" id="CART" class="shopbtn" value="加進購物車"></input>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style= "text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="cpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
                 </div>
             </div>
         </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img id="mbImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" width="130" height="130">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">主機板</span>
+                    </div>
+                    <br>
+                    <select id = "MB" onchange="onSelectMB()">
+                        <option selected="selected" disabled="disabled" id="disabledMB" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" value="" socket="" price="" watt="">請選擇一項主機板</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="mbPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img id="dramImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">記憶體</span>
+                    </div>
+                    <br>
+                    <select id = "DRAM" onchange="onSelectDRAM()">
+                        <option selected="selected" disabled="disabled" id="disabledDRAM" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" value="" socket="" price="" watt="">請選擇一項記憶體</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="dramPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img  id="gpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" width="130" height="130">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">顯示卡</span>
+                    </div>
+                    <br>
+                    <select id = "GPU" onchange="onSelectGPU()">
+                        <option selected="selected" disabled="disabled" id="disabledGPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" value="" series="" price="" watt="">請選擇一項顯示卡</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="gpuPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;"—>
+                <div class="col-3">
+                    <img id="storageImage" class="imgbig"  src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" width="130" height="130">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">硬碟</span>
+                    </div>
+                    <br>
+                    <select id = "STORAGE" onchange="onSelectSTORAGE()">
+                        <option selected="selected" disabled="disabled" id="disabledSTORAGE" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" value="" series="" price="" watt="">請選擇一項硬碟</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a  id="storagePrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img id="coolerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">散熱器</span>
+                    </div>
+                    <br>
+                    <select id = "COOLER" onchange="onSelectCOOLER()">
+                        <option  selected="selected" disabled="disabled" id="disabledCOOLER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" value="" series="" price="" watt="">請選擇一項散熱器</option>
+                        <optgroup label="空冷式" id="coolers"></optgroup>
+                        <optgroup label="水冷式" id="coolers-Liquid"></optgroup>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="coolerPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$&nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img id="powerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">電源供應器</span>
+                    </div>
+                    <br>
+                    <select id = "POWER" onchange="onSelectPOWER()">
+                        <option  selected="selected" disabled="disabled" id="disabledPOWER" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" value="" series="" price="" watt="">請選擇一項電源供應器</option>
+                        <optgroup label="450瓦以上" id="power_450"></optgroup>
+                        <optgroup label="650瓦以上" id="power_650"></optgroup>
+                        <optgroup label="850瓦以上" id="power_850"></optgroup>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="powerPrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$ &nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <div class="col-3">
+                    <img id="caseImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" width="130" height="130" style="">
+                </div>
+                <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="h5 my-2">
+                        <span class="badge  font-weight-bold" style="font-size: 25px;color:black">機殼</span>
+                    </div>
+                    <br>
+                    <select id = "CASE" onchange="onSelectCASE()">
+                        <option  selected="selected" disabled="disabled" id="disabledCASE" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" value="" series="" price="" watt="">請選擇一項機殼</option>
+                    </select>
+                </div>
+                <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
+                <div class="col-2" style="text-align:right;margin-right: auto">
+                    <div class="badge text-black-50 font-weight-bold" style="font-size: 20px;">價格</div><br>
+                    <a id="casePrice" class="font-weight-bold text-danger text-decoration-none" style="font-size: 25px;">NT$ &nbsp;</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="itemcount">
+            <div class="inner">
+                <div class="d-flex">
+                    <div class="bordtest " style="display: flex;">
+                        <div class="anyitem " style="font-size: 20px;"> 耗電量 </div>
+                        <a id="totalWatt" class="font-weight-bold text-warning text-decoration-none "
+                           style="font-size: 25px;margin-left:30px ">0瓦</a>
+                    </div>
+                    <div class="bordtest " style="display: flex;">
+                        <div class="anyitem" style="font-size: 20px;">總價錢</div>
+                        <a id="totalPrice" class="font-weight-bold text-danger text-decoration-none "
+                           style="font-size: 25px;margin-left:30px;">NT$&nbsp;0元</a>
+                    </div>
+                    <div class="bordtest" style="margin-left: auto;">
+                        <!--                        <button type="submit" id="clear" class="main-button">清空重選</button>-->
+                    </div>
+                    <div class="bordtest" style=" margin-left: auto;">
+                        <input type="button" id="CART" class="shopbtn" value="加進購物車"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 
 <!-- ***** Footer Start ***** -->
@@ -372,7 +372,7 @@
 
         totalPrice = parseInt(cpuPrice) + parseInt(mbPrice) + parseInt(dramPrice) + parseInt(gpuPrice) + parseInt(storagePrice) + parseInt(coolerPrice) + parseInt(powerPrice) + parseInt(casePrice)
         $('#totalWatt').text(totalWatt + "瓦")
-        $('#totalPrice').text(totalPrice + "元")
+        $('#totalPrice').text("NT$ " + totalPrice + "元")
     }
 
     function onSelectCPU() {
@@ -391,15 +391,15 @@
         console.log("cpuWatt=" + cpuWattSelected)
         console.log("cpuPrice=" + cpuPriceSelected)
         $('#cpuImage').attr('src',cpuImageUrlSelected);
-        $('#cpuPrice').text("NT$"+cpuPriceSelected)
+        $('#cpuPrice').text("NT$ "+cpuPriceSelected)
 
         $('#MB').empty().append("<option value = '' series = '' disabled='disabled' selected='selected'>請選擇一項主機板</option>")
         mbWatt=0; mbPrice=0; $('#mbImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg")
-        $('#mbPrice').text("NT$")
+        $('#mbPrice').text("NT$ ")
 
         $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
         dramWatt=0; dramPrice=0; $('#dramImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
-        $('#dramPrice').text("NT$")
+        $('#dramPrice').text("NT$ ")
 
         showItemMB(cpuSocketSelected)
         calculator()
@@ -424,16 +424,16 @@
         console.log("mbWatt=" + mbWattSelected)
         console.log("mbPrice=" + mbPriceSelected)
         $('#mbImage').attr('src',mbImageUrlSelected);
-        $('#mbPrice').text("NT$"+mbPriceSelected)
+        $('#mbPrice').text("NT$ "+mbPriceSelected)
 
         $('#DRAM').empty().append("<option value = '' socket='' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
         dramWatt=0; dramPrice=0; $('#dramImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
-        $('#dramPrice').text("NT$")
+        $('#dramPrice').text("NT$ ")
         showItemDRAM(mbSeriesSelected)
 
         $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
         casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
-        $('#casePrice').text("NT$")
+        $('#casePrice').text("NT$ ")
         showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
@@ -455,12 +455,12 @@
         console.log("dramWatt=" + dramWattSelected)
         console.log("dramPrice=" + dramPriceSelected)
         $('#dramImage').attr('src',dramImageUrlSelected);
-        $('#dramPrice').text("NT$"+dramPriceSelected)
+        $('#dramPrice').text("NT$ "+dramPriceSelected)
 
         // $('#MB').empty().append("<option value = '' series = ''>請選擇一項主機板</option>")
         // $('#DRAM').empty().append("<option value = '' socket='' = '' disabled='disabled' selected='selected'>請選擇一項記憶體</option>")
         // mbWatt=0; mbPrice=0; $('#mbImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg")
-        // $('#dramPrice').text("NT$")
+        // $('#dramPrice').text("NT$ ")
         // showItemDRAM(mbSeriesSelected)
 
         calculator()
@@ -483,11 +483,11 @@
         console.log("gpuWatt=" + gpuWattSelected)
         console.log("gpuPrice=" + gpuPriceSelected)
         $('#gpuImage').attr('src',gpuImageUrlSelected);
-        $('#gpuPrice').text("NT$"+gpuPriceSelected)
+        $('#gpuPrice').text("NT$ "+gpuPriceSelected)
 
         $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
         casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
-        $('#casePrice').text("NT$")
+        $('#casePrice').text("NT$ ")
         showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
@@ -509,7 +509,7 @@
         console.log("storageWatt=" + storageWattSelected)
         console.log("storagePrice=" + storagePriceSelected)
         $('#storageImage').attr('src',storageImageUrlSelected);
-        $('#storagePrice').text("NT$"+storagePriceSelected)
+        $('#storagePrice').text("NT$ "+storagePriceSelected)
 
         calculator()
     }
@@ -536,11 +536,11 @@
         console.log("coolerWatt=" + coolerWattSelected)
         console.log("coolerPrice=" + coolerPriceSelected)
         $('#coolerImage').attr('src',coolerImageUrlSelected);
-        $('#coolerPrice').text("NT$"+coolerPriceSelected)
+        $('#coolerPrice').text("NT$ "+coolerPriceSelected)
 
         $('#CASE').empty().append("<option value = '' disabled='disabled' selected='selected'>請選擇一項機殼</option>")
         casePrice=0; $('#caseImage').attr('src',"https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg")
-        $('#casePrice').text("NT$")
+        $('#casePrice').text("NT$ ")
         showItemCASE(sizeForCase, parseFloat(gpuLengthForCase), parseFloat(coolerLengthForCase), parseFloat(coolerHeightForCase))
 
         calculator()
@@ -562,7 +562,7 @@
         console.log("powerWatt=" + powerWattSelected)
         console.log("powerPrice=" + powerPriceSelected)
         $('#powerImage').attr('src',powerImageUrlSelected);
-        $('#powerPrice').text("NT$"+powerPriceSelected)
+        $('#powerPrice').text("NT$ "+powerPriceSelected)
 
         calculator()
     }
@@ -578,7 +578,7 @@
         console.log("caseImageUrl=" + caseImageUrlSelected)
         console.log("casePrice=" + casePriceSelected)
         $('#caseImage').attr('src',caseImageUrlSelected);
-        $('#casePrice').text("NT$"+casePriceSelected)
+        $('#casePrice').text("NT$ "+casePriceSelected)
 
         calculator()
     }
@@ -596,7 +596,7 @@
                     $('#CPU').append('<option value="'+ data[key].productId+ '"socket="'  +data[key].socket+ '"imageUrl="' +data[key].imageUrl+  '"watt="'+data[key].watt+ '"price='+data[key].price + '>' + data[key].productName+ '</option>')                    })
                 // 備用格式$('#CPU').append('<option value=" '+ data[key].productId+ ' "socket=" '  +data[key].socket+ ' " imageUrl=" ' +data[key].imageUrl+  ' "watt=" '+data[key].watt+ ' " price='+data[key].price + '>' + data[key].productName+ '</option>')                    })
 
-    },
+            },
             error: function (data) {
                 alert("fail");
             }

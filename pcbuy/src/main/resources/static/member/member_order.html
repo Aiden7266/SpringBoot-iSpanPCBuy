@@ -31,15 +31,13 @@
     border-radius: 20px;
     width:25px
   }
-  #cartTable td,th,tr{
-    vertical-align:middle;
+  td,th,tr{
+
     text-align: center;
     font-family:'Times New Roman';
     BORDER-style:none;
-  }
-  #cart tr,td{
-    /*height: 45px;*/
     font-size: 20px;
+
   }
 
   #cartClear span{
@@ -84,6 +82,19 @@
     opacity: 1;
     right: 0;
   }
+  .payBtn{
+    background-color : green;
+    border-radius: 20px;
+    color: whitesmoke;
+    border: none;
+  }
+  .cancelBtn{
+    background-color : red;
+    border-radius: 20px;
+    color: whitesmoke;
+    border: none;
+  }
+
 
   /*.collapsible {*/
   /*  background-color: #777;*/
@@ -122,7 +133,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="member_index.html"><img src="../assets/images/PCBUY_logo.png" style="width: 80px;height: 17px;position: relative">&nbsp;會員中心</a>
+        <a class="navbar-brand" href="member_index.html"><img src="../assets/images/PCBUY_logo.png" style="width: 85px;height: 17px;position: relative">&nbsp;會員中心</a>
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
@@ -149,7 +160,7 @@
             <ol class="breadcrumb">
               <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
               <li> 我的訂單 </li>
-              <li><a href="#" id="allToggle"> 一鍵收展☟ </a></li>
+              <li><a href="#" id="allToggle"> 一鍵收展&nbsp;<i class="fa fa-hand-o-down"></i></a></li>
             </ol>
           </div>
         </div>
@@ -172,11 +183,10 @@
 </body>
 <!-- JavaScript -->
 <script type="text/javascript">
+  var userId
+  var username
+  var selectOrderId
   $(document).ready(function () {
-
-    var userId
-    var username
-
     $.ajax({
       url: '/users/current',
       type: "get",
@@ -191,12 +201,15 @@
           success: function (orders) {
             console.log(orders)
             $.each(orders, function (key, value) {
-
-              $('#allOrder').after('<div class="out"><table class="table" id='+ key +'><tr><th>訂單編號：'+ orders[key].orderId +'</th><th>金額：'+ orders[key].totalAmount + " " + orders[key].state +'</th><th>' + new Date(orders[key].createdDate
-              ).toLocaleDateString() +'</th><th><button value='+ orders[key].orderId +' class="toggleBtn">☝</th></tr></table></div>')
-
+              if(orders[key].state === "尚未結帳") {
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th>訂單編號：' + orders[key].orderId + '</th><th>金額：' + orders[key].totalAmount.toLocaleString('zh-TW') + "元  " + orders[key].state + "   "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th>' + new Date(orders[key].createdDate
+                ).toLocaleDateString() + '</th><th><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+              } else {
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th>訂單編號：' + orders[key].orderId + '</th><th>金額：' + orders[key].totalAmount + " " + orders[key].state + '</th><th>' + new Date(orders[key].createdDate
+                ).toLocaleDateString() + '</th><th><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+              }
               $.each(orders[key].orderItemList, function (itemKey, value){
-                $('#'+ key).append('<tr class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td>' + orders[key].orderItemList[itemKey].productName + '</td><td>' + orders[key].orderItemList[itemKey].amount + '</td><td>' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+                $('#'+ key).append('<tr class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
 
               })
             })
@@ -216,6 +229,15 @@
     $('tr[class]').toggle(300)
   })
 
+  $(document).on("click", ".payBtn",function () {
+    selectOrderId = $(this).val()
+    console.log("現在訂單ID=" + selectOrderId)
+  })
+
+  $(document).on("click", ".cancelBtn",function () {
+    selectOrderId = $(this).val()
+    console.log("現在訂單ID=" + selectOrderId)
+  })
 </script>
 
 </html>

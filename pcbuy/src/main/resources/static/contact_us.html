@@ -27,9 +27,9 @@
 
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                                <li><a href="index.html"> 產品購買 </a></li>
+                                <li><a href="index.html#jump"> 產品購買 </a></li>
                                 <li><a href="intro.html" > 電腦主機零組件介紹 </a></li>
-                                <li><a href="rank.html"> 天梯效能排行 </a></li>
+                                <li><a href="rank.html"> 效能排行天梯 </a></li>
                                 <li><a href="contact_us.html" style="color: #ff589e"> 聯絡我們 </a></li>
                                 <li><a href="/member/member_index.html" id="memberDiv" class="fa fa-user">會員中心</a></li>
                             </ul>
@@ -51,12 +51,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="center-heading">
-                            <h2 class="section-title"> 聯絡我們 </h2>
+                            <h2 class="section-title"> Contact Window </h2>
                         </div>
                     </div>
                     <div class="offset-lg-3 col-lg-6">
                         <div class="center-text">
-                            <p> 請填寫正確資料，以便我們聯絡您，謝謝! </p>
+                            <p> 請您填寫正確資料，以便我們聯絡，謝謝! </p>
                         </div>
                     </div>
                 </div>
@@ -66,10 +66,10 @@
                     <!-- ***** Contact Text Start ***** -->
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="contact-text">
-                            <h4>門市位置</h4>
+                            <h4> Location </h4>
                             <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.69603122221!2d121.52948895078019!3d25.044387733888783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a96351b88ab5%3A0x962af1bf51754fe0!2z5Y6f5YO55bGLLeWFieiPr-mWgOW4gg!5e0!3m2!1szh-TW!2stw!4v1676685306888!5m2!1szh-TW!2stw"
-                                    width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                                    width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
@@ -79,31 +79,24 @@
                     <!-- ***** Contact Form Start ***** -->
                     <div class="col-lg-8 col-md-6 col-sm-12">
                         <div class="contact-form">
-                            <form id="contact" action="" method="get" >
+
+                            <form id="contact-form">
                                 <div class="row">
+                                    <input type="hidden" name="contact_number">
                                     <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <fieldset>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="完整姓名" required
+                                            <input name="user_name" type="text" class="form-control" placeholder="完整姓名" required
                                                    oninvalid="setCustomValidity('請輸入名字');" onchange="setCustomValidity('');">
-                                        </fieldset>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <fieldset>
-                                            <input name="email" type="email" class="form-control" id="email"placeholder="E-Mail 地址" required
+                                            <input name="user_email" type="email" class="form-control" placeholder="E-Mail 地址" required
                                                    oninvalid="setCustomValidity('請輸入email');" onchange="setCustomValidity('');">
-                                        </fieldset>
                                     </div>
                                     <div class="col-lg-12">
-                                        <fieldset>
-                                            <textarea name="message" rows="6" class="form-control" id="message" placeholder="您的留言" required
-                                                      oninvalid="setCustomValidity('請輸入想詢問的內容');" onchange="setCustomValidity('');"></textarea>
-                                        </fieldset>
+                                            <textarea name="message" rows="6" class="form-control" placeholder="您的留言" required
+                                                   oninvalid="setCustomValidity('請輸入想詢問的內容');" onchange="setCustomValidity('');"></textarea>
                                     </div>
                                     <div class="col-lg-12">
-                                        <fieldset>
-                                            <input type="submit" id="form-submit" class="footer_link" value="發送訊息">
-                                            <a id="mailTo"></a>
-                                        </fieldset>
+                                            <input type="submit"class="footer_link" value="發送訊息" style="color: snow">
                                     </div>
                                 </div>
                             </form>
@@ -150,6 +143,7 @@
 
  <script>
      // var initBody='';
+
      // function chk(){
      //     if(document.form.name.value==''){
      //       alert('名字未填');
@@ -165,11 +159,13 @@
      //       return false;
      //     }
      //     return true;
+
      //     var to="lisayes396@gmail.com";
      //     var name= nameText.value;
      //     var email= emailText.value;
      //     var message = messageText.value;
      //
+     //     function chk(){
      //     body =  "我們是PCBUY電腦商城 您好!" + '%0A';
      //     body += "----------------------------------------------" + '%0A';
      //     body += "今日想詢問或是反映的內容是: " + '%0A%0A%0A';
@@ -185,7 +181,35 @@
      //         messageText.value= initBody;
      //         toText.value = initTo;
      //     }
-
         </script>
+
+
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+ <script type="text/javascript">
+     (function(){
+         emailjs.init("V8SIVYkEdA0QQfaDg");
+     })();
+</script >
+
+ <script type="text/javascript">
+     window.onload = function() {
+         document.getElementById('contact-form').addEventListener('submit', function(event) {
+             event.preventDefault();
+             // generate a five digit number for the contact_number variable
+             this.contact_number.value = Math.random() * 1000 | 0;
+             // these IDs from the previous steps
+             emailjs.sendForm('service_p8tc7vv', 'template_zmp6g69', this)
+                 .then(function() {
+                     console.log('SUCCESS!');
+                     alert("已發送信件給客服！您可前往所留的信箱查看信件。")
+
+                 }, function(error) {
+                     console.log('發送失敗...請稍後再試', error);
+                 });
+         });
+     }
+
+ </script>
+
     </body>
 </html>
