@@ -15,6 +15,88 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
 
+  <style>
+    img{
+      width:100px;
+      height: 100px;
+    }
+    input {
+      margin: auto;
+      text-align: center;
+      border-radius: 20px;
+      width:25px
+    }
+    td,th,tr{
+
+      text-align: left;
+      font-family:'Times New Roman';
+      BORDER-style:none;
+      font-size: 20px;
+
+    }
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+
+    #cartClear span{
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+    #order span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+    #cartClear span:after{
+      content: '↺';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -15px;
+      transition: 0.5s;
+    }
+    #order span:after{
+      content: '➠';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -15px;
+      transition: 0.5s;
+    }
+    #cartClear:hover span {
+      padding-right: 15px;
+    }
+    #order:hover span {
+      padding-right: 15px;
+    }
+    #cartClear:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+    #order:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+    .payBtn{
+      background-color : green;
+      border-radius: 20px;
+      color: whitesmoke;
+      border: none;
+    }
+    .cancelBtn{
+      background-color : red;
+      border-radius: 20px;
+      color: whitesmoke;
+      border: none;
+    }
+  </style>
+
   <body>
     <div id="wrapper">
 
@@ -48,7 +130,6 @@
       </nav>
 
         <div id="page-wrapper">
-            <div class="row">
                   <div class="col-lg-12">
                         <h1>查詢訂單</h1>
                         <ol class="breadcrumb">
@@ -56,13 +137,147 @@
                           <li class="active">訂單管理 </li>
                         </ol>
                   </div>
-              </div>
+            <div class="out" id="allOrder"></div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
-
   </body>
+  <script type="text/javascript">
+    var userId, username, name, tel, addr
+    var selectOrderId
+    var totalAmount
+    let payModal = document.querySelector("#payModal")
+    let checkModal = document.querySelector("#DoubleCheck")
+    var nowState = "hide"
+    $(document).ready(function () {
+      $.ajax({
+        url: '/users/current',
+        type: "get",
+        dataType: "json",
+        success: function (userinfo) {
+          if(userinfo.auth.includes('admin')){$('#promodel').show()}
+          userId = userinfo.userId
+          username = userinfo.username
+          name = userinfo.name
+          tel = userinfo.tel
+          addr = userinfo.addr
+          $('#loginName').append(' ' + name)
+          $.ajax({
+            url: '/users/' + userId + '/orders',
+            type: "get",
+            dataType: "json",
+            success: function (orders) {
+              console.log(orders)
+              $.each(orders, function (key, value) {
+                if(orders[key].state === "尚未結帳") {
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
+                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+                } else if(orders[key].state === "準備出貨"){
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
+                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+                } else {
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
+                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+
+                }
+                $.each(orders[key].orderItemList, function (itemKey, value){
+                  $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+
+                })
+              })
+            }
+          })
+        }
+      })
+    })
+    $(document).on("click", ".toggleBtn",function () {
+      var selectedId = $(this).closest('table').attr('id')
+      var orderId = $(this).val()
+      console.log("selectedId="+selectedId)
+      console.log("orderId="+orderId)
+      $('.'+selectedId).toggle(300)
+    })
+
+    $('#allToggle').click(function () {
+      // $('tr[class]').toggle(300)
+      if(nowState === "hide"){
+        $('tr[class]').show()
+        nowState = "show"
+      }else {
+        $('tr[class]').hide()
+        nowState = "hide"
+      }
+    })
+
+    $(document).on("click", ".payBtn",function () {
+      selectOrderId = $(this).val()
+      // console.log("現在訂單ID=" + selectOrderId)
+      totalAmount = $(this).closest('table').find('input').val()
+      // console.log("現在總金額=" + totalAmount)
+      $('#name').val(name)
+      $('#tel').val(tel)
+      $('#addr').val(addr)
+      $('#totalAmount').val("NT$ " + totalAmount + "元")
+      payModal.showModal()
+
+    })
+
+    $('#pay-close').click(function () {
+      payModal.close()
+    })
+
+    $(document).on("click", ".cancelBtn",function () {
+      selectOrderId = $(this).val()
+      checkModal.showModal()
+      $('#ok-send').click(function () {
+        $.ajax({
+          url: '/users/'+ userId +'/orders',
+          type: "put",
+          dataType: "text",
+          contentType : 'application/json',
+          data:JSON.stringify({
+            orderId : selectOrderId,
+            state:"訂單取消"
+          }),
+          success: function (){
+            alert("已取消訂單")
+            location.reload()
+            checkModal.close()
+          },error:function (data){
+            alert("error=" + data)
+          }
+        })
+      })
+    })
+    $('#no-send').click(function () {
+      checkModal.close()
+    })
+
+    function paySubmit(){
+      console.log('userId='+userId)
+      console.log('selectOrderId='+selectOrderId)
+      $.ajax({
+        url: '/users/'+ userId +'/orders',
+        type: "put",
+        dataType: "text",
+        contentType : 'application/json',
+        data:JSON.stringify({
+          orderId : selectOrderId,
+          state:"準備出貨"
+        }),
+        success: function (){
+          console.log("success")
+          payModal.close()
+          location.reload()
+        },error:function (data){
+          alert("error=" + data)
+        }
+      })
+      return false
+    }
+
+  </script>
 </html>

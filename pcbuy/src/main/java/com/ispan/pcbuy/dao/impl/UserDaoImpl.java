@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.dao.impl;
 
 import com.ispan.pcbuy.dao.UserDao;
+import com.ispan.pcbuy.dto.PasswordUpdateRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
@@ -103,6 +104,26 @@ public class UserDaoImpl implements UserDao {
         map.put("email", userUpdateRequest.getEmail());
         map.put("userId", userId);
         map.put("lastModifiedDate", new Date());
+        namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void pwdUpdate(Integer userId, String BCryptPasswordNew) {
+        String sql = "UPDATE user SET password = :password WHERE user_id = :userId ";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("password", BCryptPasswordNew);
+        map.put("userId", userId);
+        map.put("lastModifiedDate", new Date());
+        namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        String sql = "DELETE FROM user WHERE user_id = :userId ";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
         namedParameterJdbcTemplate.update(sql,map);
     }
 }

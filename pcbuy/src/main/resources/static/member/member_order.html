@@ -37,7 +37,7 @@
   }
   td,th,tr{
 
-    text-align: center;
+    text-align: left;
     font-family:'Times New Roman';
     BORDER-style:none;
     font-size: 20px;
@@ -104,32 +104,6 @@
     color: whitesmoke;
     border: none;
   }
-
-
-  /*.collapsible {*/
-  /*  background-color: #777;*/
-  /*  color: white;*/
-  /*  cursor: pointer;*/
-  /*  padding: 18px;*/
-  /*  width: 100%;*/
-  /*  border: none;*/
-  /*  text-align: left;*/
-  /*  outline: none;*/
-  /*  font-size: 15px;*/
-  /*}*/
-
-  /*.active, .collapsible:hover {*/
-  /*  background-color: #555;*/
-  /*}*/
-
-  /*.content {*/
-  /*  padding: 0 18px;*/
-  /*  max-height: 0;*/
-  /*  overflow: hidden;*/
-  /*  transition: max-height 0.2s ease-out;*/
-  /*  background-color: #f1f1f1;*/
-  /*}*/
-
 </style>
 
 <body>
@@ -152,7 +126,7 @@
           <li><a href="member_order.html"  style="background-color: #ebc59c; color:black;"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
           <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
           <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
-          <li><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
+          <li id="promodel" style="display: none"><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right navbar-user">
           <li class="dropdown user-dropdown">
@@ -249,6 +223,7 @@
       type: "get",
       dataType: "json",
       success: function (userinfo) {
+        if(userinfo.auth.includes('admin')){$('#promodel').show()}
         userId = userinfo.userId
         username = userinfo.username
         name = userinfo.name
@@ -263,15 +238,18 @@
             console.log(orders)
             $.each(orders, function (key, value) {
               if(orders[key].state === "尚未結帳") {
-                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
-              } else if(orders[key].state === "準備出貨"){
-                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
-              } else {
-                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）        <button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
 
+                // $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
+                // ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+
+              } else if(orders[key].state === "準備出貨"){
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）        <button class="cancelBtn" value=' + orders[key].orderId + '>取消<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
+              } else {
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
               }
               $.each(orders[key].orderItemList, function (itemKey, value){
                 $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
@@ -305,7 +283,7 @@
   $(document).on("click", ".payBtn",function () {
     selectOrderId = $(this).val()
     // console.log("現在訂單ID=" + selectOrderId)
-    totalAmount = $(this).closest('table').find('input').val()
+    totalAmount = $(this).closest('table').find('input[name]').val()
     // console.log("現在總金額=" + totalAmount)
     $('#name').val(name)
     $('#tel').val(tel)
