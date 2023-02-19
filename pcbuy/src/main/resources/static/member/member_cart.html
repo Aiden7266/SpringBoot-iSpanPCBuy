@@ -26,8 +26,8 @@
     input {
         margin: auto;
         text-align: center;
-        border-radius: 20px;
-        width:25px
+        border-radius: 30px;
+        width:35px
     }
     #cartTable td,th,tr{
         vertical-align:middle;
@@ -184,7 +184,7 @@
                             $('#cart').append('<tr>')
                             $('#cart').append('<td><img src=' + url +'/></td>')
                             $('#cart').append('<td>' + cart[key].productName + '</td>')
-                            $('#cart').append('<td>' + cart[key].price + '</td>')
+                            $('#cart').append('<td> NT$ ' + cart[key].price.toLocaleString('zh-TW')  + '</td>')
                             $('#cart').append('<td><input value="1" disabled></td>')
                             $('#cart').append('</tr>')
                             totalPrice = totalPrice + cart[key].price

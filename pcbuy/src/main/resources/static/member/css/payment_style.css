@@ -4,7 +4,7 @@ dialog{
   box-shadow: 0 2px 6px #ccc;
   border-radius: 30px;
   width: 400px;
-  height: 520px;
+  height: 630px;
 }
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.1);
