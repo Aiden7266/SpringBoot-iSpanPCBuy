@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description">
+  <meta name="description" >
+  <meta http-equiv="X-UA-Compatible">
   <meta name="author">
 
   <title>購物車-會員頁面</title>
@@ -16,9 +17,12 @@
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   <!-- Page Specific CSS -->
   <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/payment_style.css">
 </head>
+
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 
 <style>
   img{
@@ -165,27 +169,57 @@
           </div>
         </div>
 
-        <div class="out" id="allOrder">
-<!--          <table class="table">-->
-<!--            <tr>-->
-<!--              <th>圖片</th>-->
-<!--              <th>名稱</th>-->
-<!--              <th>價格</th>-->
-<!--              <th>狀態</th>-->
-<!--            </tr>-->
-<!--            </table>-->
-        </div>
+        <dialog id="payModal">
+          <p> 結帳 </p>
+          <hr>
+          <form action="" method="post" id="pay-form" onsubmit="return paySubmit()">
+            <div>
+              <label for="name" class="pay-form">收件人姓名：</label>
+              <input type="text" id="name" placeholder="" required maxlength="50"
+                     oninvalid="setCustomValidity('請輸入您的姓名');" onchange="setCustomValidity('');">
+
+              <label for="tel" class="pay-form">收件人電話：</label>
+              <input type="text" id="tel" placeholder="" required maxlength="50"
+                     oninvalid="setCustomValidity('請輸入您的電話');" onchange="setCustomValidity('');">
+
+              <label for="addr" class="pay-form">收件人地址：</label>
+              <input type="text" id="addr" placeholder="" required maxlength="50"
+                     oninvalid="setCustomValidity('請輸入您的地址');" onchange="setCustomValidity('');">
+
+              <label for="totalAmount" class="pay-form">訂單總金額：</label>
+              <input type="text" id="totalAmount" placeholder="" required maxlength="50" disabled="disabled">
+
+              <label class="pay-form">付款方式：
+                <br><br>
+                <label class="pay-form"><input type="radio" name="payMethod" value="現金" checked>貨到付款</label>
+                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">銀行轉帳</label>
+                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">線上付款</label>
+                <br><br>
+              </label>
+              <div style="text-align:center;">
+                <input type="submit" id="pay-send" value="送出">
+                <input type="button" id="pay-close" value="關閉">
+              </div>
+            </div>
+          </form>
+        </dialog>
+
+        <div class="out" id="allOrder"></div>
 
       </div>
     </div>
   </div>
-  <button value=""/>
+
+
+
 </body>
 <!-- JavaScript -->
 <script type="text/javascript">
   var userId
   var username
   var selectOrderId
+  var totalAmount
+  let payModal = document.querySelector("#payModal")
   $(document).ready(function () {
     $.ajax({
       url: '/users/current',
@@ -202,8 +236,8 @@
             console.log(orders)
             $.each(orders, function (key, value) {
               if(orders[key].state === "尚未結帳") {
-                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th>訂單編號：' + orders[key].orderId + '</th><th>金額：' + orders[key].totalAmount.toLocaleString('zh-TW') + "元  " + orders[key].state + "   "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th>' + new Date(orders[key].createdDate
-                ).toLocaleDateString() + '</th><th><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+                $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：' + orders[key].totalAmount.toLocaleString('zh-TW') + "元  " + orders[key].state + "   "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
+                ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
               } else {
                 $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th>訂單編號：' + orders[key].orderId + '</th><th>金額：' + orders[key].totalAmount + " " + orders[key].state + '</th><th>' + new Date(orders[key].createdDate
                 ).toLocaleDateString() + '</th><th><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
@@ -221,7 +255,8 @@
   $(document).on("click", ".toggleBtn",function () {
     var selectedId = $(this).closest('table').attr('id')
     var orderId = $(this).val()
-    console.log(orderId)
+    console.log("selectedId="+selectedId)
+    console.log("orderId="+orderId)
     $('.'+selectedId).toggle(300)
   })
 
@@ -232,12 +267,48 @@
   $(document).on("click", ".payBtn",function () {
     selectOrderId = $(this).val()
     console.log("現在訂單ID=" + selectOrderId)
+    totalAmount = $(this).closest('table').find('input').val()
+    console.log("現在總金額=" + totalAmount)
+    payModal.showModal()
+
+  })
+
+  // $('#pay-send').click(function () {
+  //
+  // })
+
+  $('#pay-close').click(function () {
+    payModal.close()
   })
 
   $(document).on("click", ".cancelBtn",function () {
     selectOrderId = $(this).val()
     console.log("現在訂單ID=" + selectOrderId)
   })
+
+  function paySubmit(){
+    console.log('userId='+userId)
+    console.log('selectOrderId='+selectOrderId)
+    $.ajax({
+      url: '/users/'+ userId +'/orders',
+      type: "put",
+      dataType: "text",
+      contentType : 'application/json',
+      data:JSON.stringify({
+        orderId : selectOrderId,
+        state:"付款成功"
+      }),
+      success: function (){
+        console.log("success")
+        payModal.close()
+        location.reload()
+      },error:function (data){
+        alert("error=" + data)
+      }
+    })
+    return false
+  }
+
 </script>
 
 </html>

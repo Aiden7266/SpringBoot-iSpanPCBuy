@@ -142,16 +142,20 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrders(Integer userId, OrderStateRequest orderStateRequest) {
         Integer orderId = orderStateRequest.getOrderId();
         String state = orderStateRequest.getState();
+        Boolean isContain = false;
 
         List<Order> orderList = orderDao.getOrderByUserId(userId);
         for(Order order:orderList){
             if (orderId.equals(order.getOrderId())){
-                orderDao.updateOrders(orderId, state);
-                break;
-            }else {
-                log.warn("該筆訂單不存在於 {} 使用者下",userId);
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+                isContain = true;
             }
+        }
+
+        if (isContain){
+            orderDao.updateOrders(orderId, state);
+        }else {
+            log.warn("該筆訂單不存在於 {} 使用者下",userId);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 }
