@@ -2,6 +2,7 @@ package com.ispan.pcbuy.dao.impl;
 
 import com.ispan.pcbuy.dao.UserDao;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
+import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,20 @@ public class UserDaoImpl implements UserDao {
             return userList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public void userUpdate(Integer userId, UserUpdateRequest userUpdateRequest) {
+        String sql = "UPDATE user SET `name` = :name, tel = :tel, addr = :addr, email = :email, last_modified_date = :lastModifiedDate " +
+                "WHERE user_id = :userId ";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", userUpdateRequest.getName());
+        map.put("tel", userUpdateRequest.getTel());
+        map.put("addr", userUpdateRequest.getAddr());
+        map.put("email", userUpdateRequest.getEmail());
+        map.put("userId", userId);
+        map.put("lastModifiedDate", new Date());
+        namedParameterJdbcTemplate.update(sql,map);
     }
 }

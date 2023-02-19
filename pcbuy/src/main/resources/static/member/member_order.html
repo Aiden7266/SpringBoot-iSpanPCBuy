@@ -156,8 +156,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right navbar-user">
           <li class="dropdown user-dropdown">
-            <a href="#"><i class="fa fa-user"></i> lisa </a>
-          <li class="divider"></li>
+            <a href="" id="loginName"><i class="fa fa-users"></i></a>          <li class="divider"></li>
           <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out </a></li>
         </ul>
       </div>
@@ -255,6 +254,7 @@
         name = userinfo.name
         tel = userinfo.tel
         addr = userinfo.addr
+        $('#loginName').append(' ' + name)
         $.ajax({
           url: '/users/' + userId + '/orders',
           type: "get",

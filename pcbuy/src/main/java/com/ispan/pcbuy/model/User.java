@@ -18,7 +18,7 @@ public class User {
     private String tel;
     private String addr;
 
-    @JsonProperty("e-mail")
+//    @JsonProperty("e-mail")
     private String email;
 
     private String auth;

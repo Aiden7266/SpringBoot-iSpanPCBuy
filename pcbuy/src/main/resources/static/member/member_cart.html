@@ -108,8 +108,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
-                    <a href="#"><i class="fa fa-user"></i> lisa </a>
-                <li class="divider"></li>
+                    <a href="" id="loginName"><i class="fa fa-users"></i></a>                <li class="divider"></li>
                 <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out </a></li>
             </ul>
         </div>
@@ -163,7 +162,7 @@
 <script type="text/javascript">
     jQuery.support.cors = true;
     var userId
-    var username
+    var username, name
     var buyItemList = []
     $(document).ready(function () {
         $.ajax({
@@ -173,6 +172,8 @@
             success: function (userinfo) {
                 userId = userinfo.userId
                 username = userinfo.username
+                name = userinfo.name
+                $('#loginName').append(' ' + name)
                 $.ajax({
                     url: '/users/' + userId +'/cart',
                     type: "get",

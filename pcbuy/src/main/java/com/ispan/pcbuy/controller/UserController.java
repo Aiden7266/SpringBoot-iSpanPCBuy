@@ -1,6 +1,7 @@
 package com.ispan.pcbuy.controller;
 
 import com.ispan.pcbuy.dto.UserRegisterRequest;
+import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserDetailsService;
 import com.ispan.pcbuy.service.UserService;
@@ -30,6 +31,14 @@ public class UserController {
         Integer userId = userService.register(userRegisterRequest);
         User user = userService.getUserById(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> register(@PathVariable Integer userId,
+                                         @RequestBody @Valid UserUpdateRequest userUpdateRequest){
+//        System.out.println("呼叫註冊功能");
+        User user = userService.userUpdate(userId, userUpdateRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping("/current")

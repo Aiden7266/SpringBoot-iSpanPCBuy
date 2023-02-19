@@ -17,7 +17,7 @@
   </head>
 
   <body>
-
+  <link rel="stylesheet" href="css/memberinfo_style.css">
   <div id="wrapper">
       <!--        style="background-color:#eab0b0"-->
       <nav class="navbar navbar-inverse navbar-fixed-top"  >
@@ -42,7 +42,7 @@
 
               <ul class="nav navbar-nav navbar-right navbar-user">
                   <li>
-                      <a href=""><i class="fa fa-users"></i> lisa </a>
+                      <a href="" id="loginName"><i class="fa fa-users"></i></a>
                   <li></li>
                   <li><a href="/logout"><i class="fa fa-power-off"></i> Log Out</a></li>
                   </li>
@@ -51,52 +51,140 @@
       </nav>
 
       <div id="page-wrapper">
-
-        <div class="row">
-          <div class="col-lg-12">
-            <h1>會員資訊</h1>
-            <ol class="breadcrumb">
-              <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
-              <li class="active"> 會員資訊 </li>
-            </ol>
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1>會員資訊</h1>
+                  <ol class="breadcrumb">
+                      <li><a href="member_index.html"><i class="fa fa-home"></i> 首頁 </a></li>
+                      <li class="active"> 會員資訊 </li>
+                  </ol>
+              </div>
           </div>
-        </div>
 
           <table class="table table-striped">
-            <thead>
+              <tbody>
               <tr>
-                <th scope="col"></th>
+                  <th >姓名</th>
+                  <td id="td-name"></td>
               </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                  <th scope="row">姓名</th>
-                    <td>王小明</td>
-                </tr>
-                <tr>
-                    <th scope="row">帳號</th>
-                    <td>r18031803</td>
-                </tr>
-                <tr>
-                    <th scope="row">電話</th>
-                    <td>0912345678</td>
-                </tr>
-                <tr>
-                    <th scope="row">地址</th>
-                    <td>台中市南屯區公益路二段00號</td>
-                </tr>
-                <tr>
-                    <th scope="row">信箱</th>
-                    <td>abc12300000@gmail.com</td>
-                </tr>
-            </tbody>
+              <tr>
+                  <th >電話</th>
+                  <td id="td-tel"></td>
+              </tr>
+              <tr>
+                  <th >地址</th>
+                  <td id="td-addr"></td>
+              </tr>
+              <tr>
+                  <th>信箱</th>
+                  <td id="td-email"></td>
+              </tr>
+              <tr>
+                  <th>帳號</th>
+                  <td id="td-username"></td>
+              </tr>
+              </tbody>
           </table>
+          <input type="button" value="修改個人資料" id="btn-update" style="background-color: #1e7e34">
       </div>
-    </div>
+  </div>
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
+  <dialog id="infoModal-update">
+      <p id="updateFormTitle"> 修改會員基本資料 </p>
+      <hr>
+      <form action="" method="post" id="update-memberinfo-form" onsubmit="return false">
+          <div>
+              <label for="name-update" class="update-form">姓名</label>
+              <input type="text" id="name-update">
 
+              <label for="tel-update" class="update-form">電話</label>
+              <input type="text" id="tel-update">
+
+              <label for="addr-update" class="update-form">地址</label>
+              <input type="text" id="addr-update">
+
+              <label for="email-update" class="update-form">信箱</label>
+              <input type="email" id="email-update">
+
+              <label for="username-update" class="update-form">帳號</label>
+              <input type="text" id="username-update" disabled>
+
+<!--              <label for="password-update" class="update-form">密碼</label>-->
+<!--              <input type="password" id="password-update">-->
+
+<!--              <label for="confirm_password-update" class="update-form">確認密碼</label>-->
+<!--              <input type="password" id="confirm_password-update">-->
+
+              <div style="text-align:center;">
+                  <input type="button" id="update-close" value="關閉">
+                  <input type="submit" id="update-send" value="送出">
+              </div>
+          </div>
+      </form>
+  </dialog>
+
+  <script type="text/javascript">
+      var userId, username, name, email, tel, addr
+      let infoModal = document.querySelector("#infoModal-update")
+      $(document).ready(function () {
+          $.ajax({
+              url: '/users/current',
+              type: "get",
+              dataType: "json",
+              success: function (userinfo) {
+                  console.log(userinfo)
+                  userId = userinfo.userId
+                  username = userinfo.username
+                  name = userinfo.name
+                  email = userinfo.email
+                  tel = userinfo.tel
+                  addr = userinfo.addr
+                  $('#td-name').text(name)
+                  $('#td-tel').text(tel)
+                  $('#td-addr').text(addr)
+                  $('#td-email').text(email)
+                  $('#td-username').text(username)
+                  $('#loginName').append(' ' + name)
+              }
+          })
+
+      })
+
+      $('#btn-update').click(function () {
+          $('#name-update').val(name)
+          $('#tel-update').val(tel)
+          $('#addr-update').val(addr)
+          $('#email-update').val(email)
+          $('#username-update').val(username)
+          infoModal.showModal()
+      })
+
+      $('#update-close').click(function () {
+          infoModal.close()
+      })
+      $('#update-send').click(function () {
+          $.ajax({
+              url: '/users/' + userId,
+              type: "put",
+              dataType: "json",
+              data:JSON.stringify({
+                  name:$('#name-update').val(),
+                  tel:$('#tel-update').val(),
+                  addr:$('#addr-update').val(),
+                  email:$('#email-update').val()
+              }),
+              contentType:"application/json",
+              success: function (user) {
+                  console.log(user)
+                  location.reload()
+              },error:function () {
+                  alert("error")
+              }
+          })
+          infoModal.close()
+      })
+  </script>
   </body>
 </html>

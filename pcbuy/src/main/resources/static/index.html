@@ -828,14 +828,22 @@
 <script>
     $('#CART').click(function () {
 
+        var cartLength
+        var selectAll = true
         $.ajax({
             url: '/users/current',
             type: "get",
             dataType: "json",
-            success:function (data){
-                console.log(data)
+            success:function (userinfo){
+                $.ajax({
+                    url: '/users/' + userinfo.userId +'/cart',
+                    type: "get",
+                    dataType: "json",
+                    success:function (cart){
+                        cartLength = cart.length
+                    }
+                })
 
-                var selectAll = true
                 $('SELECT').each(function (){
                     if($(this).val() == null){
                         selectAll = false
@@ -843,9 +851,12 @@
                 })
                 if (!selectAll){
                     alert("有品項尚未選擇")
-                }else {
+                }else if (cartLength !== 0){
+                    alert("請先清空現有的購物車")
+                }
+                else {
                     $.ajax({
-                        url: '/users/' + data.userId + '/cart',
+                        url: '/users/' + userinfo.userId + '/cart',
                         type: "post",
                         dataType: "text",
                         contentType : 'application/json',

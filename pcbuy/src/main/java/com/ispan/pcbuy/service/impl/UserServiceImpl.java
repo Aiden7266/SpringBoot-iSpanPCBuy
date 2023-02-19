@@ -3,6 +3,7 @@ package com.ispan.pcbuy.service.impl;
 import com.ispan.pcbuy.dao.UserDao;
 import com.ispan.pcbuy.dto.UserLoginRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
+import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 import com.ispan.pcbuy.service.UserService;
 import org.slf4j.Logger;
@@ -69,5 +70,12 @@ public class UserServiceImpl implements UserService {
             log.warn("該 email {} 的密碼不正確！", userLoginRequest.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public User userUpdate(Integer userId, UserUpdateRequest userUpdateRequest) {
+        userDao.userUpdate(userId, userUpdateRequest);
+        User user = userDao.getUserById(userId);
+        return user;
     }
 }

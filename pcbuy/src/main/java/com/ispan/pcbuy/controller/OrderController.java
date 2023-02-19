@@ -53,7 +53,7 @@ public class OrderController {
     }
 
     @GetMapping("/users/{userId}/cart")
-    public ResponseEntity<?> getCart(@PathVariable Integer userId){
+    public ResponseEntity<List<Cart>> getCart(@PathVariable Integer userId){
 
         List<Cart> cartList = orderService.getCart(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(cartList);
