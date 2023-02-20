@@ -125,8 +125,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrderByUserId(Integer userId) {
+        List<Order> orderList;
 
-        List<Order> orderList = orderDao.getOrderByUserId(userId);
+        User user = userDao.getUserById(userId);
+        if(user.getAuth().contains("admin")){
+            orderList = orderDao.getOrderAll();
+        }else {
+            orderList = orderDao.getOrderByUserId(userId);
+        }
 
         for (int i=0 ; i<orderList.size() ; i++){
 
@@ -142,6 +148,7 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrders(Integer userId, OrderStateRequest orderStateRequest) {
         Integer orderId = orderStateRequest.getOrderId();
         String state = orderStateRequest.getState();
+        User user = userDao.getUserById(userId);
         Boolean isContain = false;
 
         List<Order> orderList = orderDao.getOrderByUserId(userId);
@@ -150,8 +157,7 @@ public class OrderServiceImpl implements OrderService {
                 isContain = true;
             }
         }
-
-        if (isContain){
+        if (isContain || user.getAuth().contains("admin")){
             orderDao.updateOrders(orderId, state);
         }else {
             log.warn("該筆訂單不存在於 {} 使用者下",userId);

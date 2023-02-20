@@ -157,6 +157,22 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public List<Order> getOrderAll() {
+        String sql = "SELECT order_id, user_id, total_amount, `state`, created_date, last_modified_date " +
+                "FROM `order`";
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<Order> orderList = namedParameterJdbcTemplate.query(sql, map, new OrderRowMapper());
+
+        if(orderList.size() > 0) {
+            return orderList;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public void updateOrders(Integer orderId, String state) {
         String sql = "UPDATE `order` SET `state` = :state, last_modified_date = :lastModifiedDate " +
                 "WHERE order_id = :orderId ";

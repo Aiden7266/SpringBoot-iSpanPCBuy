@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -27,6 +28,12 @@ public class UserController {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getUsers(){
+        List<User> userList = userService.getUsers();
+        return ResponseEntity.status(HttpStatus.CREATED).body(userList);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest){

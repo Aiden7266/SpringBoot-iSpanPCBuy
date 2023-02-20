@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Component
 public class UserServiceImpl implements UserService {
 
@@ -106,5 +108,10 @@ public class UserServiceImpl implements UserService {
             log.warn("密碼錯誤！");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userDao.getUsers();
     }
 }

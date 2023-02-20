@@ -4,7 +4,9 @@ import com.ispan.pcbuy.dao.UserDao;
 import com.ispan.pcbuy.dto.PasswordUpdateRequest;
 import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
+import com.ispan.pcbuy.model.Product;
 import com.ispan.pcbuy.model.User;
+import com.ispan.pcbuy.rowmapper.ProductRowMapper;
 import com.ispan.pcbuy.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -125,5 +127,20 @@ public class UserDaoImpl implements UserDao {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        String sql = "SELECT * FROM user";
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+
+        if(userList.size() > 0){
+            return userList;
+        }else {
+            return null;
+        }
     }
 }

@@ -6,6 +6,8 @@ import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
     Integer register(UserRegisterRequest userRegisterRequest);
@@ -21,4 +23,6 @@ public interface UserService {
     void pwdUpdate(Integer userId , PasswordUpdateRequest passwordUpdateRequest);
 
     void deleteUser(Integer userId, String password);
+
+    List<User> getUsers();
 }

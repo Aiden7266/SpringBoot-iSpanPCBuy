@@ -24,6 +24,8 @@ public interface OrderDao {
 
     List<Order> getOrderByUserId(Integer userId);
 
+    List<Order> getOrderAll();
+
     void updateOrders(Integer orderId, String state);
 
 

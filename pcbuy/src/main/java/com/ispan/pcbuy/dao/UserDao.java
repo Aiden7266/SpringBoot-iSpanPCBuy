@@ -5,6 +5,8 @@ import com.ispan.pcbuy.dto.UserRegisterRequest;
 import com.ispan.pcbuy.dto.UserUpdateRequest;
 import com.ispan.pcbuy.model.User;
 
+import java.util.List;
+
 public interface UserDao {
 
     Integer createUser(UserRegisterRequest userRegisterRequest);
@@ -20,4 +22,6 @@ public interface UserDao {
     void pwdUpdate(Integer userId, String BCryptPasswordNew);
 
     void deleteUser(Integer userId);
+
+    List<User> getUsers();
 }
