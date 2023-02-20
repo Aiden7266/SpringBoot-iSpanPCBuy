@@ -12,6 +12,8 @@
 
     <!-- Add custom CSS here -->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin_order.css">
+    <link rel="stylesheet" href="css/order_style.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
 
@@ -173,18 +175,18 @@
               console.log(orders)
               $.each(orders, function (key, value) {
                 if(orders[key].state === "尚未結帳") {
-                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
-                } else if(orders[key].state === "準備出貨"){
-                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '<button class="cancelBtn" value=' + orders[key].orderId + '>取消</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
-                } else {
-                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th style="vertical-align:middle">訂單編號：' + orders[key].orderId + '</th><th style="vertical-align:middle">金額：NT$ ' + orders[key].totalAmount.toLocaleString('zh-TW') + "元 （" + orders[key].state + " ）  "+ '</th><th style="vertical-align:middle">' + new Date(orders[key].createdDate
-                  ).toLocaleDateString() + '</th><th style="vertical-align:middle"><input hidden value='+ orders[key].totalAmount.toLocaleString('zh-TW') +'><button class="toggleBtn" style="border-radius: 20px; background-color: snow" value=' + orders[key].orderId + '><img src="images/hand-point-up-solid.svg" style="width: 20px; height: 20px"></th></tr></table></div>')
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                  ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）        <button class="payBtn" value=' + orders[key].orderId + '>付款<button class="cancelBtn" value=' + orders[key].orderId + '>取消<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
 
+                } else if(orders[key].state === "準備出貨"){
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                  ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）        <button class="cancelBtn" value=' + orders[key].orderId + '>取消<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
+                } else {
+                  $('#allOrder').after('<div class="out"><table class="table" id=' + key + '><tr><th colspan="4" style="vertical-align:middle"><input type="button" class="toggleBtn" value=' + '𓁺' + '> 訂單編號：' + orders[key].orderId + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ new Date(orders[key].createdDate
+                  ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
                 }
                 $.each(orders[key].orderItemList, function (itemKey, value){
-                  $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+                  $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td  style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
 
                 })
               })
