@@ -252,7 +252,7 @@
                 ).toLocaleDateString()  +'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp金額：NT$ '+ orders[key].totalAmount.toLocaleString('zh-TW') +' 元 （' + orders[key].state +'）<input hidden name='+ orders[key].totalAmount.toLocaleString('zh-TW') +' value=' + orders[key].totalAmount.toLocaleString('zh-TW') +'></th><th></th><th</th><th></th></tr></table></div>')
               }
               $.each(orders[key].orderItemList, function (itemKey, value){
-                $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
+                $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td  style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
 
               })
             })
