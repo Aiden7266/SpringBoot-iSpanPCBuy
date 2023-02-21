@@ -2,6 +2,7 @@ package com.ispan.pcbuy.controller;
 
 import com.ispan.pcbuy.dto.CreateCartRequest;
 import com.ispan.pcbuy.dto.CreateOrderRequest;
+import com.ispan.pcbuy.dto.OrderInfoRequest;
 import com.ispan.pcbuy.dto.OrderStateRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
@@ -28,6 +29,14 @@ public class OrderController {
         Order order =orderService.getOrderById(orderId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
+    }
+
+    @PostMapping("/users/{orderId}/orderinfo")
+    public ResponseEntity<HttpStatus> createOrderInfo(@PathVariable Integer orderId,
+                                             @RequestBody @Valid OrderInfoRequest orderInfoRequest){
+        orderService.createOrderInfo(orderId, orderInfoRequest);
+
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/users/{userId}/orders")

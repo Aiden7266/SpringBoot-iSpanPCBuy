@@ -13,136 +13,26 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <style>
-        #dateresult table {
-            border-collapse: collapse;
+        table,tr,td,th{
+            border-collapse: separate;
+            border-spacing: 0;
             border-radius: 10px;
-            font-family: "Times New Roman";
+            border: 1px solid;
         }
-        #dateresult table tr {
-            border-radius: 10px;
-            background-color: darkslategray;
-            color: #ffffff;
+        td{
             text-align: center;
-            font-size: 17px;
-            font-family: "Times New Roman";
-            border: 1px solid black;
-        }
-        #dateresult table td {
-            text-align: center;
-            padding: 15px;
-            background: #e6e6e6;
-            box-shadow: -2px -2px 5px #c4c4c4;
-            color: #000000;
             font-size: 15px;
-            border: 1px solid black;
+            background-color: #f8f1de;
         }
-
-        #background-pop {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 40px;
-        }
-
-        #div-pop {
-            background: #ffffff;
-            margin-top: 200px;
-            margin-left: 450px;
-            width: 60%;
-            height: 400px;
-            border-radius: 8px;
-            overflow: auto;
-        }
-
-        .div-top {
-            width: 100%;
-            height: auto;
-            background: linear-gradient(darkslategray, #585355);
-            color: #ffffff;
-
-        }
-
-        .div-top div {
-            padding: 3px 5px 5px 8px;
-        }
-
-        span {
-            color: white;
-            margin-bottom: 10px;
-            margin-left: 20px;
-            cursor: pointer;
-            float: right;
-        }
-
-        .div-content {
-            width: 90%;
-            height: 80%;
-            margin: 0 auto;
-            background-color: #faf9f9;
-            overflow: auto;
-            padding-top: 30px;
-            padding-left: 50px;
-        }
-
-        .div-content th {
-            background-color: #515557;
-            width: 80px;
-            color: #faf9f9;
-            vertical-align: middle;
-            text-align: center;
-            font-size: 17px;
-        }
-
-        .div-content tr {
-            border-bottom: solid 13px white;
-            font-size: 15px;
-        }
-
-        .div-content tr:last-child {
-            border-bottom: none;
-        }
-
-        .div-content table {
-            border-width: 5px;
-        }
-
-        .div-content input {
-            transition: 0.3s;
-            width: 400px;
-        }
-
-        .div-content input:focus {
-            outline-color: #e8e8e8;
-            background: #e8e8e8;
-            box-shadow: inset 20px 20px 60px #c6e2f0,
-            inset -20px -20px 60px #ffffff;
-            transition: 0.3s;
-        }
-
-        .div-footer {
-            background-color: rgb(255, 255, 255);
-            text-align: center;
-        }
-
-        #confirm-button {
-            border-radius: 20px;
-            background-color: darkslategray;
-            font-size: 13px;
-        }
-        .btn{
-            border-radius: 10px;
-            font-size: 15px;
+        th{
+            background-color: #5bc0de;
         }
     </style>
 </head>
 
 <body>
 <div id="wrapper">
-
+    <link rel="stylesheet" href="css/product_style.css">
     <nav class="navbar navbar-inverse navbar-fixed-top">
 
         <div class="navbar-header">
@@ -151,12 +41,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="admin_index.html">PCBUY 後台管理</a>
+            <a class="navbar-brand" href="admin_index.html"><img src="../assets/images/logo2.png" style="width: 70px;height: 20px;position: relative"> 後台管理</a>
         </div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active"><a href="admin_index.html" ><i class="fa fa-home"></i> 首頁 </a></li>
+                <li><a href="admin_index.html" ><i class="fa fa-home"></i> 首頁 </a></li>
                 <li><a href="admin_member.html" style="background-color: #e7e7e7; color:black;"><i class="fa fa-user-md"></i>  會員管理 </a></li>
                 <li><a href="admin_commodity.html"><i class="fa fa-wrench"></i>  商品管理 </a></li>
                 <li><a href="admin_order.html"><i class="fa fa-file-text"></i>  訂單管理 </a></li>
@@ -194,6 +84,7 @@
                                 <th style="text-align: center">編號</th>
                                 <th style="text-align: center">姓名</th>
                                 <th style="text-align: center">電話</th>
+                                <th style="text-align: center">信箱</th>
                                 <th style="text-align: center">地址</th>
                             </tr>
                         </table>
@@ -213,10 +104,10 @@
             type:'get',
             dataType:'json',
             success:function (userList) {
-                console.log(userList)
+                // console.log(userList)
                 var i=1
                 $.each(userList, function (key, value) {
-                    $('#usersTable').append('<tr style="text-align: center"><td ><input type="radio" name="usersRaido" value=' + userList[key].userId + '></td><td>' + i++ + '</td><td>' + userList[key].name + '</td><td>' + userList[key].tel + '</td><td>' + userList[key].addr + '</td></tr>')
+                    $('#usersTable').append('<tr style="text-align: center; font-size: 18px"><td ><input type="radio" name="usersRaido" value=' + userList[key].userId + '></td><td>' + i++ + '</td><td>' + userList[key].name + '</td><td>' + userList[key].tel + '</td><td>' + userList[key].email + '</td><td>' + userList[key].addr + '</td></tr>')
                 })
             }
         })

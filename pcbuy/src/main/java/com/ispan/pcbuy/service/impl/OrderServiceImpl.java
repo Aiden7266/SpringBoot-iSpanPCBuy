@@ -3,10 +3,7 @@ package com.ispan.pcbuy.service.impl;
 import com.ispan.pcbuy.dao.OrderDao;
 import com.ispan.pcbuy.dao.ProductDao;
 import com.ispan.pcbuy.dao.UserDao;
-import com.ispan.pcbuy.dto.BuyItem;
-import com.ispan.pcbuy.dto.CreateCartRequest;
-import com.ispan.pcbuy.dto.CreateOrderRequest;
-import com.ispan.pcbuy.dto.OrderStateRequest;
+import com.ispan.pcbuy.dto.*;
 import com.ispan.pcbuy.model.*;
 import com.ispan.pcbuy.service.OrderService;
 import org.slf4j.Logger;
@@ -45,8 +42,6 @@ public class OrderServiceImpl implements OrderService {
             log.warn("該 userId {} 不存在",userId);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-
-
 
         int totalAmount = 0;
         List<OrderItem> orderItemList = new ArrayList<>();
@@ -163,5 +158,10 @@ public class OrderServiceImpl implements OrderService {
             log.warn("該筆訂單不存在於 {} 使用者下",userId);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public void createOrderInfo(Integer orderId, OrderInfoRequest orderInfoRequest) {
+        orderDao.createOrderInfo(orderId, orderInfoRequest);
     }
 }

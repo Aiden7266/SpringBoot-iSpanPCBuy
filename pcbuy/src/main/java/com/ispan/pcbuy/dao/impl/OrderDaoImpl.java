@@ -3,6 +3,7 @@ package com.ispan.pcbuy.dao.impl;
 import com.ispan.pcbuy.dao.OrderDao;
 
 import com.ispan.pcbuy.dto.CreateCartRequest;
+import com.ispan.pcbuy.dto.OrderInfoRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
 import com.ispan.pcbuy.model.OrderItem;
@@ -89,7 +90,7 @@ public class OrderDaoImpl implements OrderDao {
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
         String sql = "SELECT oi.order_item_id, oi.order_id, oi.product_id, oi.quantity, oi.amount, p.product_name, p.image_url " +
                      "FROM order_item as oi " +
-                     "LEFT JOIN product as p ON oi.product_id = p.product_id " +
+                     "INNER JOIN product as p ON oi.product_id = p.product_id " +
                      "WHERE oi.order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
@@ -182,5 +183,20 @@ public class OrderDaoImpl implements OrderDao {
         map.put("state", state);
         map.put("lastModifiedDate", new Date());
         namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void createOrderInfo(Integer orderId, OrderInfoRequest orderInfoRequest) {
+        String sql = "INSERT INTO order_info (order_id, `name`, tel, addr, payment, assemble)" +
+                "VALUES (:orderId, :name, :tel, :addr, :payment, :assemble)";
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderId", orderId);
+        map.put("name", orderInfoRequest.getName());
+        map.put("tel", orderInfoRequest.getTel());
+        map.put("addr", orderInfoRequest.getAddr());
+        map.put("payment", orderInfoRequest.getPayment());
+        map.put("assemble", orderInfoRequest.getAssemble());
+
+        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map));
     }
 }

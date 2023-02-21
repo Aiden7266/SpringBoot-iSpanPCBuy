@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-
+<!-- 加了圖片放大彈窗 不過圖是白色 有新增css  要獲取的圖加onclick="openModal(this.id)"    搜 姿加-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +14,51 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/templatemo-softy-pinko.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            top: 80px;
+            display: block;
+            margin: auto;
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 80%;
+        }
+
+        .modal-content img {
+            pointer-events: none;
+        }
+    </style>
+
+
+
+
+
 </head>
 <script src="https://cdn.staticfile.org/echarts/4.8.0/echarts.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,7 +80,7 @@
                     <ul class="nav">
                         <li><a href="#purchase"> 產品購買 </a></li>
                         <li><a href="intro.html"> 電腦主機零組件介紹 </a></li>
-                        <li><a href="rank.html"> 效能排行天梯 </a></li>
+<!--                        <li><a href="rank.html"> 效能排行天梯 </a></li>-->
                         <li><a href="contact_us.html"> 聯絡我們 </a></li>
                         <li><a href="/member/member_index.html" id="memberDiv" class="fa fa-user">會員中心</a></li>
                     </ul>
@@ -79,7 +124,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center; ">
                 <div class="col-3">
-                    <img id="cpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
+                    <img id="cpuImage" onclick="openModal(this.id)"   class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg" width="40px">
                 </div>
                 <div class="col-5" style= "display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -88,8 +133,8 @@
                     <br>
                     <select id = "CPU" onchange="onSelectCPU()">
                         <option selected="selected" disabled="disabled" id="disabledCPU" imgUrl="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-01.svg"  value="" socket="" price="" watt="">請選擇一項處理器</option>
-                            <optgroup label="intel" id="intel"></optgroup>
-                            <optgroup label="AMD" id="AMD"></optgroup>
+                        <optgroup label="intel" id="intel"></optgroup>
+                        <optgroup label="AMD" id="AMD"></optgroup>
                     </select>
                 </div>
                 <div style="border-left: 1px solid gray; padding: 20px 0;margin-left: auto;">&nbsp;</div>
@@ -103,7 +148,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img id="mbImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" width="130" height="130">
+                    <img id="mbImage" onclick="openModal(this.id)"   class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-03.svg" width="130" height="130">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -125,7 +170,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img id="dramImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" width="130" height="130" style="">
+                    <img id="dramImage" onclick="openModal(this.id)"   class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-04.svg" width="130" height="130" style="">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -147,7 +192,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img  id="gpuImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" width="130" height="130">
+                    <img  id="gpuImage" onclick="openModal(this.id)"  class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-05.svg" width="130" height="130">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -169,7 +214,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;"—>
                 <div class="col-3">
-                    <img id="storageImage" class="imgbig"  src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" width="130" height="130">
+                    <img id="storageImage" onclick="openModal(this.id)"  class="imgbig"  src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-06.svg" width="130" height="130">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -191,7 +236,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img id="coolerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" width="130" height="130" style="">
+                    <img id="coolerImage" onclick="openModal(this.id)"  class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-02.svg" width="130" height="130" style="">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -215,7 +260,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img id="powerImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" width="130" height="130" style="">
+                    <img id="powerImage" onclick="openModal(this.id)"  class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-07.svg" width="130" height="130" style="">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -240,7 +285,7 @@
         <div class="card shadow-sm text-center p-2" style="border-radius: 20px">
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <div class="col-3">
-                    <img id="caseImage" class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" width="130" height="130" style="">
+                    <img id="caseImage" onclick="openModal(this.id)"  class="imgbig" src="https://storage-asset.msi.com/event/mb/2018/how-to-build-a-pc/images/svg/icob-btn-08.svg" width="130" height="130" style="">
                 </div>
                 <div class="col-5" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="h5 my-2">
@@ -258,6 +303,7 @@
                 </div>
             </div>
         </div>
+
 
 
         <div class="itemcount">
@@ -281,6 +327,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 姿加 -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img id="modalImg" class="modal-content">
         </div>
     </div>
 </div>
@@ -372,7 +424,7 @@
 
         totalPrice = parseInt(cpuPrice) + parseInt(mbPrice) + parseInt(dramPrice) + parseInt(gpuPrice) + parseInt(storagePrice) + parseInt(coolerPrice) + parseInt(powerPrice) + parseInt(casePrice)
         $('#totalWatt').text(totalWatt + "瓦")
-        $('#totalPrice').text("NT$ " + totalPrice + "元")
+        $('#totalPrice').text("NT$ " + totalPrice.toLocaleString('zh-TW') + "元")
     }
 
     function onSelectCPU() {
@@ -910,6 +962,30 @@
         })
 
     })
+</script>
+<!-- 姿加 -->
+<script>
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("modalImg");
+
+    function openModal(imgId) {
+
+        modal.style.display = "block";
+        modalImg.src = document.getElementById(imgId).src;
+        console.log(document.getElementById(imgId).src);
+
+    }
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 </body>
 </html>
