@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
         map.put("tel", userRegisterRequest.getTel());
         map.put("addr", userRegisterRequest.getAddr());
         map.put("email", userRegisterRequest.getEmail());
-        map.put("auth", "ROLE_admin,ROLE_member");
+        map.put("auth", "ROLE_member");
 
         Date now = new Date();
         map.put("createdDate", now);
