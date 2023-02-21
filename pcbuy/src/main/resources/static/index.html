@@ -389,6 +389,15 @@
 <!--  畫面預設載入CPU的選單   -->
 <script>
     jQuery.support.cors = true;
+
+    var cartLength
+    var userId
+    var cpuPrice=0, mbPrice=0, dramPrice=0, gpuPrice=0, storagePrice=0, coolerPrice=0, powerPrice=0, casePrice=0
+    var cpuWatt=0, mbWatt=0, dramWatt=0, gpuWatt=0, storageWatt=0, powerWatt=0
+    var totalWatt=0, totalPrice=0
+    var sizeForCase
+    var gpuLengthForCase=0, coolerLengthForCase=0, coolerHeightForCase=0
+
     $(document).ready(function () {
 
         //先載入不需要篩選的Category
@@ -397,17 +406,28 @@
         showItemSTORAGE()
         showItemCOOLER()
         showItemPOWER()
+
+        $.ajax({
+            url: '/users/current',
+            type: "get",
+            dataType: "json",
+            success:function (userinfo){
+                userId = userinfo.userId
+                console.log("現在的使用者為=" + userId)
+
+                $.ajax({
+                    url: '/users/' + userId +'/cart',
+                    type: "get",
+                    dataType: "json",
+                    success:function (cart){
+                        cartLength = cart.length
+                        console.log("現在購物車length=" + cartLength)
+                    }
+                })
+            }
+        })
+
     })
-</script>
-
-<!-- 首頁商品下拉選單的onChange方法在此-->
-<script>
-
-    var cpuPrice=0, mbPrice=0, dramPrice=0, gpuPrice=0, storagePrice=0, coolerPrice=0, powerPrice=0, casePrice=0
-    var cpuWatt=0, mbWatt=0, dramWatt=0, gpuWatt=0, storageWatt=0, powerWatt=0
-    var totalWatt=0, totalPrice=0
-    var sizeForCase
-    var gpuLengthForCase=0, coolerLengthForCase=0, coolerHeightForCase=0
 
     function calculator(){
         totalWatt = parseInt(cpuWatt) + parseInt(mbWatt) + parseInt(dramWatt) + parseInt(gpuWatt) + parseInt(storageWatt)
@@ -875,93 +895,73 @@
             }
         })
     }
-</script>
 
-<script>
     $('#CART').click(function () {
 
-        var cartLength
         var selectAll = true
-        $.ajax({
-            url: '/users/current',
-            type: "get",
-            dataType: "json",
-            success:function (userinfo){
-                $.ajax({
-                    url: '/users/' + userinfo.userId +'/cart',
-                    type: "get",
-                    dataType: "json",
-                    success:function (cart){
-                        cartLength = cart.length
-                        console.log("現在購物車length=" + cartLength)
-                    }
-                })
 
-                $('SELECT').each(function (){
-                    if($(this).val() == null){
-                        selectAll = false
-                    }
-                })
-                if (!selectAll){
-                    alert("有品項尚未選擇")
-                }else if (cartLength !== 0){
-                    alert("請先清空現有的購物車")
-                }
-                else {
-                    $.ajax({
-                        url: '/users/' + userinfo.userId + '/cart',
-                        type: "post",
-                        dataType: "text",
-                        contentType : 'application/json',
-                        data:JSON.stringify({
-                            buyItemList:[
-                                {
-                                    productId:$('#CPU').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#MB').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#DRAM').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#GPU').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#STORAGE').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#COOLER').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#POWER').val(),
-                                    quantity:1
-                                },
-                                {
-                                    productId:$('#CASE').val(),
-                                    quantity:1
-                                }
-                            ]
-                        }),
-                        success:function () {
-                            alert("已加進購物車")
-                            location.href =  "/member/member_cart.html";
-                        },error:function () {
-                            alert("error")
-                        }
-                    })
-                }
-            },error:function (data) {
-                alert("您尚未登入")
+        $('SELECT').each(function (){
+            if($(this).val() === null){
+                selectAll = false
             }
         })
 
+        if( selectAll && cartLength === 0 && userId !== undefined){
+            $.ajax({
+                url: '/users/' + userId + '/cart',
+                type: "post",
+                dataType: "text",
+                contentType : 'application/json',
+                data:JSON.stringify({
+                    buyItemList:[
+                        {
+                            productId:$('#CPU').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#MB').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#DRAM').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#GPU').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#STORAGE').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#COOLER').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#POWER').val(),
+                            quantity:1
+                        },
+                        {
+                            productId:$('#CASE').val(),
+                            quantity:1
+                        }
+                    ]
+                }),
+                success:function () {
+                    alert("已加進購物車")
+                    location.href =  "/member/member_cart.html";
+                },error:function () {
+                    alert("error")
+                }
+            })
+        } else if(userId === undefined){
+            alert("您還沒登入")
+        } else if(selectAll === false){
+            alert("請確保每個零件都已選擇")
+        } else if (cartLength !== 0) {
+            alert("請先清空購物車")
+        }
     })
 </script>
 <!-- 姿加 -->
