@@ -123,10 +123,32 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orderList;
 
         User user = userDao.getUserById(userId);
+        if(user != null){
+            orderList = orderDao.getOrderByUserId(userId);
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        for (int i=0 ; i<orderList.size() ; i++){
+
+            List<OrderItem> orderItemList =orderDao.getOrderItemsByOrderId(orderList.get(i).getOrderId());
+
+            orderList.get(i).setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
+
+    @Override
+    public List<Order> getOrderAll(Integer userId) {
+        List<Order> orderList;
+
+        User user = userDao.getUserById(userId);
         if(user.getAuth().contains("admin")){
             orderList = orderDao.getOrderAll();
         }else {
-            orderList = orderDao.getOrderByUserId(userId);
+            log.warn(" {} 不是管理員", user.getUsername());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
         for (int i=0 ; i<orderList.size() ; i++){

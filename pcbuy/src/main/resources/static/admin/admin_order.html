@@ -132,35 +132,35 @@
       </nav>
 
       <dialog id="payModal">
-        <p> 結帳 </p>
+        <p> 確認訂單 </p>
         <hr>
         <form action="" method="post" id="pay-form" onsubmit="return paySubmit()">
           <div>
             <label for="name" class="pay-form">收件人姓名：</label>
-            <input type="text" id="name" placeholder="" required maxlength="50"
+            <input disabled type="text" id="name" placeholder="" required maxlength="50"
                    oninvalid="setCustomValidity('請輸入您的姓名');" onchange="setCustomValidity('');">
 
             <label for="tel" class="pay-form">收件人電話：</label>
-            <input type="text" id="tel" placeholder="" required maxlength="50"
+            <input disabled type="text" id="tel" placeholder="" required maxlength="50"
                    oninvalid="setCustomValidity('請輸入您的電話');" onchange="setCustomValidity('');">
 
             <label for="addr" class="pay-form">收件人地址：</label>
-            <input type="text" id="addr" placeholder="" required maxlength="50"
+            <input disabled type="text" id="addr" placeholder="" required maxlength="50"
                    oninvalid="setCustomValidity('請輸入您的地址');" onchange="setCustomValidity('');">
 
             <label for="totalAmount" class="pay-form">訂單總金額：</label>
-            <input type="text" id="totalAmount" placeholder="" required maxlength="50" disabled="disabled">
+            <input disabled type="text" id="totalAmount" placeholder="" required maxlength="50" disabled="disabled">
             <br><br>
             <label class="assembling-form">是否組裝：
               <br><br>
-              <input type="radio" name="assemblingMethod" checked>需組裝
-              <input type="radio" name="assemblingMethod">不組裝
+              <input disabled type="radio" name="assemblingMethod" checked>需組裝
+              <input disabled type="radio" name="assemblingMethod">不組裝
               <br><br>
             </label>
 
             <label class="pay-form">付款方式：
               <br><br>
-              <label class="pay-form"><input type="radio" name="payMethod" value="現金" checked>貨到付款</label>
+              <label class="pay-form"><input disabled type="radio" name="payMethod" value="現金" checked>貨到付款</label>
               <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">銀行轉帳</label>
               <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">線上付款</label>
               <br><br>
@@ -222,7 +222,7 @@
           addr = userinfo.addr
           $('#loginName').append(' ' + name)
           $.ajax({
-            url: '/users/' + userId + '/orders',
+            url: '/admin/' + userId + '/orders',
             type: "get",
             dataType: "json",
             success: function (orders) {

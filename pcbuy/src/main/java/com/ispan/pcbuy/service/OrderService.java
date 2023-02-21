@@ -23,6 +23,8 @@ public interface OrderService {
 
     List<Order> getOrderByUserId(Integer userId);
 
+    List<Order> getOrderAll (Integer userId);
+
     void updateOrders(Integer userId, OrderStateRequest orderStateRequest);
 
     void createOrderInfo(Integer orderId, OrderInfoRequest orderInfoRequest);

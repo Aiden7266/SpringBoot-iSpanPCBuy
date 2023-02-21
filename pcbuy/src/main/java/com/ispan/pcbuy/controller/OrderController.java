@@ -47,6 +47,14 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderList);
     }
 
+    @GetMapping("/admin/{userId}/orders")
+    public ResponseEntity<?> getOrderAll(@PathVariable Integer userId){
+
+        List<Order> orderList = orderService.getOrderAll(userId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderList);
+    }
+
     @PutMapping("/users/{userId}/orders")
     public void updateOrders(@PathVariable Integer userId, @RequestBody OrderStateRequest orderStateRequest){
         orderService.updateOrders(userId, orderStateRequest);
