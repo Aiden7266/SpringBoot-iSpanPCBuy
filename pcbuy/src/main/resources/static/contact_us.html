@@ -141,53 +141,11 @@
         <script src="/assets/js/jquery.counterup.min.js"></script>
         <script src="/assets/js/imgfix.min.js"></script>
 
- <script>
-     // var initBody='';
-
-     // function chk(){
-     //     if(document.form.name.value==''){
-     //       alert('名字未填');
-     //       document.form.name.focus();
-     //       return false;
-     //     }else if(document.form.email.value==''){
-     //       alert('信箱未填');
-     //       document.form.email.focus();
-     //       return false;
-     //     }else if(document.form.message.value==''){
-     //       alert('訊息未填');
-     //       document.form.message.focus();
-     //       return false;
-     //     }
-     //     return true;
-
-     //     var to="lisayes396@gmail.com";
-     //     var name= nameText.value;
-     //     var email= emailText.value;
-     //     var message = messageText.value;
-     //
-     //     function chk(){
-     //     body =  "我們是PCBUY電腦商城 您好!" + '%0A';
-     //     body += "----------------------------------------------" + '%0A';
-     //     body += "今日想詢問或是反映的內容是: " + '%0A%0A%0A';
-     //     body += "" + message + '%0A%0A%0A';
-     //     body += "From:   " + name + '%0A';
-     //     body += "Email:  " + email;
-     //
-     //     mailTo.href="mailto:" + to + "?subject=" + "有關PCBUY電腦商城的顧客相關問題" + "&body=" + body;
-     //     mailTo.click();
-     // }
-     //
-     //     function init(){
-     //         messageText.value= initBody;
-     //         toText.value = initTo;
-     //     }
-        </script>
-
 
  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
  <script type="text/javascript">
      (function(){
-         emailjs.init("V8SIVYkEdA0QQfaDg");
+         emailjs.init("6lZQqvWQaTkhX4Ty5");
      })();
 </script >
 
@@ -198,7 +156,7 @@
              // generate a five digit number for the contact_number variable
              this.contact_number.value = Math.random() * 1000 | 0;
              // these IDs from the previous steps
-             emailjs.sendForm('service_p8tc7vv', 'template_zmp6g69', this)
+             emailjs.sendForm('service_42i2x3j', 'template_qab1qbw', this)
                  .then(function() {
                      console.log('SUCCESS!');
                      alert("已發送信件給客服！您可前往所留的信箱查看信件。")
