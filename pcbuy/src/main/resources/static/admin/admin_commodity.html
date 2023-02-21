@@ -273,8 +273,8 @@
 
             <label for="state-update" class="update-form" id="state-update-label">上架狀態：</label>
             <select id="state-update" name="state"  required="required">
-                <option value="true">true</option>
-                <option value="false">false</option>
+                <option value="true">是</option>
+                <option value="false">否</option>
             </select>
 
             <label for="description-update" id="description-update-label" class="update-form">描述：</label>
@@ -437,32 +437,42 @@
 
     //按下修改資料時，到資料庫撈出該筆資料並且將值放進Form表單的input中
     $('#btn-update').click(function () {
+        $('#update-CATEGORY-form').find("input[type=text], textarea").val("")
+        $('#update-CATEGORY-form').find("input[type=number], textarea").val("")
+        $('#update-CATEGORY-form').find("input[type=URL], textarea").val("")
+        $('#update-CATEGORY-form').find("select[id=state-update]").val("")
         var selectedId = $("input[name='categoryRadio']:checked").val()
+        // alert("選到的ID=" + selectedId)
         if (selectedId != undefined){
             $.ajax({
                 url: '/products/'+selectedId,
                 type: "get",
                 dataType: "json",
                 success:function (data) {
-                    $('#productId-update').attr('value',data.productId)
-                    $('#productName-update').attr('value',data.productName)
+                    // CRUDreload(data.category)
+                    $('#productId-update').val(data.productId)
+                    // $('#productId-update').attr('value',data.productId)
+                    $('#productName-update').val(data.productName)
+                    // $('#productName-update').attr('value',data.productName)
                     $('#category-update-value').attr('value',data.category).text(data.category)
-                    $('#brand-update').attr('value',data.brand)
-                    $('#watt-update').attr('value',data.watt)
-                    $('#socket-update').attr('value',data.socket)
-                    $('#score-update').attr('value',data.score)
-                    $('#size-update').attr('value',data.size)
-                    $('#series-update').attr('value',data.series)
-                    $('#coolerLength-update').attr('value',data.coolerLength)
-                    $('#coolerHeight-update').attr('value',data.coolerHeight)
-                    $('#gpuLength-update').attr('value',data.gpuLength)
-                    $('#capacity-update').attr('value',data.capacity)
-                    $('#state-update').attr('value',data.state)
-                    $('#description-update').attr('value',data.description)
-                    $('#imageUrl-update').attr('value',data.imageUrl)
-                    $('#stock-update').attr('value',data.stock)
-                    $('#price-update').attr('value',data.price)
-                    console.log(data)
+                    $('#brand-update').val(data.brand)
+                    $('#watt-update').val(data.watt)
+                    $('#socket-update').val(data.socket)
+                    $('#score-update').val(data.score)
+                    $('#size-update').val(data.size)
+                    $('#series-update').val(data.series)
+                    $('#coolerLength-update').val(data.coolerLength)
+                    $('#coolerHeight-update').val(data.coolerHeight)
+                    $('#gpuLength-update').val(data.gpuLength)
+                    $('#capacity-update').val(data.capacity)
+                    console.log("狀態"+data.state)
+                    document.getElementById('state-update').value = data.state
+                    // $('#state-update').val(data.state)
+                    $('#description-update').val(data.description)
+                    $('#imageUrl-update').val(data.imageUrl)
+                    $('#stock-update').val(data.stock)
+                    $('#price-update').val(data.price)
+                    // console.log(data)
 
                     //用抓取回來的category去請求待會要呈現的Form該對應哪個category
                     loadForm(data.category)
