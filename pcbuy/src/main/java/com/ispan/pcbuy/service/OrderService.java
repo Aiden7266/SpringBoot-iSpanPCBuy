@@ -6,6 +6,7 @@ import com.ispan.pcbuy.dto.OrderInfoRequest;
 import com.ispan.pcbuy.dto.OrderStateRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
+import com.ispan.pcbuy.model.OrderInfo;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface OrderService {
     void updateOrders(Integer userId, OrderStateRequest orderStateRequest);
 
     void createOrderInfo(Integer orderId, OrderInfoRequest orderInfoRequest);
+
+    OrderInfo getOrderInfo(Integer orderId);
 }

@@ -153,8 +153,8 @@
             <br><br>
             <label class="assembling-form">是否組裝：
               <br><br>
-              <input disabled type="radio" name="assemblingMethod" checked>需組裝
-              <input disabled type="radio" name="assemblingMethod">不組裝
+              <input disabled type="radio" name="assemblingMethod" value="需組裝">需組裝
+              <input disabled type="radio" name="assemblingMethod" value="不組裝">不組裝
               <br><br>
             </label>
 
@@ -241,7 +241,6 @@
                 }
                 $.each(orders[key].orderItemList, function (itemKey, value){
                   $('#'+ key).append('<tr hidden class='+ key +'><td><img src='+ orders[key].orderItemList[itemKey].imageUrl +'/></td><td style="vertical-align:middle">' + orders[key].orderItemList[itemKey].productName + '</td><td  style="vertical-align:middle">' + 'NT$ '+ orders[key].orderItemList[itemKey].amount.toLocaleString('zh-TW') + '元</td><td style="vertical-align:middle">數量' + orders[key].orderItemList[itemKey].quantity + '</td></tr>')
-
                 })
               })
             }
@@ -272,12 +271,24 @@
       selectOrderId = $(this).val()
       // console.log("現在訂單ID=" + selectOrderId)
 
+      $.ajax({
+        url: '/users/' + selectOrderId + '/orderinfo',
+        type: "get",
+        dataType: "json",
+        success: function (orderinfo) {
+          $('#name').val(orderinfo.name)
+          $('#tel').val(orderinfo.tel)
+          $('#addr').val(orderinfo.addr)
+          if (orderinfo.assemble === "不組裝")
+          $('input[name=assemblingMethod][value="不組裝"]').attr('checked',true)
+          else {
+            $('input[name=assemblingMethod][value="需組裝"]').attr('checked',true)
+          }
+          // $('input[name=assemble]:checked').val(orderinfo.assemble)
+        }
+      })
       //用orderId去獲取使用者資料
       totalAmount = $(this).closest('table').find('input[name]').val()
-      // console.log("現在總金額=" + totalAmount)
-      $('#name').val(name)
-      $('#tel').val(tel)
-      $('#addr').val(addr)
       $('#totalAmount').val("NT$ " + totalAmount + "元")
       payModal.showModal()
 

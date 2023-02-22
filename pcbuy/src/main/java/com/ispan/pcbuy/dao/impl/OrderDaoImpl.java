@@ -6,8 +6,10 @@ import com.ispan.pcbuy.dto.CreateCartRequest;
 import com.ispan.pcbuy.dto.OrderInfoRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
+import com.ispan.pcbuy.model.OrderInfo;
 import com.ispan.pcbuy.model.OrderItem;
 import com.ispan.pcbuy.rowmapper.CartRowMapper;
+import com.ispan.pcbuy.rowmapper.OrderInfoRowMapper;
 import com.ispan.pcbuy.rowmapper.OrderItemRowMapper;
 import com.ispan.pcbuy.rowmapper.OrderRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -198,5 +200,21 @@ public class OrderDaoImpl implements OrderDao {
         map.put("assemble", orderInfoRequest.getAssemble());
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map));
+    }
+
+    @Override
+    public OrderInfo getOrderInfo(Integer orderId) {
+        String sql = "SELECT * FROM order_info WHERE order_id = :orderId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderId", orderId);
+
+        List<OrderInfo> orderInfoList = namedParameterJdbcTemplate.query(sql, map, new OrderInfoRowMapper());
+
+        if(orderInfoList.size() > 0) {
+            return orderInfoList.get(0);
+        } else {
+            return null;
+        }
     }
 }

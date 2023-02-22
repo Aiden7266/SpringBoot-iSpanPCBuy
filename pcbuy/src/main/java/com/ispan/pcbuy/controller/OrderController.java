@@ -6,6 +6,7 @@ import com.ispan.pcbuy.dto.OrderInfoRequest;
 import com.ispan.pcbuy.dto.OrderStateRequest;
 import com.ispan.pcbuy.model.Cart;
 import com.ispan.pcbuy.model.Order;
+import com.ispan.pcbuy.model.OrderInfo;
 import com.ispan.pcbuy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,14 @@ public class OrderController {
         orderService.createOrderInfo(orderId, orderInfoRequest);
 
         return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/users/{orderId}/orderinfo")
+    public ResponseEntity<OrderInfo> getOrderInfo(@PathVariable Integer orderId){
+
+        OrderInfo orderInfo = orderService.getOrderInfo(orderId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(orderInfo);
     }
 
     @GetMapping("/users/{userId}/orders")

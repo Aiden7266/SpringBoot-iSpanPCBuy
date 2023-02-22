@@ -160,7 +160,7 @@
                  .then(function() {
                      console.log('SUCCESS!');
                      alert("已發送信件給客服！您可前往所留的信箱查看信件。")
-
+                    location.reload()
                  }, function(error) {
                      console.log('發送失敗...請稍後再試', error);
                  });

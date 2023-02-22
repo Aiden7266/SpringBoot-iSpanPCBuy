@@ -170,16 +170,16 @@
               <br><br>
               <label class="assembling-form">是否組裝：
                 <br><br>
-                <input type="radio" name="assemblingMethod" checked>需組裝
-                <input type="radio" name="assemblingMethod">不組裝
+                <input type="radio" name="assemblingMethod" value="需組裝" checked>需組裝
+                <input type="radio" name="assemblingMethod" value="不組裝">不組裝
                 <br><br>
               </label>
 
               <label class="pay-form">付款方式：
                 <br><br>
-                <label class="pay-form"><input type="radio" name="payMethod" value="現金" checked>貨到付款</label>
-                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">銀行轉帳</label>
-                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="免單">線上付款</label>
+                <label class="pay-form"><input type="radio" name="payMethod" value="貨到付款" checked>貨到付款</label>
+                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="銀行轉帳">銀行轉帳</label>
+                <label class="pay-form"><input disabled="disabled" type="radio" name="payMethod" value="線上付款">線上付款</label>
                 <br><br>
               </label>
               <div style="text-align:center;">
@@ -357,10 +357,24 @@
         state:"準備出貨"
       }),
       success: function (){
-        console.log("success")
         payModal.close()
         alert("我們會盡快為您出貨！")
         location.reload()
+        $.ajax({
+          url: '/users/'+ selectOrderId +'/orderinfo',
+          type: 'post',
+          dataType: 'json',
+          contentType : 'application/json',
+          data:JSON.stringify({
+            name : $('#name').val(),
+            tel:$('#tel').val(),
+            addr:$('#addr').val(),
+            payment:$('input[name=payMethod]:checked').val(),
+            assemble:$('input[name=assemblingMethod]:checked').val()
+          }),success:(function () {
+            console.log("收件資料建立成功")
+          })
+        })
       },error:function (data){
         alert("error=" + data)
       }

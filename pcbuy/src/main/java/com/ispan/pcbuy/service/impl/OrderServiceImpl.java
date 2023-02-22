@@ -186,4 +186,12 @@ public class OrderServiceImpl implements OrderService {
     public void createOrderInfo(Integer orderId, OrderInfoRequest orderInfoRequest) {
         orderDao.createOrderInfo(orderId, orderInfoRequest);
     }
+
+    @Override
+    public OrderInfo getOrderInfo(Integer orderId) {
+
+        OrderInfo orderInfo = orderDao.getOrderInfo(orderId);
+
+        return orderInfo;
+    }
 }
