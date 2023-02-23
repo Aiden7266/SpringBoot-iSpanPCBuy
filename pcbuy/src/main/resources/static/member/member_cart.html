@@ -103,6 +103,7 @@
                 <li><a href="member_cart.html"  style="background-color: #ebc59c; color:black;"><i class="fa fa-shopping-cart"></i>  購物車 </a></li>
                 <li><a href="member_order.html"><i class="fa fa-file-text-o"></i>  我的訂單 </a></li>
                 <li><a href="member_info.html"><i class="fa fa-user"></i>  會員資訊 </a></li>
+<!--                <img src="../assets/categoryImages/case/ROG%20Hyperion%20GR701.png">-->
                 <li><a href="../index.html" style="position:fixed; bottom:20px; left:0;"><i class="fa fa-backward"></i> 返回官網 </a></li>
                 <li id="promodel" style="display: none"><a href="/admin/admin_index.html" style="position:fixed; bottom:70px; left:0;"><i class="fa fa-star"></i> 進階模式 </a></li>
             </ul>
@@ -182,9 +183,8 @@
                     success:function (cart){
                         var totalPrice = 0
                         $.each(cart, function (key, value) {
-                            var url = cart[key].imageUrl
                             $('#cart').append('<tr>')
-                            $('#cart').append('<td><img src=' + url +'/></td>')
+                            $('#cart').append('<td><img src=' + cart[key].imageUrl + '/></td>')
                             $('#cart').append('<td>' + cart[key].productName + '</td>')
                             $('#cart').append('<td> NT$ ' + cart[key].price.toLocaleString('zh-TW')  + ' 元</td>')
                             $('#cart').append('<td><input value="1" disabled></td>')
