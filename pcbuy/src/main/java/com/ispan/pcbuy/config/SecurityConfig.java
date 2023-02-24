@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
                 .tokenValiditySeconds(600) //設置記住我的有效時長(秒)
                 .userDetailsService(userDetailsService)
-                .and().csrf().disable(); //關閉csrf防護
+                .and().csrf().disable(); //關閉 csrf 防護
     }
 
     @Bean
