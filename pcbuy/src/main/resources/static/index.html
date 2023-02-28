@@ -677,9 +677,10 @@
 
     function showItemCPUv2(){
         $.ajax({
-            url: 'http://localhost:8080/products/CPU/List',
+            url: 'http://localhost:8080/products/CPU/Filter',
             type: "get",
             dataType: "json",
+            data:{},
             success: function (data) {
                 console.log(data)
                 $.each(data, function (key, value) {
@@ -822,67 +823,67 @@
     }
 
     function showItemCASE(size, gpuLength, coolerLength, coolerHeight){
-        console.log("我是showItemCASE() 傳進的參數為" + size +" "+ gpuLength +" "+ coolerLength +" "+ coolerHeight )
+        // console.log("我是showItemCASE() 傳進的參數為" + size +" "+ gpuLength +" "+ coolerLength +" "+ coolerHeight )
         $.ajax({
-            url: 'http://localhost:8080/products/CASE/List',
+            url: 'http://localhost:8080/products/CASE/Filter',
             type: "get",
             data:{},
             dataType: "json",
             success: function (data) {
-                console.log(data)
+                // console.log(data)
                 if(size === "E-ATX"){
-                    console.log("showItemCASE()的size=Ｅ-ATX 所以我進來了")
+                    // console.log("showItemCASE()的size=Ｅ-ATX 所以我進來了")
                     $.each(data, function (key, value) {
                         if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight){
-                            console.log("執行點1")
+                            // console.log("執行點1")
                             $('#CASE').append('<option value="'+data[key].productId+'"imageUrl="'+data[key].imageUrl+'"price="'+data[key].price+'">'+data[key].productName+'</option>')
                         }
                     })
                 }else if (size === "ATX"){
-                    console.log("showItemCASE()的size=ATX 所以我進來了")
+                    // console.log("showItemCASE()的size=ATX 所以我進來了")
                     $.each(data, function (key, value) {
                         if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點2")
+                            // console.log("執行點2")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點3")
+                            // console.log("執行點3")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         }
                     })
                 }else if (size === "m-ATX"){
                     $.each(data, function (key, value) {
                         if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點4")
+                            // console.log("執行點4")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點5")
+                            // console.log("執行點5")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "m-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點6")
+                            // console.log("執行點6")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         }
                     })
                 }else if (size === "mini-iTX"){
                     $.each(data, function (key, value) {
                         if (data[key].size === "E-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點7")
+                            // console.log("執行點7")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點8")
+                            // console.log("執行點8")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "m-ATX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點9")
+                            // console.log("執行點9")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         } else if (data[key].size === "mini-iTX" && parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點10")
+                            // console.log("執行點10")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         }
                     })
                 }else if (size === undefined){
-                    console.log("林北沒定義size!")
+                    // console.log("林北沒定義size!")
                     $.each(data, function (key, value) {
                         if (parseFloat(data[key].gpuLength) >= gpuLength && parseFloat(data[key].coolerLength) >= coolerLength && parseFloat(data[key].coolerHeight) >= coolerHeight) {
-                            console.log("執行點11")
+                            // console.log("執行點11")
                             $('#CASE').append('<option value="' + data[key].productId + '"imageUrl="' + data[key].imageUrl + '"price="' + data[key].price + '">' + data[key].productName + '</option>')
                         }
                     })

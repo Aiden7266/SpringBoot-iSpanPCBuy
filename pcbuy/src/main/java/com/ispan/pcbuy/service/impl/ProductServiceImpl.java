@@ -35,7 +35,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getCategoryByFilter(ProductCategory category, String filterI, String filterII, String filterIII) {
 //        System.out.println("我是Service.getCategoryByFilter()" + category + " " + filterI);
-        if (category.name().equals("MB")) {
+        if (filterI == null && filterII == null && filterIII == null){
+            return productDao.getProductsFromCategory(category.name());
+        }
+        else if (category.name().equals("MB")) {
             if(filterI != null) {
                 return productDao.getMbByFilter(category, filterI);
             }else if (filterI == null){
@@ -65,12 +68,6 @@ public class ProductServiceImpl implements ProductService {
             else {
                 return null;
             }
-            /*
-        }else if (category.name().equals("CASE")){
-            //需要三個參數 1.顯卡長度 2.冷排長度 3.散熱器高度
-            return null;
-
-             */
         }else if (category.name().equals("GPU")){
             if(filterI == null) {
                 return productDao.getProductsFromCategory(category.name());
@@ -93,9 +90,7 @@ public class ProductServiceImpl implements ProductService {
         else {
             return null;
         }
-
     }
-
     @Override
     public Product getProductById(Integer productId) {
         return productDao.getProductById(productId);

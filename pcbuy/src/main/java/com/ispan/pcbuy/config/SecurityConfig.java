@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAnyRole("admin")
                 .antMatchers("/member/**").hasAnyRole("member","admin")
                 .anyRequest().authenticated()
-                .and().rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
+                .and()
+                .rememberMe().tokenRepository(persistentTokenRepository()) //設置記住我
                 .tokenValiditySeconds(600) //設置記住我的有效時長(秒)
                 .userDetailsService(userDetailsService)
                 .and().csrf().disable(); //關閉 csrf 防護
