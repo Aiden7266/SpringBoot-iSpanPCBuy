@@ -17,20 +17,44 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
 <style>
-    tr{
+    table{
+        margin: auto;
+        padding: 20px;
         border-collapse: separate;
         border-spacing: 0;
-        border-radius: 10px;
-        border: 1px solid;
-
+        font-size: large;
     }
-    td{
-        font-size: 15px;
-        background-color: #f8f1de;
+    tr{
+        border: 1px solid #656464;
     }
     th{
+        border: 1px solid #3d3939;
+        padding: 10px 30px;
         background-color: #3d3939;
-        color: snow;
+        color: #FFF;
+    }
+    td{
+        border: 1px solid #3d3939;
+        padding: 10px 30px;
+        background-color: #f8f1de;
+        color: #3d3939;
+    }
+
+    /*第一欄第一列：左上*/
+    tr:first-child th:first-child{
+        border-top-left-radius: 10px;
+    }
+    /*第一欄最後列：左下*/
+    tr:last-child td:first-child{
+        border-bottom-left-radius: 10px;
+    }
+    /*最後欄第一列：右上*/
+    tr:first-child th:last-child{
+        border-top-right-radius: 10px;
+    }
+    /*最後欄第一列：右下*/
+    tr:last-child td:last-child{
+        border-bottom-right-radius: 10px;
     }
 </style>
 
@@ -92,8 +116,8 @@
                     <option value = 'POWER'>電源供應器</option>
                 </select>
                 <br><br><br>
-                <table id="categoryTable" style="width: 100%">
-                    <tr id="MyTh">
+                <table id="categoryTable" style="width: 100%" >
+                    <tr id="MyTh" >
                         <th style="text-align: center">選取</th>
                         <th style="text-align: left">編號</th>
                         <th style="text-align: left">名稱</th>
@@ -190,7 +214,7 @@
                    oninvalid="setCustomValidity('描述最大字數為1000');" onchange="setCustomValidity('');">
 
             <label for="imageUrl-create" class="create-form" id="imageUrl-create-label">照片連結：</label>
-            <input type="URL" id="imageUrl-create" name="imageUrl" placeholder="輸入商品照片連結" required="required"
+            <input type="text" id="imageUrl-create" name="imageUrl" placeholder="輸入商品照片連結" required="required"
                    oninvalid="setCustomValidity('請確定商品連結正確');" onchange="setCustomValidity('');">
 
             <label for="stock-create" class="create-form" id="stock-create-label">庫存：</label>

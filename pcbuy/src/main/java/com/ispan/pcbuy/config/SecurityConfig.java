@@ -42,8 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login_register.html") //登入頁面設置
                 .loginProcessingUrl("/users/login") //登入時訪問的URL 要和form表單的action相同
-                .defaultSuccessUrl("/index.html",true) //登入後跳轉路徑
-                .failureUrl("/login-error").permitAll();
+                .defaultSuccessUrl("/login_state.html",true) //登入後跳轉路徑
+                .failureUrl("/login_state.html")
+                .permitAll();
         //退出
         http.logout()
                 .logoutUrl("/logout")

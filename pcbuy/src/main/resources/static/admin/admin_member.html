@@ -13,21 +13,46 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <style>
-        tr{
+        table{
+            margin: auto;
+            padding: 20px;
             border-collapse: separate;
             border-spacing: 0;
-            border-radius: 10px;
-            border: 1px solid;
+            font-size: large;
         }
-        td{
-            font-size: 15px;
-            background-color: #f8f1de;
+        tr{
+            border: 1px solid #656464;
         }
         th{
+            border: 1px solid #3d3939;
+            padding: 10px 30px;
             background-color: #3d3939;
-            color: snow;
+            color: #FFF;
         }
-    </style>
+        td{
+            border: 1px solid #3d3939;
+            padding: 10px 30px;
+            background-color: #f8f1de;
+            color: #3d3939;
+        }
+
+        /*第一欄第一列：左上*/
+        tr:first-child th:first-child{
+            border-top-left-radius: 10px;
+        }
+        /*第一欄最後列：左下*/
+        tr:last-child td:first-child{
+            border-bottom-left-radius: 10px;
+        }
+        /*最後欄第一列：右上*/
+        tr:first-child th:last-child{
+            border-top-right-radius: 10px;
+        }
+        /*最後欄第一列：右下*/
+        tr:last-child td:last-child{
+            border-bottom-right-radius: 10px;
+        }
+</style>
 </head>
 
 <body>
